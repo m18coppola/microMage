@@ -7,5 +7,5 @@ to run the game, either create an application in intellij using the DesktopLaunc
 
 # Running without an IDE
 in a terminal, run the appropiate version of gradle for your OS with the desktop:run task  
-Mac/Linux/gitBash: './gradlew desktop:run'
-DOS-based/Powershell: 'gradlew.bat desktop:run'
+Mac/Linux/gitBash: `./gradlew desktop:run`  
+DOS-based/Powershell: `gradlew.bat desktop:run`
