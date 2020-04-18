@@ -6,7 +6,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.project.game.entities.FireBall;
 import com.project.game.entities.Player;
+
+import java.util.ArrayList;
 
 public class Game extends ApplicationAdapter {
 	SpriteBatch batch;
@@ -14,9 +17,11 @@ public class Game extends ApplicationAdapter {
 	OrthographicCamera cam;
 	Player player;
 	Controller controller;
+	static ArrayList<FireBall> fireBalls;
 	
 	@Override
 	public void create () {
+		fireBalls = new ArrayList<FireBall>();
 		batch = new SpriteBatch();
 		player = new Player();
 		Gdx.input.setInputProcessor(new Controller(player));
@@ -31,6 +36,9 @@ public class Game extends ApplicationAdapter {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
+		for(FireBall fireBall: fireBalls){
+			batch.draw(fireBall.getTexture(),fireBall.getPosition().x, fireBall.getPosition().y);
+		}
 		batch.draw(player.getTexture(), player.getPosition().x, player.getPosition().y);
 		batch.end();
 	}
@@ -40,5 +48,13 @@ public class Game extends ApplicationAdapter {
 		batch.dispose();
 		img.dispose();
 		player.dispose();
+		for(FireBall fireBall: fireBalls){
+			fireBall.dispose();
+		}
+	}
+
+	public static void addFireBall(FireBall f){
+		fireBalls.add(f);
+
 	}
 }

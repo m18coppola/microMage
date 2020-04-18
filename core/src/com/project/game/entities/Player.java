@@ -2,6 +2,7 @@ package com.project.game.entities;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
+import com.project.game.Game;
 
 public class Player {
     Texture texture;
@@ -51,8 +52,16 @@ public class Player {
 
     }
 
-    public void dispose(){
+    public void shoot(int x, int y){
+        double angle = Math.atan((y-position.y)/ (x-position.x));
+        System.out.println(angle);
+        FireBall fireBall = new FireBall(angle, new Vector3(position.x, position.y, 0));
+        Game.addFireBall(fireBall);
+        fireBall.start();
 
+    }
+
+    public void dispose(){
         texture.dispose();
     }
 

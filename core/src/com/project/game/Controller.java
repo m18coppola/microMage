@@ -49,4 +49,12 @@ public class Controller extends InputAdapter {
         }
         return true;
     }
+
+    @Override
+    public boolean touchDown (int x, int y, int pointer, int button) {
+        if(button == 0){ // 0 is left click
+            player.shoot(x, y);
+        }
+        return false;
+    }
 }
