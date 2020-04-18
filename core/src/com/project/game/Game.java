@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Game extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
-	OrthographicCamera cam;
+	public static OrthographicCamera cam;
 	Player player;
 	Controller controller;
 	static ArrayList<FireBall> fireBalls;
@@ -46,7 +46,6 @@ public class Game extends ApplicationAdapter {
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
 		player.dispose();
 		for(FireBall fireBall: fireBalls){
 			fireBall.dispose();

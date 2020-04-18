@@ -53,8 +53,8 @@ public class Player {
     }
 
     public void shoot(int x, int y){
-        double angle = Math.atan((y-position.y)/ (x-position.x));
-        System.out.println(angle);
+        double angle = Math.atan2((y-position.y), (x-position.x));
+
         FireBall fireBall = new FireBall(angle, new Vector3(position.x, position.y, 0));
         Game.addFireBall(fireBall);
         fireBall.start();
