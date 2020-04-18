@@ -22,27 +22,27 @@ public class Player {
     }
     public void moveLeft(boolean moving){
         if(moving)
-            velocity.x = -1;
+            velocity.x -= 1;
         else
-            velocity.x = 0;
+            velocity.x += 1;
     }
     public void moveRight(boolean moving){
         if(moving)
-            velocity.x = +1;
+            velocity.x += 1;
         else
-            velocity.x = 0;
+            velocity.x -= 1;
     }
     public void moveUp(boolean moving){
         if(moving)
-            velocity.y = + 1;
+            velocity.y += 1;
         else
-            velocity.y = 0;
+            velocity.y -= 1;
     }
     public void moveDown(boolean moving){
         if(moving)
-            velocity.y = - 1;
+            velocity.y -= 1;
         else
-            velocity.y = 0;
+            velocity.y += 1;
     }
 
     public void update(){
