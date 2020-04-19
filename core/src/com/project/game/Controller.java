@@ -57,7 +57,7 @@ public class Controller extends InputAdapter {
             Vector3 mousePos = Game.cam.unproject(new Vector3(x,y,0));
             System.out.println("Player pos: " + player.getPosition());
             System.out.println("Mouse pos:" + mousePos);
-            player.shoot((int)mousePos.x, (int)mousePos.y);
+            player.shoot((int)mousePos.x , (int)mousePos.y );
         }
         return false;
     }
