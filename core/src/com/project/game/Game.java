@@ -31,7 +31,8 @@ public class Game extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-		player.update();
+		float dt = Gdx.graphics.getDeltaTime();
+		player.update(dt);
 		batch.setProjectionMatrix(cam.combined);
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
