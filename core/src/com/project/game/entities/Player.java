@@ -1,6 +1,7 @@
 package com.project.game.entities;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector3;
 import com.project.game.Animation;
 import com.project.game.Game;
@@ -13,6 +14,7 @@ public class Player {
     Animation idle;
     Animation attack;
     int speed = 100;
+    Sprite sprite;
     boolean attacking;
     public Player(){
         attacking = false;

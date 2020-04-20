@@ -9,7 +9,7 @@ public class FireBall extends Thread{
     Texture texture;
     public FireBall(double angle, Vector3 position){
         texture = new Texture("items/fireball.png");
-        velocity = new Vector3((int)(Math.cos(angle)*5), (int)(Math.sin(angle)*5),0);
+        velocity = new Vector3((float)(Math.cos(angle)*5), (float)(Math.sin(angle)*5),0);
         this.position = position;
     }
     public Texture getTexture(){
