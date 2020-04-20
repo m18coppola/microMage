@@ -55,8 +55,6 @@ public class Controller extends InputAdapter {
     public boolean touchDown (int x, int y, int pointer, int button) {
         if(button == 0){ // 0 is left click
             Vector3 mousePos = Game.cam.unproject(new Vector3(x,y,0));
-            System.out.println("Player pos: " + player.getPosition());
-            System.out.println("Mouse pos:" + mousePos);
             player.shoot((int)mousePos.x , (int)mousePos.y );
         }
         return false;

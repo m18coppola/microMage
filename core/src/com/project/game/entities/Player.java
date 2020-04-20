@@ -47,6 +47,7 @@ public class Player {
         position = new Vector3(125 / 2,125 / 2,0);
         velocity = new Vector3(0,0,0);
 
+
     }
 
     public Texture getTexture(){
@@ -94,7 +95,6 @@ public class Player {
         walk.update(dt);
         idle.update(dt);
         attack.update(dt);
-        System.out.println(attacking);
 
     }
 

@@ -9,11 +9,7 @@ public class FireBall extends Thread{
     Texture texture;
     public FireBall(double angle, Vector3 position){
         texture = new Texture("items/fireball.png");
-        velocity = new Vector3((int)(Math.cos(angle)*10), (int)(Math.sin(angle)*10),0);
-        System.out.println("angle: " + Math.toDegrees(angle));
-        System.out.println("cos(angle) = " + Math.cos(angle));
-        System.out.println("x component:" + velocity.x);
-        System.out.println("y component:" + velocity.y);
+        velocity = new Vector3((int)(Math.cos(angle)*5), (int)(Math.sin(angle)*5),0);
         this.position = position;
     }
     public Texture getTexture(){
@@ -26,7 +22,7 @@ public class FireBall extends Thread{
     public void run(){
         while(true){
             try {
-                sleep(100);
+                sleep(33);
             }catch (Exception e){}
             position.add(velocity);
         }
