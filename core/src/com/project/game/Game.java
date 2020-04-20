@@ -38,7 +38,7 @@ public class Game extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		for(FireBall fireBall: fireBalls){
-			batch.draw(fireBall.getTexture(),fireBall.getPosition().x, fireBall.getPosition().y);
+			batch.draw(fireBall.getTexture(),fireBall.getPosition().x -4, fireBall.getPosition().y -5);
 		}
 		batch.draw(player.getTexture(), player.getPosition().x, player.getPosition().y);
 		batch.end();

@@ -101,7 +101,7 @@ public class Player {
     }
 
     public void shoot(int x, int y){
-        double angle = Math.atan2((y-position.y), (x-position.x));
+        double angle = Math.atan2((y-position.y - 3), (x-position.x - 5));
         attacking = true;
         FireBall fireBall = new FireBall(angle, new Vector3(position.x + 5, position.y + 3 , 0));
         Game.addFireBall(fireBall);
