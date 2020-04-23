@@ -15,6 +15,8 @@ public class Game extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
 	public static OrthographicCamera cam;
+	public static final int WIDTH = 500;
+	public static final int HEIGHT = 500;
 	Player player;
 	Controller controller;
 	static ArrayList<FireBall> fireBalls;
@@ -26,7 +28,7 @@ public class Game extends ApplicationAdapter {
 		player = new Player();
 		Gdx.input.setInputProcessor(new Controller(player));
 		cam = new OrthographicCamera();
-		cam.setToOrtho(false,125 , 125);
+		cam.setToOrtho(false, WIDTH/4 , HEIGHT/4);
 	}
 
 	@Override
