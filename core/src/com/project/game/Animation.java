@@ -9,6 +9,7 @@ public class Animation {
     int currentFrame;
     float frameTimeDelta;
     float frameTimeLength;
+    boolean isLeft;
 
     public Animation(Sprite[] frames, float speed){
         this.frames = frames;
@@ -31,6 +32,22 @@ public class Animation {
         if(currentFrame >= frameCount)
             currentFrame = 0;
 
+    }
+    public void setLeft(){
+        if(!isLeft){
+            isLeft = true;
+            for(Sprite s : frames){
+                s.flip(true, false);
+            }
+        }
+    }
+    public void setRight(){
+        if(isLeft){
+            isLeft = false;
+            for(Sprite s : frames){
+                s.flip(true, false);
+            }
+        }
     }
     public Sprite getSprite(){
         return frames[currentFrame];

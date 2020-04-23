@@ -41,14 +41,22 @@ public class Player extends Entity{
             return walk.getSprite();
     }
     public void moveLeft(boolean moving){
-        if(moving)
+        if(moving) {
             velocity.x -= SPEED;
+            walk.setLeft();
+            idle.setLeft();
+            attack.setLeft();
+        }
         else
             velocity.x += SPEED;
     }
     public void moveRight(boolean moving){
-        if(moving)
+        if(moving) {
             velocity.x += SPEED;
+            walk.setRight();
+            idle.setRight();
+            attack.setRight();
+        }
         else
             velocity.x -= SPEED;
     }
