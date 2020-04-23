@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.project.game.Animation;
 import com.project.game.Game;
 import com.project.game.ResourceLoader;
+import com.project.game.states.PlayState;
 
 public class Player extends Entity{
     public static final int WIDTH = 18;
@@ -91,7 +92,7 @@ public class Player extends Entity{
         double angle = Math.atan2((y-center.y), (x-center.x));
         attacking = true;
         FireBall fireBall = new FireBall(angle, new Vector2(center.x, center.y));
-        Game.addFireBall(fireBall);
+        PlayState.addFireBall(fireBall);
         attack.resetFrames();
 
     }

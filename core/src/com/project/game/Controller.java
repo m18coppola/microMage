@@ -4,6 +4,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Vector3;
 import com.project.game.entities.Player;
+import com.project.game.states.PlayState;
 
 public class Controller extends InputAdapter {
     Player player;
@@ -54,7 +55,7 @@ public class Controller extends InputAdapter {
     @Override
     public boolean touchDown (int x, int y, int pointer, int button) {
         if(button == 0){ // 0 is left click
-            Vector3 mousePos = Game.cam.unproject(new Vector3(x,y,0));
+            Vector3 mousePos = PlayState.cam.unproject(new Vector3(x,y,0));
             player.shoot((int)mousePos.x , (int)mousePos.y );
         }
         return false;
