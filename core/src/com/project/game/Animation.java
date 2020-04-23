@@ -1,15 +1,16 @@
 package com.project.game;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Animation {
-    Texture[] frames;
+    Sprite[] frames;
     int frameCount;
     int currentFrame;
     float frameTimeDelta;
     float frameTimeLength;
 
-    public Animation(Texture[] frames, float speed){
+    public Animation(Sprite[] frames, float speed){
         this.frames = frames;
         frameCount = frames.length;
         currentFrame = 0;
@@ -31,10 +32,15 @@ public class Animation {
             currentFrame = 0;
 
     }
-    public Texture getTexture(){
+    public Sprite getSprite(){
         return frames[currentFrame];
     }
     public void resetFrames(){
         currentFrame = 0;
     }
+    public void dispose(){
+        for(Sprite s : frames){
+            s.getTexture().dispose();
+        }
+    };
 }

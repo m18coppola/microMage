@@ -1,34 +1,33 @@
 package com.project.game.entities;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
+import com.project.game.ResourceLoader;
 
-public class FireBall extends Thread{
-    Vector3 velocity;
-    Vector3 position;
-    Texture texture;
-    public FireBall(double angle, Vector3 position){
-        texture = new Texture("items/fireball.png");
-        velocity = new Vector3((float)(Math.cos(angle)*5), (float)(Math.sin(angle)*5),0);
-        this.position = position;
+public class FireBall extends Entity{
+    Vector2 velocity;
+    Sprite sprite;
+    public static final int WIDTH = 8;
+    public static final int HEIGHT = 9;
+    public static final int SPEED = 100;
+
+    public FireBall(double angle, Vector2 position){
+        super(position.x, position.y, WIDTH, HEIGHT);
+        sprite = ResourceLoader.loadFireBall();
+        velocity = new Vector2((float)(Math.cos(angle)*SPEED), (float)(Math.sin(angle)*SPEED));
     }
-    public Texture getTexture(){
-        return texture;
+    public Sprite getSprite(){
+        return sprite;
     }
-    public Vector3 getPosition(){
-        return position;
+
+    public void update(float dt){
+        hitbox.setPosition(hitbox.getX() + velocity.x * dt,
+                           hitbox.getY() + velocity.y * dt);
     }
-    @Override
-    public void run(){
-        while(true){
-            try {
-                sleep(33);
-            }catch (Exception e){}
-            position.add(velocity);
-        }
-    }
+
     public void dispose(){
-        texture.dispose();
+        sprite.getTexture().dispose();
     }
 
 }
