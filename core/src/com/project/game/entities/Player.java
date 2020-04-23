@@ -2,116 +2,105 @@ package com.project.game.entities;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.Vector2;
 import com.project.game.Animation;
 import com.project.game.Game;
+import com.project.game.ResourceLoader;
 
-public class Player {
-    Texture texture;
-    Vector3 position;
-    Vector3 velocity;
+public class Player extends Entity{
+    public static final int WIDTH = 18;
+    public static final int HEIGHT = 18;
+    Vector2 velocity;
     Animation walk;
     Animation idle;
     Animation attack;
-    int speed = 100;
-    Sprite sprite;
+    static final int SPEED = 100;
     boolean attacking;
+    Vector2 center;
     public Player(){
+        super(125 /2, 125/2, WIDTH, HEIGHT);
+        center = new Vector2();
         attacking = false;
-        texture = new Texture("characters/wizard/wizard_idle_01.png");
-        walk = new Animation(new Texture[]{
-                new Texture("characters/wizard/wizard_run_01.png"),
-                new Texture("characters/wizard/wizard_run_02.png"),
-                new Texture("characters/wizard/wizard_run_03.png"),
-                new Texture("characters/wizard/wizard_run_04.png")
-        }, 0.06f);
-        idle = new Animation(new Texture[]{
-                new Texture("characters/wizard/wizard_idle_01.png"),
-                new Texture("characters/wizard/wizard_idle_02.png"),
-                new Texture("characters/wizard/wizard_idle_03.png"),
-                new Texture("characters/wizard/wizard_idle_04.png"),
-                new Texture("characters/wizard/wizard_idle_05.png"),
-                new Texture("characters/wizard/wizard_idle_06.png"),
 
-        },.1f);
-        attack = new Animation(new Texture[]{
-                new Texture("characters/wizard/wizard_attack_01.png"),
-                new Texture("characters/wizard/wizard_attack_02.png"),
-                new Texture("characters/wizard/wizard_attack_03.png"),
-                new Texture("characters/wizard/wizard_attack_04.png"),
-                new Texture("characters/wizard/wizard_attack_05.png"),
-                new Texture("characters/wizard/wizard_attack_06.png"),
-                new Texture("characters/wizard/wizard_attack_07.png"),
+        walk = new Animation(ResourceLoader.loadWizardWalk(), 0.06f);
+        idle = new Animation(ResourceLoader.loadWizardIdle(),.1f);
+        attack = new Animation(ResourceLoader.loadWizardAttack(),.1f);
 
-
-        },.1f);
-
-        position = new Vector3(125 / 2,125 / 2,0);
-        velocity = new Vector3(0,0,0);
+        velocity = new Vector2(0,0);
 
 
     }
 
-    public Texture getTexture(){
+    @Override
+    public Sprite getSprite(){
         if(attacking)
-            return attack.getTexture();
+            return attack.getSprite();
         else if(velocity.x == 0 && velocity.y == 0)
-            return idle.getTexture();
+            return idle.getSprite();
         else
-            return walk.getTexture();
-    }
-    public Vector3 getPosition(){
-        return position;
+            return walk.getSprite();
     }
     public void moveLeft(boolean moving){
-        if(moving)
-            velocity.x -= speed;
+        if(moving) {
+            velocity.x -= SPEED;
+            walk.setLeft();
+            idle.setLeft();
+            attack.setLeft();
+        }
         else
-            velocity.x += speed;
+            velocity.x += SPEED;
     }
     public void moveRight(boolean moving){
-        if(moving)
-            velocity.x += speed;
+        if(moving) {
+            velocity.x += SPEED;
+            walk.setRight();
+            idle.setRight();
+            attack.setRight();
+        }
         else
-            velocity.x -= speed;
+            velocity.x -= SPEED;
     }
     public void moveUp(boolean moving){
         if(moving)
-            velocity.y += speed;
+            velocity.y += SPEED;
         else
-            velocity.y -= speed;
+            velocity.y -= SPEED;
     }
     public void moveDown(boolean moving){
         if(moving)
-            velocity.y -= speed;
+            velocity.y -= SPEED;
         else
-            velocity.y += speed;
+            velocity.y += SPEED;
     }
 
+    @Override
     public void update(float dt){
         if(attack.getCurrentFrame() == 6 && attacking)
         attacking = false;
 
-        position.x = position.x + velocity.x*dt;
-        position.y = position.y + velocity.y*dt;
+        hitbox.setPosition(hitbox.getX() + velocity.x*dt,
+                           hitbox.getY() + velocity.y*dt);
+
         walk.update(dt);
         idle.update(dt);
         attack.update(dt);
-
     }
 
     public void shoot(int x, int y){
-        double angle = Math.atan2((y-position.y - 3), (x-position.x - 5));
+        center = hitbox.getCenter(center);
+        double angle = Math.atan2((y-center.y), (x-center.x));
         attacking = true;
-        FireBall fireBall = new FireBall(angle, new Vector3(position.x + 5, position.y + 3 , 0));
+        FireBall fireBall = new FireBall(angle, new Vector2(center.x, center.y));
         Game.addFireBall(fireBall);
-        fireBall.start();
         attack.resetFrames();
 
     }
 
+    @Override
     public void dispose(){
-        texture.dispose();
+        walk.dispose();
+        attack.dispose();
+        idle.dispose();
     }
 
 }
