@@ -1,6 +1,7 @@
 package com.project.game.States;
 
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.project.game.Game;
@@ -12,8 +13,8 @@ public class MenuState extends State{
 
     public MenuState(GameStateManager gsm){
         super(gsm);
-        background = new Texture("");
-        playBtn = new Texture("");
+        background = new Texture("UI/background.bmp");
+        playBtn = new Texture("UI/playBtn.png");
     }
 
     @Override
@@ -31,10 +32,15 @@ public class MenuState extends State{
 
     }
 
+    public void dispose() {
+        background.dispose();
+        playBtn.dispose();
+    }
+
     @Override
     public void handleInput() {
-        //if(Gdx.input.justTouched()){
-            //gsm.set(new PlayState(gsm));
-        //}
+        if(Gdx.input.justTouched()){
+            gsm.set(new PlayState(gsm));
+        }
     }
 }

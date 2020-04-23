@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.project.game.States.GameStateManager;
+import com.project.game.States.MenuState;
 import com.project.game.entities.FireBall;
 import com.project.game.entities.Player;
 
@@ -17,6 +19,7 @@ public class Game extends ApplicationAdapter {
 	public static OrthographicCamera cam;
 	public static final int WIDTH = 500;
 	public static final int HEIGHT = 500;
+	private GameStateManager gsm;
 	Player player;
 	Controller controller;
 	static ArrayList<FireBall> fireBalls;
@@ -25,35 +28,41 @@ public class Game extends ApplicationAdapter {
 	public void create () {
 		fireBalls = new ArrayList<FireBall>();
 		batch = new SpriteBatch();
-		player = new Player();
-		Gdx.input.setInputProcessor(new Controller(player));
-		cam = new OrthographicCamera();
-		cam.setToOrtho(false, WIDTH/4 , HEIGHT/4);
+		gsm = new GameStateManager();
+		gsm.push(new MenuState(gsm));
+		//player = new Player();
+		//Gdx.input.setInputProcessor(new Controller(player));
+		//cam = new OrthographicCamera();
+		//cam.setToOrtho(false, WIDTH/4 , HEIGHT/4);
 	}
 
 	@Override
 	public void render () {
 		float dt = Gdx.graphics.getDeltaTime();
-		player.update(dt);
-		batch.setProjectionMatrix(cam.combined);
+		//player.update(dt);
+		//batch.setProjectionMatrix(cam.combined);
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		for(FireBall fireBall: fireBalls){
-			fireBall.update(dt);
-			batch.draw(fireBall.getSprite(),fireBall.getPosition().x, fireBall.getPosition().y);
-		}
-		batch.draw(player.getSprite(), player.getPosition().x, player.getPosition().y);
-		batch.end();
+		gsm.update(dt);
+		gsm.render(batch);
+		//batch.begin();
+		//for(FireBall fireBall: fireBalls){
+			//fireBall.update(dt);
+			//batch.draw(fireBall.getSprite(),fireBall.getPosition().x, fireBall.getPosition().y);
+		//}
+		//batch.draw(player.getSprite(), player.getPosition().x, player.getPosition().y);
+		//batch.end();
 	}
 	
 	@Override
 	public void dispose () {
-		batch.dispose();
-		player.dispose();
-		for(FireBall fireBall: fireBalls){
-			fireBall.dispose();
-		}
+
+		super.dispose();
+		//batch.dispose();
+		//player.dispose();
+		//for(FireBall fireBall: fireBalls){
+			//fireBall.dispose();
+		//}
 	}
 
 	public static void addFireBall(FireBall f){
