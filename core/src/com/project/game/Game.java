@@ -17,18 +17,12 @@ public class Game extends ApplicationAdapter {
 	SpriteBatch batch;
 	GameStateManager gsm;
 
-
-
-
-	
 	@Override
 	public void create () {
 
 		batch = new SpriteBatch();
 		gsm = new GameStateManager();
 		gsm.push(new PlayState(gsm));
-
-
 
 	}
 

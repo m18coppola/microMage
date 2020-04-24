@@ -30,7 +30,6 @@ public abstract class Entity {
     public abstract void dispose();
 
     public boolean collidesWith(Entity other){
-        hitbox.contains(other.hitbox);
-        return false;
+        return hitbox.contains(other.hitbox);
     };
 }
