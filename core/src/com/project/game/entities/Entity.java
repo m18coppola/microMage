@@ -21,8 +21,7 @@ public abstract class Entity {
         position = hitbox.getPosition(position);
     }
 
-    public Vector2 getPosition(){
-        return hitbox.getPosition(position);
+    public Vector2 getPosition(){ return hitbox.getPosition(position);
     }
 
     public abstract void update(float dt);

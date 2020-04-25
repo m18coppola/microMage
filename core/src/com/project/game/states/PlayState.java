@@ -51,8 +51,7 @@ public class PlayState extends State {
         batch.end();
     }
 
-    public static void addProjectile(Spells p){
-        projectiles.add(p);
+    public static void addProjectile(Spells p){ projectiles.add(p);
     }
 
     @Override

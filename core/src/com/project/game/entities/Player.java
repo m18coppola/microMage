@@ -91,7 +91,7 @@ public class Player extends Entity{
         center = hitbox.getCenter(center);
         double angle = Math.atan2((y-center.y), (x-center.x));
         attacking = true;
-        SnowBall fireBall = new SnowBall(angle, new Vector2(center.x, center.y));
+        LightningBolt fireBall = new LightningBolt(angle, new Vector2(center.x, center.y));
         PlayState.addProjectile(fireBall);
         attack.resetFrames();
 
