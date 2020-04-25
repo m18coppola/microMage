@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.project.game.Controller;
 import com.project.game.entities.FireBall;
 import com.project.game.entities.Player;
+import com.project.game.entities.tiles.Floor;
+import com.project.game.entities.tiles.Tile;
 
 import java.util.ArrayList;
 
@@ -16,23 +18,30 @@ public class PlayState extends State {
     Player player;
     Controller controller;
     static ArrayList<FireBall> fireBalls;
+    ArrayList<Tile> tilemap = new ArrayList<Tile>();
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
-        fireBalls = new ArrayList<FireBall>();
-        player = new Player();
+        //fireBalls = new ArrayList<FireBall>();
+        //player = new Player();
         cam = new OrthographicCamera();
         cam.setToOrtho(false,125 , 125);
         Gdx.gl.glClearColor(1, 0, 0, 1);
-        Gdx.input.setInputProcessor(new Controller(player));
+        //Gdx.input.setInputProcessor(new Controller(player));
+
+        for(int x = 0; x < 10; x++){
+            for(int y = 0; y < 10; y++){
+                tilemap.add(new Floor(x * 8, y * 8));
+            }
+        }
     }
 
     @Override
     public void update(float dt) {
-        player.update(dt);
-        for(FireBall fireBall: fireBalls){
-            fireBall.update(dt);
-        }
+        //player.update(dt);
+        //for(FireBall fireBall: fireBalls){
+            //fireBall.update(dt);
+        //}
     }
 
     @Override
@@ -42,10 +51,13 @@ public class PlayState extends State {
 
         batch.begin();
 
-        for(FireBall fireBall: fireBalls){
-            batch.draw(fireBall.getSprite(),fireBall.getPosition().x, fireBall.getPosition().y);
+        //for(FireBall fireBall: fireBalls){
+            //batch.draw(fireBall.getSprite(),fireBall.getPosition().x, fireBall.getPosition().y);
+        //}
+        //batch.draw(player.getSprite(), player.getPosition().x, player.getPosition().y);
+        for(Tile t: tilemap){
+            batch.draw(t.getSprite(), t.getPosition().x, t.getPosition().y);
         }
-        batch.draw(player.getSprite(), player.getPosition().x, player.getPosition().y);
 
         batch.end();
     }
@@ -56,9 +68,9 @@ public class PlayState extends State {
 
     @Override
     public void dispose() {
-        player.dispose();
-        for(FireBall fireBall: fireBalls){
-            fireBall.dispose();
-        }
+        //player.dispose();
+        //for(FireBall fireBall: fireBalls){
+            //fireBall.dispose();
+        //}
     }
 }
