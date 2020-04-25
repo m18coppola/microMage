@@ -91,8 +91,8 @@ public class Player extends Entity{
         center = hitbox.getCenter(center);
         double angle = Math.atan2((y-center.y), (x-center.x));
         attacking = true;
-        FireBall fireBall = new FireBall(angle, new Vector2(center.x, center.y));
-        PlayState.addFireBall(fireBall);
+        SnowBall fireBall = new SnowBall(angle, new Vector2(center.x, center.y));
+        PlayState.addProjectile(fireBall);
         attack.resetFrames();
 
     }

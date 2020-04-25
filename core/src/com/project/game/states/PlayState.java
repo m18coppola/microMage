@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.project.game.Controller;
 import com.project.game.entities.FireBall;
 import com.project.game.entities.Player;
+import com.project.game.entities.Spells;
 
 import java.util.ArrayList;
 
@@ -15,11 +16,11 @@ public class PlayState extends State {
     public static OrthographicCamera cam;
     Player player;
     Controller controller;
-    static ArrayList<FireBall> fireBalls;
+    static ArrayList<Spells> projectiles;
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
-        fireBalls = new ArrayList<FireBall>();
+        projectiles = new ArrayList<Spells>();
         player = new Player();
         cam = new OrthographicCamera();
         cam.setToOrtho(false,125 , 125);
@@ -30,8 +31,8 @@ public class PlayState extends State {
     @Override
     public void update(float dt) {
         player.update(dt);
-        for(FireBall fireBall: fireBalls){
-            fireBall.update(dt);
+        for(Spells p: projectiles){
+            p.update(dt);
         }
     }
 
@@ -42,23 +43,23 @@ public class PlayState extends State {
 
         batch.begin();
 
-        for(FireBall fireBall: fireBalls){
-            batch.draw(fireBall.getSprite(),fireBall.getPosition().x, fireBall.getPosition().y);
+        for(Spells p: projectiles){
+            batch.draw(p.getSprite(),p.getPosition().x, p.getPosition().y);
         }
         batch.draw(player.getSprite(), player.getPosition().x, player.getPosition().y);
 
         batch.end();
     }
 
-    public static void addFireBall(FireBall f){
-        fireBalls.add(f);
+    public static void addProjectile(Spells p){
+        projectiles.add(p);
     }
 
     @Override
     public void dispose() {
         player.dispose();
-        for(FireBall fireBall: fireBalls){
-            fireBall.dispose();
+        for(Spells p: projectiles){
+            p.dispose();
         }
     }
 }

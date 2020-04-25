@@ -39,4 +39,6 @@ public class ResourceLoader {
     public static Sprite loadFireBall() {
         return new Sprite(new Texture("items/fireball.png"));
     }
+
+    public static Sprite loadSnowBall() { return new Sprite(new Texture("items/snowball.png")); }
 }
