@@ -2,6 +2,7 @@ package com.project.game;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class ResourceLoader {
     public static Sprite[] loadWizardWalk(){
@@ -39,4 +40,8 @@ public class ResourceLoader {
     public static Sprite loadFireBall() {
         return new Sprite(new Texture("items/fireball.png"));
     }
+
+    public static Sprite loadFilledHeart(){ return new Sprite(new TextureRegion(new Texture("UI/heart-sprite-png.png"), 11, 29, 280,256 ));}
+
+    public static Sprite loadEmptyHeart(){ return new Sprite(new TextureRegion(new Texture("UI/heart-sprite-png.png"), 608, 34, 280,256 ));}
 }

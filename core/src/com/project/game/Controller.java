@@ -27,7 +27,6 @@ public class Controller extends InputAdapter {
             case Input.Keys.D:
                 player.moveRight(true);
                 break;
-
         }
         return true;
     }
@@ -55,6 +54,7 @@ public class Controller extends InputAdapter {
     @Override
     public boolean touchDown (int x, int y, int pointer, int button) {
         if(button == 0){ // 0 is left click
+            player.setHealth(player.getHealth()-1);
             Vector3 mousePos = PlayState.cam.unproject(new Vector3(x,y,0));
             player.shoot((int)mousePos.x , (int)mousePos.y );
         }

@@ -12,6 +12,7 @@ public class Player extends Entity{
     public static final int WIDTH = 18;
     public static final int HEIGHT = 18;
     Vector2 velocity;
+    static int health;
     Animation walk;
     Animation idle;
     Animation attack;
@@ -22,13 +23,12 @@ public class Player extends Entity{
         super(125 /2, 125/2, WIDTH, HEIGHT);
         center = new Vector2();
         attacking = false;
-
+        health = 3;
         walk = new Animation(ResourceLoader.loadWizardWalk(), 0.06f);
         idle = new Animation(ResourceLoader.loadWizardIdle(),.1f);
         attack = new Animation(ResourceLoader.loadWizardAttack(),.1f);
 
         velocity = new Vector2(0,0);
-
 
     }
 
@@ -97,6 +97,15 @@ public class Player extends Entity{
 
     }
 
+    public static int getHealth()
+    {
+        return health;
+    }
+
+    public void setHealth(int newHealth)
+    {
+        health = newHealth;
+    }
     @Override
     public void dispose(){
         walk.dispose();
