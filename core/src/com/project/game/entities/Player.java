@@ -12,6 +12,7 @@ public class Player extends Entity{
     public static final int WIDTH = 18;
     public static final int HEIGHT = 18;
     Vector2 velocity;
+    static int health;
     Animation walk;
     Animation idle;
     Animation attack;
@@ -22,13 +23,12 @@ public class Player extends Entity{
         super(125 /2, 125/2, WIDTH, HEIGHT);
         center = new Vector2();
         attacking = false;
-
+        health = 3;
         walk = new Animation(ResourceLoader.loadWizardWalk(), 0.06f);
         idle = new Animation(ResourceLoader.loadWizardIdle(),.1f);
         attack = new Animation(ResourceLoader.loadWizardAttack(),.1f);
 
         velocity = new Vector2(0,0);
-
 
     }
 
@@ -81,7 +81,6 @@ public class Player extends Entity{
 
         hitbox.setPosition(hitbox.getX() + velocity.x*dt,
                            hitbox.getY() + velocity.y*dt);
-
         walk.update(dt);
         idle.update(dt);
         attack.update(dt);
@@ -95,6 +94,18 @@ public class Player extends Entity{
         PlayState.addProjectile(fireBall);
         attack.resetFrames();
 
+    }
+
+    public static int getHealth()
+    {
+        return health;
+    }
+
+    public void setHealth(int newHealth)
+    {
+        if(newHealth >= 0 && newHealth <= 3) {
+            health = newHealth;
+        }
     }
 
     @Override

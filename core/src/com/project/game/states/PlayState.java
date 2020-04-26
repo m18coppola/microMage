@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.project.game.Controller;
+import com.project.game.HealthBar;
 import com.project.game.entities.FireBall;
 import com.project.game.entities.Player;
 import com.project.game.entities.Spells;
@@ -16,12 +17,16 @@ public class PlayState extends State {
     public static OrthographicCamera cam;
     Player player;
     Controller controller;
+
     static ArrayList<Spells> projectiles;
+    static HealthBar healthBar;
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
         projectiles = new ArrayList<Spells>();
         player = new Player();
+        healthBar = new HealthBar(player);
+        healthBar.start();
         cam = new OrthographicCamera();
         cam.setToOrtho(false,125 , 125);
         Gdx.gl.glClearColor(1, 0, 0, 1);
@@ -47,6 +52,7 @@ public class PlayState extends State {
             batch.draw(p.getSprite(),p.getPosition().x, p.getPosition().y);
         }
         batch.draw(player.getSprite(), player.getPosition().x, player.getPosition().y);
+        healthBar.render(batch);
 
         batch.end();
     }
@@ -60,5 +66,7 @@ public class PlayState extends State {
         for(Spells p: projectiles){
             p.dispose();
         }
+        healthBar.dispose();
+
     }
 }

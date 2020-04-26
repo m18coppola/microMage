@@ -27,7 +27,6 @@ public class Controller extends InputAdapter {
             case Input.Keys.D:
                 player.moveRight(true);
                 break;
-
         }
         return true;
     }
