@@ -103,7 +103,9 @@ public class Player extends Entity{
 
     public void setHealth(int newHealth)
     {
-        health = newHealth;
+        if(newHealth >= 0 && newHealth <= 3) {
+            health = newHealth;
+        }
     }
 
     @Override
