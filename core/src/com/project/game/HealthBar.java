@@ -29,19 +29,28 @@ public class HealthBar extends Thread
     {
         while(true)
         {
+
             int lives = Player.getHealth();
-            if(lives == 2)
-            {
-                livesArray[2] = false;
-            }
-            else if(lives == 1)
-            {
-                livesArray[1] = false;
-            }
-            else if(lives == 0)
-            {
-                livesArray[0] = false;
-            }
+             synchronized (livesArray) {
+                 if(lives == 3) {
+                     livesArray[0] = true;
+                     livesArray[1] = true;
+                     livesArray[2] = true;
+                 }
+                 else if (lives == 2) {
+                     livesArray[0] = true;
+                     livesArray[1] = true;
+                     livesArray[2] = false;
+                 } else if (lives == 1) {
+                     livesArray[0] = true;
+                     livesArray[1] = false;
+                     livesArray[2] = false;
+                 } else if (lives == 0) {
+                     livesArray[0] = false;
+                     livesArray[1] = false;
+                     livesArray[2] = false;
+                 }
+             }
         }
 
     }
@@ -50,18 +59,15 @@ public class HealthBar extends Thread
     public void render(SpriteBatch batch) {
         xPos = 5;
         yPos = 5;
-        for(boolean life: livesArray)
-        {
-            if(life)
-            {
-                batch.draw(filledHeart, xPos,yPos, 5, 5);
+            for (boolean life : livesArray) {
+                if (life) {
+                    batch.draw(filledHeart, xPos, yPos, 5, 5);
+                } else {
+                    batch.draw(emptyHeart, xPos, yPos, 5, 5);
+                }
+                xPos += 6;
             }
-            else
-            {
-                batch.draw(emptyHeart, xPos,yPos,5 ,5);
-            }
-            xPos += 6;
-        }
+
 
     }
 
