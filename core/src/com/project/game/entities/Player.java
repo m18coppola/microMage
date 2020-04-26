@@ -81,7 +81,6 @@ public class Player extends Entity{
 
         hitbox.setPosition(hitbox.getX() + velocity.x*dt,
                            hitbox.getY() + velocity.y*dt);
-
         walk.update(dt);
         idle.update(dt);
         attack.update(dt);
@@ -106,6 +105,7 @@ public class Player extends Entity{
     {
         health = newHealth;
     }
+
     @Override
     public void dispose(){
         walk.dispose();
