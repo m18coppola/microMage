@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.project.game.entities.FireBall;
 import com.project.game.entities.Player;
 import com.project.game.states.GameStateManager;
+import com.project.game.states.MenuState;
 import com.project.game.states.PlayState;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class Game extends ApplicationAdapter {
 
 		batch = new SpriteBatch();
 		gsm = new GameStateManager();
-		gsm.push(new PlayState(gsm));
+		gsm.push(new MenuState(gsm));
 
 	}
 
