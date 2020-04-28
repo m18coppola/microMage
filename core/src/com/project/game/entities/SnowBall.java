@@ -7,7 +7,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.project.game.ResourceLoader;
 
 public class SnowBall extends Spells{
-    static Sprite sprite = ResourceLoader.loadSnowBall();
 
     public static final int WIDTH = 12;
     public static final int HEIGHT = 12;
@@ -16,10 +15,9 @@ public class SnowBall extends Spells{
     public static final int MANA = 1;
 
     public SnowBall(double angle, Vector2 position){
-        super(angle,position,SPEED,WIDTH,HEIGHT,DAMAGE,MANA);
+        super(angle,position,SPEED,WIDTH,HEIGHT,DAMAGE,MANA, ResourceLoader.loadSnowBall());
     }
 
-    public Sprite getSprite(){ return sprite; }
 
     public int getManaUsage() { return MANA; }
 
