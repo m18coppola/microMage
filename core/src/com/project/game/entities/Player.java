@@ -11,6 +11,8 @@ import com.project.game.states.PlayState;
 public class Player extends Entity{
     public static final int WIDTH = 18;
     public static final int HEIGHT = 18;
+    static final int MAX_MANA = 8;
+    private static final float MANA_REGEN_SPEED = 1.5f;
     Vector2 velocity;
     static int health;
     static int mana;
@@ -20,12 +22,13 @@ public class Player extends Entity{
     static final int SPEED = 100;
     boolean attacking;
     Vector2 center;
+    float manaRegen;
     public Player(){
         super(125 /2, 125/2, WIDTH, HEIGHT);
         center = new Vector2();
         attacking = false;
         health = 3;
-        mana = 8;
+        mana = MAX_MANA;
         walk = new Animation(ResourceLoader.loadWizardWalk(), 0.06f);
         idle = new Animation(ResourceLoader.loadWizardIdle(),.1f);
         attack = new Animation(ResourceLoader.loadWizardAttack(),.1f);
@@ -78,6 +81,13 @@ public class Player extends Entity{
 
     @Override
     public void update(float dt){
+        manaRegen += dt;
+        if(manaRegen > MANA_REGEN_SPEED){
+            manaRegen = 0;
+            if(mana < MAX_MANA){
+                mana++;
+            }
+        }
         if(attack.getCurrentFrame() == 6 && attacking)
         attacking = false;
 
