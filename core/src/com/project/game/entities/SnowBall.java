@@ -13,13 +13,14 @@ public class SnowBall extends Spells{
     public static final int HEIGHT = 12;
     public static final int SPEED = 150;
     public static final int DAMAGE = 10;
+    public static final int MANA = 1;
 
     public SnowBall(double angle, Vector2 position){
-        super(angle,position,SPEED,WIDTH,HEIGHT,DAMAGE);
+        super(angle,position,SPEED,WIDTH,HEIGHT,DAMAGE,MANA);
     }
 
-    public Sprite getSprite(){
-        return sprite;
-    }
+    public Sprite getSprite(){ return sprite; }
+
+    public int getManaUsage() { return MANA; }
 
 }

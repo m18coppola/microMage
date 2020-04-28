@@ -11,7 +11,7 @@ public abstract class Spells extends Entity{
     Sprite sprite;
 
 
-    public Spells(double angle, Vector2 position,int SPEED,int WIDTH, int HEIGHT, int DAMAGE){
+    public Spells(double angle, Vector2 position,int SPEED,int WIDTH, int HEIGHT, int DAMAGE, int MANA){
         super(position.x - WIDTH/2, position.y - HEIGHT / 2, WIDTH, HEIGHT);
         velocity = new Vector2((float)(Math.cos(angle)*SPEED), (float)(Math.sin(angle)*SPEED));
     }

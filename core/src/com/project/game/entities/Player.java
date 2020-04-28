@@ -13,6 +13,7 @@ public class Player extends Entity{
     public static final int HEIGHT = 18;
     Vector2 velocity;
     static int health;
+    static int mana;
     Animation walk;
     Animation idle;
     Animation attack;
@@ -24,6 +25,7 @@ public class Player extends Entity{
         center = new Vector2();
         attacking = false;
         health = 3;
+        mana = 8;
         walk = new Animation(ResourceLoader.loadWizardWalk(), 0.06f);
         idle = new Animation(ResourceLoader.loadWizardIdle(),.1f);
         attack = new Animation(ResourceLoader.loadWizardAttack(),.1f);
@@ -90,10 +92,13 @@ public class Player extends Entity{
         center = hitbox.getCenter(center);
         double angle = Math.atan2((y-center.y), (x-center.x));
         attacking = true;
-        LightningBolt fireBall = new LightningBolt(angle, new Vector2(center.x, center.y));
-        PlayState.addProjectile(fireBall);
+        SnowBall spellType = new SnowBall(angle, new Vector2(center.x, center.y));
+        if(mana > 0) {
+            PlayState.addProjectile(spellType);
+        }
+        setMana(mana - spellType.getManaUsage());
+        System.out.println(mana);
         attack.resetFrames();
-
     }
 
     public static int getHealth()
@@ -105,6 +110,15 @@ public class Player extends Entity{
     {
         if(newHealth >= 0 && newHealth <= 3) {
             health = newHealth;
+        }
+    }
+
+    public static int getMana() { return mana; }
+
+    public static void setMana(int newMana)
+    {
+        if(newMana >= 0 && newMana <= 8) {
+            mana = newMana;
         }
     }
 
