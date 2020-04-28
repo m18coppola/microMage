@@ -19,6 +19,10 @@ public abstract class Enemy extends Entity {
     public abstract void moveUp();
 
     public abstract void moveDown();
+
+    public abstract void attack();
+
+
     @Override
     public void update(float dt) {
 
