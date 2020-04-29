@@ -40,35 +40,49 @@ public class ResourceLoader {
 
     public static Sprite[] loadBarbarianAttack() {
         return new Sprite[]{
-                new Sprite(new Texture("character/barbarian/barbarian_attack_01")),
-                new Sprite(new Texture("character/barbarian/barbarian_attack_02")),
-                new Sprite(new Texture("character/barbarian/barbarian_attack_03")),
-                new Sprite(new Texture("character/barbarian/barbarian_attack_04")),
-                new Sprite(new Texture("character/barbarian/barbarian_attack_05")),
-                new Sprite(new Texture("character/barbarian/barbarian_attack_04")),
-                new Sprite(new Texture("character/barbarian/barbarian_attack_05")),
-                new Sprite(new Texture("character/barbarian/barbarian_attack_06")),
-                new Sprite(new Texture("character/barbarian/barbarian_attack_07")),
-        }
+                new Sprite(new Texture("characters/barbarian/barbarian_attack_01.png")),
+                new Sprite(new Texture("characters/barbarian/barbarian_attack_02.png")),
+                new Sprite(new Texture("characters/barbarian/barbarian_attack_03.png")),
+                new Sprite(new Texture("characters/barbarian/barbarian_attack_04.png")),
+                new Sprite(new Texture("characters/barbarian/barbarian_attack_05.png")),
+                new Sprite(new Texture("characters/barbarian/barbarian_attack_04.png")),
+                new Sprite(new Texture("characters/barbarian/barbarian_attack_05.png")),
+                new Sprite(new Texture("characters/barbarian/barbarian_attack_06.png")),
+                new Sprite(new Texture("characters/barbarian/barbarian_attack_07.png")),
+        };
     }
 
     public static Sprite[] loadBarbarianWalk() {
         return new Sprite[]{
-                new Sprite(new Texture("character/barbarian/barbarian_run_01")),
-                new Sprite(new Texture("character/barbarian/barbarian_run_02")),
-                new Sprite(new Texture("character/barbarian/barbarian_run_03")),
-                new Sprite(new Texture("character/barbarian/barbarian_run_04")),
+                new Sprite(new Texture("characters/barbarian/barbarian_run_01.png")),
+                new Sprite(new Texture("characters/barbarian/barbarian_run_02.png")),
+                new Sprite(new Texture("characters/barbarian/barbarian_run_03.png")),
+                new Sprite(new Texture("characters/barbarian/barbarian_run_04.png")),
 
-        }
+        };
     }
 
-}
+    public static Sprite[] loadBarbarianIdle() {
+        return new Sprite[]{
+                new Sprite(new Texture("characters/barbarian/barbarian_idle_01.png")),
+                new Sprite(new Texture("characters/barbarian/barbarian_idle_02.png")),
+                new Sprite(new Texture("characters/barbarian/barbarian_idle_03.png")),
+                new Sprite(new Texture("characters/barbarian/barbarian_idle_04.png")),
+
+        };
+    }
+
+
 
     public static Sprite loadFireBall() {
         return new Sprite(new Texture("items/fireball.png"));
     }
 
-    public static Sprite loadAxe(){return new Sprite(new Texture("item/fireball.png"));}
+    public static Sprite loadAxe() {
+        return new Sprite(new Texture("items/axe.png"));
+    }
+
+
 }
 
 
