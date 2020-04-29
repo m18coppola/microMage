@@ -1,10 +1,7 @@
 package com.project.game.entities;
-
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.project.game.Animation;
-import com.project.game.Game;
 import com.project.game.ResourceLoader;
 import com.project.game.states.PlayState;
 
@@ -19,17 +16,14 @@ public class Player extends Entity{
     boolean attacking;
     Vector2 center;
     public Player(){
-        super(125 /2, 125/2, WIDTH, HEIGHT);
+        super(125/2, 125/2, WIDTH, HEIGHT);
         center = new Vector2();
         attacking = false;
-
         walk = new Animation(ResourceLoader.loadWizardWalk(), 0.06f);
         idle = new Animation(ResourceLoader.loadWizardIdle(),.1f);
         attack = new Animation(ResourceLoader.loadWizardAttack(),.1f);
 
         velocity = new Vector2(0,0);
-
-
     }
 
     @Override

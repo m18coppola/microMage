@@ -13,7 +13,7 @@ public class Axe extends Entity{
 
     public Axe(double angle, Vector2 position){
         super(position.x - WIDTH/2, position.y - HEIGHT / 2, WIDTH, HEIGHT);
-        sprite = ResourceLoader.loadFireBall();
+        sprite = ResourceLoader.loadAxe();
         velocity = new Vector2((float)(Math.cos(angle)*SPEED), (float)(Math.sin(angle)*SPEED));
     }
     public Sprite getSprite(){
