@@ -20,7 +20,7 @@ public abstract class Enemy extends Entity {
 
     public abstract void moveDown();
 
-    public abstract void attack();
+    public abstract void attack(int x, int y);
 
 
     @Override
