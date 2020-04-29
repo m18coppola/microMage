@@ -33,6 +33,7 @@ public class PlayState extends State {
     @Override
     public void update(float dt) {
         player.update(dt);
+        enemy1.update(dt);
         for (FireBall fireBall : fireBalls) {
             fireBall.update(dt);
         }

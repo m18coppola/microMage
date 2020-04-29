@@ -26,7 +26,7 @@ public class Barbarian extends Enemy {
         idle = new Animation(ResourceLoader.loadBarbarianIdle(), .1f);
         walk = new Animation(ResourceLoader.loadBarbarianWalk(), 0.06f);
         attack = new Animation(ResourceLoader.loadBarbarianAttack(), 0.1f);
-        velocity = new Vector2(0,0);
+        velocity = new Vector2(0, 0);
     }
 
 
@@ -67,7 +67,9 @@ public class Barbarian extends Enemy {
     }
 
     public void moveDown() {
-        velocity.y -= SPEED;
+        if (movement) {
+            velocity.y -= SPEED;
+        }
     }
 
     public void attack(int x, int y) {
@@ -82,11 +84,13 @@ public class Barbarian extends Enemy {
 
     @Override
     public void update(float dt) {
-
+        idle.update(dt);
     }
 
     @Override
     public void dispose() {
-
+        walk.dispose();
+        attack.dispose();
+        idle.dispose();
     }
 }
