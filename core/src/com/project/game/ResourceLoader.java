@@ -57,4 +57,21 @@ public class ResourceLoader {
         }
         return sprites;
     }
+
+    public static Sprite[] loadWallTiles(){
+        Sprite[] sprites = new Sprite[12];  //12 wall types
+        sprites[0]  = new Sprite(new TextureRegion(tileAssets,8,0, Tile.WIDTH, Tile.HEIGHT)); // HORIZONTAL
+        sprites[1]  = new Sprite(new TextureRegion(tileAssets,40,0, Tile.WIDTH, Tile.HEIGHT)); // HORIZONTAL_L_BROKE
+        sprites[2]  = new Sprite(new TextureRegion(tileAssets,32,0, Tile.WIDTH, Tile.HEIGHT)); // HORIZONTAL_R_BROKE
+        sprites[3]  = new Sprite(new TextureRegion(tileAssets,20,8, Tile.WIDTH, Tile.HEIGHT)); // VERTICAL
+        sprites[4]  = new Sprite(new TextureRegion(tileAssets,20,0, Tile.WIDTH, Tile.HEIGHT)); // VERTICAL_T_END
+        sprites[5]  = new Sprite(new TextureRegion(tileAssets,20,16, Tile.WIDTH, Tile.HEIGHT)); // VERTICAL_B_END
+        sprites[6]  = new Sprite(new TextureRegion(tileAssets,4,9, Tile.WIDTH, Tile.HEIGHT)); // VERTICAL_T_BROKE
+        sprites[7]  = new Sprite(new TextureRegion(tileAssets,4,16, Tile.WIDTH, Tile.HEIGHT)); // VERTICAL_B_BROKE
+        sprites[8]  = new Sprite(new TextureRegion(tileAssets,32,8, Tile.WIDTH, Tile.HEIGHT)); // CORNER_NW
+        sprites[9]  = new Sprite(new TextureRegion(tileAssets,40,8, Tile.WIDTH, Tile.HEIGHT)); // CORNER_NE
+        sprites[10] = new Sprite(new TextureRegion(tileAssets,32,16, Tile.WIDTH, Tile.HEIGHT)); // CORNER_SW
+        sprites[11] = new Sprite(new TextureRegion(tileAssets,40,16, Tile.WIDTH, Tile.HEIGHT)); // CORNER_SE
+        return sprites;
+    }
 }

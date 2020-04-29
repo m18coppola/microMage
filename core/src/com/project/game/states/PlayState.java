@@ -9,6 +9,7 @@ import com.project.game.entities.FireBall;
 import com.project.game.entities.Player;
 import com.project.game.entities.tiles.Floor;
 import com.project.game.entities.tiles.Tile;
+import com.project.game.entities.tiles.Wall;
 
 import java.util.ArrayList;
 
@@ -19,6 +20,7 @@ public class PlayState extends State {
     Controller controller;
     static ArrayList<FireBall> fireBalls;
     ArrayList<Tile> tilemap = new ArrayList<Tile>();
+    Wall[] walls = new Wall[12];
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
@@ -33,6 +35,11 @@ public class PlayState extends State {
             for(int y = 0; y < 10; y++){
                 tilemap.add(new Floor(x * 8, y * 8));
             }
+        }
+        for(int x = 0; x < 12; x++){
+
+            walls[x] = new Wall(x*10,50, Wall.WallType.values()[x]);
+
         }
     }
 
@@ -51,13 +58,15 @@ public class PlayState extends State {
 
         batch.begin();
 
+        for(Wall w: walls){
+            batch.draw(w.getSprite(),w.getPosition().x,w.getPosition().y);
+        }
+
         //for(FireBall fireBall: fireBalls){
             //batch.draw(fireBall.getSprite(),fireBall.getPosition().x, fireBall.getPosition().y);
         //}
         //batch.draw(player.getSprite(), player.getPosition().x, player.getPosition().y);
-        for(Tile t: tilemap){
-            batch.draw(t.getSprite(), t.getPosition().x, t.getPosition().y);
-        }
+
 
         batch.end();
     }
