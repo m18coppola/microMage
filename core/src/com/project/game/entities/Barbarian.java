@@ -1,14 +1,14 @@
 package com.project.game.entities;
-
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.project.game.Animation;
 import com.project.game.ResourceLoader;
 import com.project.game.states.PlayState;
 
-public class Barbarian extends Enemy {
+public class Barbarian extends Entity{
     public static final int WIDTH = 18;
     public static final int HEIGHT = 18;
+    public static final int attackRange = 30;
     Vector2 velocity;
     Animation walk;
     Animation idle;
@@ -16,7 +16,9 @@ public class Barbarian extends Enemy {
     static final int SPEED = 100;
     boolean attacking;
     Vector2 center;
+    Vector2 target;
     boolean movement = false;
+
 
     public Barbarian() {
 
@@ -84,6 +86,12 @@ public class Barbarian extends Enemy {
 
     @Override
     public void update(float dt) {
+        center = hitbox.getCenter(center);
+        target = Player.hitbox.getCenter(center);
+        if(Barbarian.hitbox.getX().dst(Player.hitbox) <= attackRange ){
+            attack(Player.hitbox.getX(), Player.hitbox.getY());
+        }
+
         idle.update(dt);
     }
 

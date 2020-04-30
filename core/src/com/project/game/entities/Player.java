@@ -68,6 +68,8 @@ public class Player extends Entity{
             velocity.y += SPEED;
     }
 
+
+
     @Override
     public void update(float dt){
         if(attack.getCurrentFrame() == 6 && attacking)
