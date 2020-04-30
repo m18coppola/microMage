@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class PlayState extends State {
 
     public static OrthographicCamera cam;
-    Player player;
+    public static Player player;
     Enemy enemy1;
     Controller controller;
     static ArrayList<FireBall> fireBalls;

@@ -15,7 +15,7 @@ public abstract class Entity {
     public Entity(float x, float y, int width, int height){
         position = new Vector2();
         hitbox = new Rectangle(x, y, width, height);
-        position = hitbox.getPosition(position);
+        hitbox.getPosition(position);
     }
 
     public Vector2 getPosition(){

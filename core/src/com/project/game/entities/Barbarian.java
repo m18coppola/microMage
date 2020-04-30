@@ -5,7 +5,7 @@ import com.project.game.Animation;
 import com.project.game.ResourceLoader;
 import com.project.game.states.PlayState;
 
-public class Barbarian extends Entity{
+public class Barbarian extends Enemy{
     public static final int WIDTH = 18;
     public static final int HEIGHT = 18;
     public static final int attackRange = 30;
@@ -74,7 +74,7 @@ public class Barbarian extends Entity{
         }
     }
 
-    public void attack(int x, int y) {
+    public void attack(float x, float y) {
         center = hitbox.getCenter(center);
         double angle = Math.atan2((y - center.y), (x - center.x));
         attacking = true;
@@ -87,9 +87,9 @@ public class Barbarian extends Entity{
     @Override
     public void update(float dt) {
         center = hitbox.getCenter(center);
-        target = PlayState.Player.hitbox.getCenter(center);
-        if(Barbarian.hitbox.getX().dst(Player.hitbox) <= attackRange ){
-            attack(Player.hitbox.getX(), Player.hitbox.getY());
+        target = PlayState.player.hitbox.getCenter(center);
+        if(center.dst(target) <= attackRange ){
+            attack(PlayState.player.hitbox.getX(), PlayState.player.hitbox.getY());
         }
 
         idle.update(dt);
