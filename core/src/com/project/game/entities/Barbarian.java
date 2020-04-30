@@ -87,7 +87,7 @@ public class Barbarian extends Entity{
     @Override
     public void update(float dt) {
         center = hitbox.getCenter(center);
-        target = Player.hitbox.getCenter(center);
+        target = PlayState.Player.hitbox.getCenter(center);
         if(Barbarian.hitbox.getX().dst(Player.hitbox) <= attackRange ){
             attack(Player.hitbox.getX(), Player.hitbox.getY());
         }
