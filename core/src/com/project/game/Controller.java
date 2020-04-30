@@ -12,11 +12,9 @@ import static org.graalvm.compiler.nodes.PauseNode.pause;
 
 public class Controller extends InputAdapter {
     Player player;
-    boolean running;
     public Controller(Player player){
 
         this.player = player;
-        running = true;
     }
     @Override
     public boolean keyDown (int keycode) {
