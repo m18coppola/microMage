@@ -19,7 +19,7 @@ public class Barbarian extends Enemy {
     Vector2 center;
     Vector2 target;
     boolean movement = false;
-    public float duration = 0.1f;
+    public float duration = 0.3f;
     public float elapsed = 0.0f;
 
 
@@ -111,7 +111,7 @@ public class Barbarian extends Enemy {
 
                 elapsed += dt;
             }
-            else{
+            else {
                elapsed = 0;
                attack(PlayState.player.hitbox.getX(), PlayState.player.hitbox.getY());
             }
