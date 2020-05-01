@@ -9,7 +9,7 @@ import com.project.game.states.PlayState;
 public class Barbarian extends Enemy {
     public static final int WIDTH = 18;
     public static final int HEIGHT = 18;
-    public static final float attackRange = 5f;
+    public static final float attackRange = 50;
     Vector2 velocity;
     Animation walk;
     Animation idle;
@@ -19,6 +19,8 @@ public class Barbarian extends Enemy {
     Vector2 center;
     Vector2 target;
     boolean movement = false;
+    public float duration = 0.1f;
+    public float elapsed = 0.0f;
 
 
     public Barbarian() {
@@ -76,28 +78,46 @@ public class Barbarian extends Enemy {
     }
 
     public void attack(float x, float y) {
-        if (attacking == true) {
+        if (attack.getCurrentFrame() == 7 && attacking) {
+            attacking = false;
+        }
+
+        if (attacking) {
             center = hitbox.getCenter(center);
             double angle = Math.atan2((y - center.y), (x - center.x));
             Axe axe = new Axe(angle, new Vector2(center.x, center.y));
             PlayState.addAxe(axe);
-            attack.resetFrames();
+
         }
     }
 
 
     @Override
     public void update(float dt) {
+
         center = hitbox.getCenter(center);
         target = PlayState.player.hitbox.getCenter(PlayState.player.center);
         this.idle.update(dt);
+        this.attack.update(dt);
         if (center.dst(target) < attackRange) {
+            if (center.x < target.x) {
+                attack.setRight();
+            } else {
+                attack.setLeft();
+            }
+
             attacking = true;
-            attack(PlayState.player.hitbox.getX(), PlayState.player.hitbox.getY());
+            if (elapsed <= duration) {
+
+                elapsed += dt;
+            }
+            else{
+               elapsed = 0;
+               attack(PlayState.player.hitbox.getX(), PlayState.player.hitbox.getY());
+            }
         } else {
             attacking = false;
         }
-
 
     }
 
@@ -107,4 +127,5 @@ public class Barbarian extends Enemy {
         attack.dispose();
         idle.dispose();
     }
+
 }
