@@ -1,14 +1,15 @@
 package com.project.game.entities;
+
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.project.game.Animation;
 import com.project.game.ResourceLoader;
 import com.project.game.states.PlayState;
 
-public class Barbarian extends Enemy{
+public class Barbarian extends Enemy {
     public static final int WIDTH = 18;
     public static final int HEIGHT = 18;
-    public static final int attackRange = 30;
+    public static final float attackRange = 5f;
     Vector2 velocity;
     Animation walk;
     Animation idle;
@@ -75,24 +76,29 @@ public class Barbarian extends Enemy{
     }
 
     public void attack(float x, float y) {
-        center = hitbox.getCenter(center);
-        double angle = Math.atan2((y - center.y), (x - center.x));
-        attacking = true;
-        Axe axe = new Axe(angle, new Vector2(center.x, center.y));
-        PlayState.addAxe(axe);
-        attack.resetFrames();
+        if (attacking == true) {
+            center = hitbox.getCenter(center);
+            double angle = Math.atan2((y - center.y), (x - center.x));
+            Axe axe = new Axe(angle, new Vector2(center.x, center.y));
+            PlayState.addAxe(axe);
+            attack.resetFrames();
+        }
     }
 
 
     @Override
     public void update(float dt) {
         center = hitbox.getCenter(center);
-        target = PlayState.player.hitbox.getCenter(center);
-        if(center.dst(target) <= attackRange ){
+        target = PlayState.player.hitbox.getCenter(PlayState.player.center);
+        this.idle.update(dt);
+        if (center.dst(target) < attackRange) {
+            attacking = true;
             attack(PlayState.player.hitbox.getX(), PlayState.player.hitbox.getY());
+        } else {
+            attacking = false;
         }
 
-        idle.update(dt);
+
     }
 
     @Override
