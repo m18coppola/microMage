@@ -106,12 +106,13 @@ public class PlayState extends State {
                 batch.draw(t.getSprite(), t.getPosition().x, t.getPosition().y, 16, 16);
         }
 
-        batch.draw(pause, 115, 115, 10, 10);
+
         for (Spells p : projectiles) {
             batch.draw(p.getSprite(), p.getPosition().x, p.getPosition().y);
         }
         batch.draw(player.getSprite(), player.getPosition().x - 5, player.getPosition().y);
         batch.setProjectionMatrix(UIcam.combined);
+        batch.draw(pause, 115, 115, 10, 10);
         healthBar.render(batch);
         manaBar.render(batch);
 
