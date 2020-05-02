@@ -11,7 +11,7 @@ public abstract class Entity {
     Vector2 position;
 
     //hitbox
-    protected Rectangle hitbox;
+    public Rectangle hitbox;
 
     public abstract Sprite getSprite();
 
@@ -29,6 +29,6 @@ public abstract class Entity {
     public abstract void dispose();
 
     public boolean collidesWith(Entity other){
-        return hitbox.contains(other.hitbox);
+        return hitbox.overlaps(other.hitbox);
     };
 }

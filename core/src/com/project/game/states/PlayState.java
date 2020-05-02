@@ -8,17 +8,28 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.project.game.Controller;
 import com.project.game.HealthBar;
 import com.project.game.ManaBar;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector3;
+import com.project.game.*;
+import com.project.game.entities.FireBall;
 import com.project.game.entities.Player;
 import com.project.game.entities.Spells;
-import com.project.game.RegenMana;
+import com.project.game.entities.tiles.Floor;
+import com.project.game.entities.tiles.Tile;
+import com.project.game.entities.tiles.TileMap;
+import com.project.game.entities.tiles.Wall;
+
 import java.util.ArrayList;
 
 public class PlayState extends State {
 
     public static OrthographicCamera cam;
+    public static OrthographicCamera UIcam;
     Player player;
+
     Controller controller;
     Texture pause;
+
     static ArrayList<Spells> projectiles;
     static HealthBar healthBar;
     public static boolean isPaused;
@@ -26,10 +37,16 @@ public class PlayState extends State {
     static RegenMana regenMana;
     public static int currSpell;
 
+    public static TileMap tileMap;
+
+
+
+
     public PlayState(GameStateManager gsm) {
         super(gsm);
+        tileMap = new TileMap();
         projectiles = new ArrayList<Spells>();
-        player = new Player();
+        player = new Player(tileMap.playerSpawn.x,tileMap.playerSpawn.y);
         healthBar = new HealthBar(player);
         healthBar.start();
         manaBar = new ManaBar(player);
@@ -38,10 +55,13 @@ public class PlayState extends State {
         regenMana.start();
         cam = new OrthographicCamera();
         cam.setToOrtho(false,125 , 125);
-        Gdx.gl.glClearColor(1, 0, 0, 1);
+        UIcam = new OrthographicCamera();
+        UIcam.setToOrtho(false,125,125);
+        Gdx.gl.glClearColor(41f/255f, 30f/255f, 49f/255f, 1);
         Gdx.input.setInputProcessor(new Controller(player));
         pause = new Texture("UI/pause.png");
         isPaused = false;
+
     }
 
     @Override
@@ -55,24 +75,42 @@ public class PlayState extends State {
                 p.update(dt);
             }
         }
+        cam.position.set(player.getCenter(),0);
+        cam.update();
+
     }
 
     @Override
     public void render(SpriteBatch batch) {
-        batch.setProjectionMatrix(cam.combined);
+
+
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
+        batch.setProjectionMatrix(cam.combined);
+
+
+        for(Tile t: tileMap.tiles){
+            if(t != null)
+            batch.draw(t.getSprite(),t.getPosition().x,t.getPosition().y,16,16);
+        }
 
         batch.draw(pause, 115,115, 10, 10);
         for(Spells p: projectiles){
             batch.draw(p.getSprite(),p.getPosition().x, p.getPosition().y);
         }
-        batch.draw(player.getSprite(), player.getPosition().x, player.getPosition().y);
+        batch.draw(player.getSprite(), player.getPosition().x - 5, player.getPosition().y);
+        batch.setProjectionMatrix(UIcam.combined);
         healthBar.render(batch);
         manaBar.render(batch);
 
+
+
+
+
         batch.end();
+
+
     }
 
     public static void addProjectile(Spells p){ projectiles.add(p);

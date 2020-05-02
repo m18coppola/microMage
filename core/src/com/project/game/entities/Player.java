@@ -6,13 +6,15 @@ import com.badlogic.gdx.math.Vector2;
 import com.project.game.Animation;
 import com.project.game.Game;
 import com.project.game.ResourceLoader;
+import com.project.game.entities.tiles.Tile;
+import com.project.game.entities.tiles.Wall;
 import com.project.game.states.PlayState;
 
 import static com.project.game.states.PlayState.currSpell;
 
 public class Player extends Entity{
-    public static final int WIDTH = 18;
-    public static final int HEIGHT = 18;
+    public static final int WIDTH = 10;
+    public static final int HEIGHT = 10;
     static final int MAX_MANA = 8;
     private static final float MANA_REGEN_SPEED = 1.5f;
     Vector2 velocity;
@@ -27,8 +29,11 @@ public class Player extends Entity{
     float manaRegen;
     Spells spellType;
 
-    public Player(){
-        super(125 /2, 125/2, WIDTH, HEIGHT);
+
+    Vector2 oldPos;
+
+    public Player(float x, float y){
+        super(x, y, WIDTH, HEIGHT);
         center = new Vector2();
         attacking = false;
         health = 3;
@@ -36,6 +41,9 @@ public class Player extends Entity{
         walk = new Animation(ResourceLoader.loadWizardWalk(), 0.06f);
         idle = new Animation(ResourceLoader.loadWizardIdle(),.1f);
         attack = new Animation(ResourceLoader.loadWizardAttack(),.1f);
+
+        oldPos = new Vector2(this.getPosition());
+
         velocity = new Vector2(0,0);
         currSpell = 1;
     }
@@ -93,9 +101,28 @@ public class Player extends Entity{
         }
         if(attack.getCurrentFrame() == 6 && attacking)
         attacking = false;
+        hitbox.getPosition(oldPos);
 
-        hitbox.setPosition(hitbox.getX() + velocity.x*dt,
-                           hitbox.getY() + velocity.y*dt);
+        //check x collision
+        hitbox.setX(hitbox.getX() + velocity.x * dt);
+        for(Tile t: PlayState.tileMap.tiles){
+            if(t instanceof Wall){
+                if(this.collidesWith(t)){
+                    hitbox.setX(oldPos.x);
+                }
+            }
+        }
+        //check y collision
+        hitbox.setY(hitbox.getY() + velocity.y * dt);
+        for(Tile t: PlayState.tileMap.tiles){
+            if(t instanceof Wall){
+                if(this.collidesWith(t)){
+                    hitbox.setY(oldPos.y);
+                }
+            }
+        }
+
+
         walk.update(dt);
         idle.update(dt);
         attack.update(dt);
@@ -143,6 +170,8 @@ public class Player extends Entity{
             mana = newMana;
         }
     }
+
+    public Vector2 getCenter(){return hitbox.getCenter(center);}
 
     @Override
     public void dispose(){
