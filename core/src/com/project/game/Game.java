@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.project.game.entities.FireBall;
 import com.project.game.entities.Player;
 import com.project.game.states.GameStateManager;
@@ -17,6 +18,7 @@ import java.util.Timer;
 public class Game extends ApplicationAdapter {
 	SpriteBatch batch;
 	GameStateManager gsm;
+	public static ShapeRenderer sr;
 
 	@Override
 	public void create () {
@@ -24,6 +26,7 @@ public class Game extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		gsm = new GameStateManager();
 		gsm.push(new PlayState(gsm));
+		sr = new ShapeRenderer();
 	}
 
 	@Override

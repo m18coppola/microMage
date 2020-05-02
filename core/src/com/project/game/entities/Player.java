@@ -6,6 +6,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.project.game.Animation;
 import com.project.game.Game;
 import com.project.game.ResourceLoader;
+import com.project.game.entities.tiles.Tile;
+import com.project.game.entities.tiles.Wall;
 import com.project.game.states.PlayState;
 
 public class Player extends Entity{
@@ -23,6 +25,8 @@ public class Player extends Entity{
     boolean attacking;
     Vector2 center;
     float manaRegen;
+    Vector2 oldPos;
+
     public Player(){
         super(125 /2, 125/2, WIDTH, HEIGHT);
         center = new Vector2();
@@ -32,7 +36,7 @@ public class Player extends Entity{
         walk = new Animation(ResourceLoader.loadWizardWalk(), 0.06f);
         idle = new Animation(ResourceLoader.loadWizardIdle(),.1f);
         attack = new Animation(ResourceLoader.loadWizardAttack(),.1f);
-
+        oldPos = new Vector2(this.getPosition());
         velocity = new Vector2(0,0);
 
     }
@@ -90,9 +94,17 @@ public class Player extends Entity{
         }
         if(attack.getCurrentFrame() == 6 && attacking)
         attacking = false;
-
+        hitbox.getPosition(oldPos);
         hitbox.setPosition(hitbox.getX() + velocity.x*dt,
                            hitbox.getY() + velocity.y*dt);
+        for(Tile t: PlayState.floors){
+            if(t instanceof Wall){
+                if(this.collidesWith(t)){
+                    hitbox.setPosition(oldPos);
+                    System.out.println("colliding with dt at " + dt);
+                }
+            }
+        }
         walk.update(dt);
         idle.update(dt);
         attack.update(dt);

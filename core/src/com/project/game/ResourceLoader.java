@@ -3,6 +3,7 @@ package com.project.game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.project.game.entities.tiles.Tile;
 
 public class ResourceLoader {
     public static Sprite[] loadWizardWalk(){
@@ -53,4 +54,23 @@ public class ResourceLoader {
     public static Sprite loadFilledManaHeart(){ return new Sprite(new TextureRegion(new Texture("UI/manaHeart.png"),11,29,280,256));}
 
     public static Sprite loadEmptyManaHeart(){ return new Sprite(new TextureRegion(new Texture("UI/manaHeart.png"),608,34,280,256));}
+
+    static Texture tiles = new Texture("tilesets/topdown.png");
+
+    public static Sprite loadWall(){return new Sprite(new TextureRegion(tiles, 20,8, Tile.DIM, Tile.DIM));}
+
+    public static Sprite[] loadFloorTiles(){
+        int y = 24;
+        int x = 0;
+        int i = 0;
+
+        Sprite[] sprites = new Sprite[20];
+        for(int xCount = 0; xCount < 5; xCount++) {
+            for(int yCount = 0; yCount < 4; yCount++){
+                sprites[i] = new Sprite(new TextureRegion(tiles, xCount* Tile.DIM + x, yCount * Tile.DIM + y, Tile.DIM, Tile.DIM));
+                i++;
+            }
+        }
+        return sprites;
+    }
 }
