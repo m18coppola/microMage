@@ -11,8 +11,8 @@ import com.project.game.entities.tiles.Wall;
 import com.project.game.states.PlayState;
 
 public class Player extends Entity{
-    public static final int WIDTH = 18;
-    public static final int HEIGHT = 18;
+    public static final int WIDTH = 5;
+    public static final int HEIGHT = 5;
     static final int MAX_MANA = 8;
     private static final float MANA_REGEN_SPEED = 1.5f;
     Vector2 velocity;
@@ -27,8 +27,8 @@ public class Player extends Entity{
     float manaRegen;
     Vector2 oldPos;
 
-    public Player(){
-        super(125 /2, 125/2, WIDTH, HEIGHT);
+    public Player(float x, float y){
+        super(x, y, WIDTH, HEIGHT);
         center = new Vector2();
         attacking = false;
         health = 3;
@@ -97,7 +97,7 @@ public class Player extends Entity{
         hitbox.getPosition(oldPos);
         hitbox.setPosition(hitbox.getX() + velocity.x*dt,
                            hitbox.getY() + velocity.y*dt);
-        for(Tile t: PlayState.floors){
+        for(Tile t: PlayState.tileMap.tiles){
             if(t instanceof Wall){
                 if(this.collidesWith(t)){
                     hitbox.setPosition(oldPos);
@@ -143,6 +143,8 @@ public class Player extends Entity{
             mana = newMana;
         }
     }
+
+    public Vector2 getCenter(){return hitbox.getCenter(center);}
 
     @Override
     public void dispose(){

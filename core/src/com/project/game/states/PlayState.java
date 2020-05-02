@@ -12,6 +12,7 @@ import com.project.game.entities.Player;
 import com.project.game.entities.Spells;
 import com.project.game.entities.tiles.Floor;
 import com.project.game.entities.tiles.Tile;
+import com.project.game.entities.tiles.TileMap;
 import com.project.game.entities.tiles.Wall;
 
 import java.util.ArrayList;
@@ -20,21 +21,23 @@ import java.util.Timer;
 public class PlayState extends State {
 
     public static OrthographicCamera cam;
+    public static OrthographicCamera UIcam;
     Player player;
 
     static ArrayList<Spells> projectiles;
     static HealthBar healthBar;
     static ManaBar manaBar;
     static RegenMana regenMana;
+    public static TileMap tileMap;
 
 
 
-    public static Tile[] floors = new Tile[49];
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
+        tileMap = new TileMap();
         projectiles = new ArrayList<Spells>();
-        player = new Player();
+        player = new Player(tileMap.playerSpawn.x,tileMap.playerSpawn.y);
         healthBar = new HealthBar(player);
         healthBar.start();
         manaBar = new ManaBar(player);
@@ -43,20 +46,14 @@ public class PlayState extends State {
         regenMana.start();
         cam = new OrthographicCamera();
         cam.setToOrtho(false,125 , 125);
+        UIcam = new OrthographicCamera();
+        UIcam.setToOrtho(false,125,125);
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.input.setInputProcessor(new Controller(player));
 
 
-        int i = 0;
-        for(int x = 0; x < Math.sqrt(floors.length); x++){
-            for (int y = 0; y < Math.sqrt(floors.length); y++){
-                if(x == 0 || y == 0 || x == Math.sqrt(floors.length) - 1 || y == Math.sqrt(floors.length) - 1)
-                floors[i] = new Wall(x * Tile.DIM * 2, y * Tile.DIM * 2);
-                else
-                    floors[i] = new Floor(x * Tile.DIM * 2, y * Tile.DIM * 2);
-                i++;
-            }
-        }
+
+
 
     }
 
@@ -66,36 +63,35 @@ public class PlayState extends State {
         for(Spells p: projectiles){
             p.update(dt);
         }
+        cam.position.set(player.getCenter(),0);
+        cam.update();
 
     }
 
     @Override
     public void render(SpriteBatch batch) {
 
-        batch.setProjectionMatrix(cam.combined);
+
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
+        batch.setProjectionMatrix(cam.combined);
 
-        for(Tile f: floors){
-            batch.draw(f.getSprite(), f.getPosition().x, f.getPosition().y,16,16);
 
+        for(Tile t: tileMap.tiles){
+            if(t != null)
+            batch.draw(t.getSprite(),t.getPosition().x,t.getPosition().y,16,16);
         }
+
         for(Spells p: projectiles){
             batch.draw(p.getSprite(),p.getPosition().x, p.getPosition().y);
         }
         batch.draw(player.getSprite(), player.getPosition().x, player.getPosition().y);
+        batch.setProjectionMatrix(UIcam.combined);
         healthBar.render(batch);
         manaBar.render(batch);
-        Game.sr.setProjectionMatrix(cam.combined);
-        Game.sr.begin(ShapeRenderer.ShapeType.Line);
-        Game.sr.rect(player.hitbox.x,player.hitbox.y,player.hitbox.width,player.hitbox.height);
-        for(Tile t: floors){
-            if(t instanceof Wall){
-                Game.sr.rect(t.hitbox.x,t.hitbox.y,t.hitbox.width,t.hitbox.height);
-            }
-        }
-        Game.sr.end();
+
+
 
 
 
