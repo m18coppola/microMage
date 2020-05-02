@@ -80,13 +80,10 @@ public class Controller extends InputAdapter {
     @Override
     public boolean touchDown (int x, int y, int pointer, int button) {
         if(button == 0) { // 0 is left click
+
             Vector3 mousePos = PlayState.cam.unproject(new Vector3(x, y, 0));
-            if (mousePos.x >= 115 && mousePos.x <= 125 && mousePos.y >= 115 && mousePos.y <= 125) {
-                if (PlayState.isPaused) {
-                    PlayState.isPaused = false;
-                } else {
-                    PlayState.isPaused = true;
-                }
+            if (x >= 468 && x <= 493 && y >= 7 && y <= 34) {
+                PlayState.isPaused = !PlayState.isPaused;
             } else if(!PlayState.isPaused){
                 player.shoot((int) mousePos.x, (int) mousePos.y);
             }
