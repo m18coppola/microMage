@@ -65,7 +65,8 @@ public class PlayState extends State {
             batch.draw(axe.getSprite(), axe.getPosition().x, axe.getPosition().y);
         }
         for (Arrow arrow : arrows) {
-            batch.draw(arrow.getSprite(), arrow.getPosition().x, arrow.getPosition().y);
+            arrow.getSprite().setPosition(arrow.getPosition().x, arrow.getPosition().y);
+           arrow.getSprite().draw(batch);
         }
         batch.draw(player.getSprite(), player.getPosition().x, player.getPosition().y);
         batch.draw(enemy1.getSprite(), enemy1.getPosition().x, enemy1.getPosition().y);
