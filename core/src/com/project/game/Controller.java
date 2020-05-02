@@ -52,6 +52,8 @@ public class Controller extends InputAdapter {
                     currSpell = 3;
                     break;
                 }
+            case Input.Keys.ESCAPE:
+                Gdx.app.exit();
         }
         return true;
     }
