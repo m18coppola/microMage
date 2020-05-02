@@ -13,6 +13,7 @@ import com.project.game.states.MenuState;
 import com.project.game.states.PlayState;
 
 import java.util.ArrayList;
+import java.util.Timer;
 
 public class Game extends ApplicationAdapter {
 	SpriteBatch batch;
@@ -24,14 +25,12 @@ public class Game extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		gsm = new GameStateManager();
 		gsm.push(new MenuState(gsm));
-
 	}
 
 	@Override
 	public void render () {
 		gsm.update(Gdx.graphics.getDeltaTime());
 		gsm.render(batch);
-
 	}
 	
 	@Override

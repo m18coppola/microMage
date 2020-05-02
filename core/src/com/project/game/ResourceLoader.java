@@ -50,4 +50,7 @@ public class ResourceLoader {
 
     public static Sprite loadEmptyHeart(){ return new Sprite(new TextureRegion(new Texture("UI/heart-sprite-png.png"), 608, 34, 280,256 ));}
 
+    public static Sprite loadFilledManaHeart(){ return new Sprite(new TextureRegion(new Texture("UI/manaHeart.png"),11,29,280,256));}
+
+    public static Sprite loadEmptyManaHeart(){ return new Sprite(new TextureRegion(new Texture("UI/manaHeart.png"),608,34,280,256));}
 }

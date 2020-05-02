@@ -5,13 +5,12 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.project.game.Controller;
 import com.project.game.HealthBar;
-import com.project.game.entities.FireBall;
+import com.project.game.ManaBar;
 import com.project.game.entities.Player;
 import com.project.game.entities.Spells;
-
+import com.project.game.RegenMana;
 import java.util.ArrayList;
 
 public class PlayState extends State {
@@ -20,10 +19,12 @@ public class PlayState extends State {
     Player player;
     Controller controller;
     Texture pause;
-    Texture spell;
     static ArrayList<Spells> projectiles;
     static HealthBar healthBar;
     public static boolean isPaused;
+    static ManaBar manaBar;
+    static RegenMana regenMana;
+    public static int currSpell;
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
@@ -31,12 +32,15 @@ public class PlayState extends State {
         player = new Player();
         healthBar = new HealthBar(player);
         healthBar.start();
+        manaBar = new ManaBar(player);
+        manaBar.start();
+        regenMana = new RegenMana(player);
+        regenMana.start();
         cam = new OrthographicCamera();
         cam.setToOrtho(false,125 , 125);
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.input.setInputProcessor(new Controller(player));
         pause = new Texture("UI/pause.png");
-        spell = new Texture("UI/spell.png");
         isPaused = false;
     }
 
@@ -61,12 +65,12 @@ public class PlayState extends State {
         batch.begin();
 
         batch.draw(pause, 115,115, 10, 10);
-        batch.draw(spell, 115,103, 5 , 5);
         for(Spells p: projectiles){
             batch.draw(p.getSprite(),p.getPosition().x, p.getPosition().y);
         }
         batch.draw(player.getSprite(), player.getPosition().x, player.getPosition().y);
         healthBar.render(batch);
+        manaBar.render(batch);
 
         batch.end();
     }
@@ -82,6 +86,6 @@ public class PlayState extends State {
         }
         healthBar.dispose();
         pause.dispose();
-        spell.dispose();
+        manaBar.dispose();
     }
 }

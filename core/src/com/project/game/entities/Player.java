@@ -8,28 +8,36 @@ import com.project.game.Game;
 import com.project.game.ResourceLoader;
 import com.project.game.states.PlayState;
 
+import static com.project.game.states.PlayState.currSpell;
+
 public class Player extends Entity{
     public static final int WIDTH = 18;
     public static final int HEIGHT = 18;
+    static final int MAX_MANA = 8;
+    private static final float MANA_REGEN_SPEED = 1.5f;
     Vector2 velocity;
     static int health;
+    static int mana;
     Animation walk;
     Animation idle;
     Animation attack;
     static final int SPEED = 100;
     boolean attacking;
     Vector2 center;
+    float manaRegen;
+    Spells spellType;
+
     public Player(){
         super(125 /2, 125/2, WIDTH, HEIGHT);
         center = new Vector2();
         attacking = false;
         health = 3;
+        mana = MAX_MANA;
         walk = new Animation(ResourceLoader.loadWizardWalk(), 0.06f);
         idle = new Animation(ResourceLoader.loadWizardIdle(),.1f);
         attack = new Animation(ResourceLoader.loadWizardAttack(),.1f);
-
         velocity = new Vector2(0,0);
-
+        currSpell = 1;
     }
 
     @Override
@@ -76,6 +84,13 @@ public class Player extends Entity{
 
     @Override
     public void update(float dt){
+        manaRegen += dt;
+        if(manaRegen > MANA_REGEN_SPEED){
+            manaRegen = 0;
+            if(mana < MAX_MANA){
+                mana++;
+            }
+        }
         if(attack.getCurrentFrame() == 6 && attacking)
         attacking = false;
 
@@ -89,11 +104,23 @@ public class Player extends Entity{
     public void shoot(int x, int y){
         center = hitbox.getCenter(center);
         double angle = Math.atan2((y-center.y), (x-center.x));
-        attacking = true;
-        LightningBolt fireBall = new LightningBolt(angle, new Vector2(center.x, center.y));
-        PlayState.addProjectile(fireBall);
-        attack.resetFrames();
-
+        if(currSpell == 1) {
+            spellType = new SnowBall(angle, new Vector2(center.x, center.y));
+        }
+        else if(currSpell == 2){
+            spellType = new FireBall(angle, new Vector2(center.x, center.y));
+        }
+        else if(currSpell == 3){
+            spellType = new LightningBolt(angle, new Vector2(center.x, center.y));
+        }
+        if(mana > 0 && mana >= spellType.getManaUsage()) {
+            PlayState.addProjectile(spellType);
+            setMana(mana - spellType.getManaUsage());
+            attacking = true;
+            System.out.println(mana);
+            attack.resetFrames();
+        }
+        else{ attacking = false; }
     }
 
     public static int getHealth()
@@ -108,11 +135,21 @@ public class Player extends Entity{
         }
     }
 
+    public static int getMana() { return mana; }
+
+    public static void setMana(int newMana)
+    {
+        if(newMana >= 0 && newMana <= 8) {
+            mana = newMana;
+        }
+    }
+
     @Override
     public void dispose(){
         walk.dispose();
         attack.dispose();
         idle.dispose();
     }
+
 
 }

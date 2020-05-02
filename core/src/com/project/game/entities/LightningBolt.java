@@ -7,20 +7,19 @@ import com.badlogic.gdx.math.Vector2;
 import com.project.game.ResourceLoader;
 
 public class LightningBolt extends Spells{
-    static Sprite sprite = ResourceLoader.loadLightningBolt();
 
     public static final int WIDTH = 8;
     public static final int HEIGHT = 11;
     public static final int SPEED = 180;
     public static final int DAMAGE = 15;
+    public static final int MANA = 2;
 
     public LightningBolt(double angle, Vector2 position){
-        super(angle,position,SPEED,WIDTH,HEIGHT,DAMAGE);
+        super(angle,position,SPEED,WIDTH,HEIGHT,DAMAGE,MANA,ResourceLoader.loadLightningBolt());
 
     }
 
-    public Sprite getSprite(){
-        return sprite;
-    }
+
+    public int getManaUsage() { return MANA; }
 
 }
