@@ -26,133 +26,131 @@ import java.util.ArrayList;
 
 public class PlayState extends State {
 
-    public static OrthographicCamera cam;
+        public static OrthographicCamera cam;
 
-    public static OrthographicCamera UIcam;
-    public static Player player;
+        public static OrthographicCamera UIcam;
+        public static Player player;
 
-    Controller controller;
-    Texture pause;
+        Controller controller;
+        Texture pause;
 
-    static ArrayList<Spells> projectiles;
-    static HealthBar healthBar;
-    public static boolean isPaused;
-    static ManaBar manaBar;
-    static RegenMana regenMana;
-    public static int currSpell;
+        static ArrayList<Spells> projectiles;
+        static HealthBar healthBar;
+        public static boolean isPaused;
+        static ManaBar manaBar;
+        static RegenMana regenMana;
+        public static int currSpell;
 
-    public static TileMap tileMap;
+        public static TileMap tileMap;
 
-    static ArrayList<EnemyProjectiles> enemyProjectiles;
-
-
-    public PlayState(GameStateManager gsm) {
-        super(gsm);
-        tileMap = new TileMap();
-        projectiles = new ArrayList<Spells>();
-        player = new Player(tileMap.playerSpawn.x, tileMap.playerSpawn.y);
-        healthBar = new HealthBar(player);
-        healthBar.start();
-        manaBar = new ManaBar(player);
-        manaBar.start();
-        regenMana = new RegenMana(player);
-        regenMana.start();
-        cam = new OrthographicCamera();
-        cam.setToOrtho(false, 125, 125);
-        UIcam = new OrthographicCamera();
-        UIcam.setToOrtho(false, 125, 125);
-        Gdx.gl.glClearColor(41f / 255f, 30f / 255f, 49f / 255f, 1);
-        Gdx.input.setInputProcessor(new Controller(player));
-        pause = new Texture("UI/pause.png");
-        isPaused = false;
-        enemyProjectiles = new ArrayList<EnemyProjectiles>();
+        static ArrayList<EnemyProjectiles> enemyProjectiles;
 
 
-    }
+        public PlayState(GameStateManager gsm) {
+                super(gsm);
+                tileMap = new TileMap();
+                projectiles = new ArrayList<Spells>();
+                player = new Player(tileMap.playerSpawn.x, tileMap.playerSpawn.y);
+                healthBar = new HealthBar(player);
+                healthBar.start();
+                manaBar = new ManaBar(player);
+                manaBar.start();
+                regenMana = new RegenMana(player);
+                regenMana.start();
+                cam = new OrthographicCamera();
+                cam.setToOrtho(false, 125, 125);
+                UIcam = new OrthographicCamera();
+                UIcam.setToOrtho(false, 125, 125);
+                Gdx.gl.glClearColor(41f / 255f, 30f / 255f, 49f / 255f, 1);
+                Gdx.input.setInputProcessor(new Controller(player));
+                pause = new Texture("UI/pause.png");
+                isPaused = false;
+                enemyProjectiles = new ArrayList<EnemyProjectiles>();
 
-    @Override
-    public void update(float dt) {
 
-        if (isPaused) {
-            dt = 0;
-        } else {
-            dt = Gdx.graphics.getDeltaTime();
-            player.update(dt);
-            for (Spells p : projectiles) {
-                p.update(dt);
-            }
         }
-        cam.position.set(player.getCenter(), 0);
-        cam.update();
 
-        for (EnemyProjectiles ep : enemyProjectiles) {
-            ep.update(dt);
-        }
-    }
+        @Override
+        public void update(float dt) {
 
 
-    @Override
-    public void render(SpriteBatch batch) {
+                dt = Gdx.graphics.getDeltaTime();
+                player.update(dt);
+                for (Spells p : projectiles) {
+                        p.update(dt);
+                }
 
+                cam.position.set(player.getCenter(), 0);
+                cam.update();
 
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        batch.begin();
-        batch.setProjectionMatrix(cam.combined);
-
-
-        for (Tile t : tileMap.tiles) {
-            if (t != null)
-                batch.draw(t.getSprite(), t.getPosition().x, t.getPosition().y, 16, 16);
+                for (EnemyProjectiles ep : enemyProjectiles) {
+                        ep.update(dt);
+                }
         }
 
 
-        for (Spells p : projectiles) {
-            batch.draw(p.getSprite(), p.getPosition().x, p.getPosition().y);
+        @Override
+        public void render(SpriteBatch batch) {
+
+
+                Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+                batch.begin();
+                batch.setProjectionMatrix(cam.combined);
+
+
+                for (Tile t : tileMap.tiles) {
+                        if (t != null)
+                                batch.draw(t.getSprite(), t.getPosition().x, t.getPosition().y, 16, 16);
+                }
+
+
+                for (Spells p : projectiles) {
+                        batch.draw(p.getSprite(), p.getPosition().x, p.getPosition().y);
+                }
+                batch.draw(player.getSprite(), player.getPosition().x - 5, player.getPosition().y);
+                batch.setProjectionMatrix(UIcam.combined);
+                batch.draw(pause, 115, 115, 10, 10);
+                healthBar.render(batch);
+                manaBar.render(batch);
+
+
+                for (EnemyProjectiles ep : enemyProjectiles) {
+                        ep.getSprite().setPosition(ep.getPosition().x, ep.getPosition().y);
+                        ep.getSprite().draw(batch);
+                }
+
+
+                batch.end();
+
+
         }
-        batch.draw(player.getSprite(), player.getPosition().x - 5, player.getPosition().y);
-        batch.setProjectionMatrix(UIcam.combined);
-        batch.draw(pause, 115, 115, 10, 10);
-        healthBar.render(batch);
-        manaBar.render(batch);
 
 
-        for (EnemyProjectiles ep : enemyProjectiles) {
-            ep.getSprite().setPosition(ep.getPosition().x, ep.getPosition().y);
-            ep.getSprite().draw(batch);
+        public static void addProjectile(Spells p) {
+                projectiles.add(p);
+        }
+
+        public static void addEnemyProjectile(EnemyProjectiles f) {
+                enemyProjectiles.add(f);
         }
 
 
-        batch.end();
+        @Override
+        public void dispose() {
+                player.dispose();
 
+                for (Spells p : projectiles) {
+                        p.dispose();
+                }
+                healthBar.dispose();
+                pause.dispose();
+                manaBar.dispose();
 
-    }
-
-
-    public static void addProjectile(Spells p) {
-        projectiles.add(p);
-    }
-
-    public static void addEnemyProjectile(EnemyProjectiles f) {
-        enemyProjectiles.add(f);
-    }
-
-
-    @Override
-    public void dispose() {
-        player.dispose();
-
-        for (Spells p : projectiles) {
-            p.dispose();
+                for (EnemyProjectiles ep : enemyProjectiles) {
+                        ep.dispose();
+                }
         }
-        healthBar.dispose();
-        pause.dispose();
-        manaBar.dispose();
-
-        for (EnemyProjectiles ep : enemyProjectiles) {
-            ep.dispose();
-        }
-    }
 }
 
 

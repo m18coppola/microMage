@@ -31,8 +31,11 @@ public class Game extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-		gsm.update(Gdx.graphics.getDeltaTime());
-		gsm.render(batch);
+		if(!(gsm.peek() instanceof PlayState) || !PlayState.isPaused) {
+			gsm.update(Gdx.graphics.getDeltaTime());
+			gsm.render(batch);
+		}
+
 	}
 	
 	@Override

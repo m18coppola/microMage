@@ -38,4 +38,8 @@ public class GameStateManager {
             states.pop().dispose();
         }
     }
+
+    public State peek(){
+        return states.peek();
+    }
 }
