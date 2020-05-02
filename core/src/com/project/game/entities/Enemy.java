@@ -16,13 +16,11 @@ public abstract class Enemy extends Entity {
     public abstract Sprite getSprite();
 
 
-
     public abstract void attack(float x, float y);
 
 
     @Override
     public abstract void update(float dt);
-
 
 
     @Override

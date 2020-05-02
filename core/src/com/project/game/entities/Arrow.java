@@ -12,25 +12,26 @@ public class Arrow extends EnemyProjectiles {
     public static final int SPEED = 100;
 
 
-    public Arrow(double angle, Vector2 position){
-        super(position.x - WIDTH/2, position.y - HEIGHT / 2, WIDTH, HEIGHT);
+    public Arrow(double angle, Vector2 position) {
+        super(position.x - WIDTH / 2, position.y - HEIGHT / 2, WIDTH, HEIGHT);
         sprite = ResourceLoader.loadArrow();
-        sprite.setRotation((float)Math.toDegrees(angle)+ 270);
+        sprite.setRotation((float) Math.toDegrees(angle) + 270);
         System.out.println(sprite.getRotation());
-        velocity = new Vector2((float)(Math.cos(angle)*SPEED), (float)(Math.sin(angle)*SPEED));
+        velocity = new Vector2((float) (Math.cos(angle) * SPEED), (float) (Math.sin(angle) * SPEED));
     }
-    public Sprite getSprite(){
+
+    public Sprite getSprite() {
         return sprite;
     }
 
-    public void update(float dt){
+    public void update(float dt) {
         hitbox.setPosition(hitbox.getX() + velocity.x * dt,
                 hitbox.getY() + velocity.y * dt);
 
 
     }
 
-    public void dispose(){
+    public void dispose() {
         sprite.getTexture().dispose();
     }
 

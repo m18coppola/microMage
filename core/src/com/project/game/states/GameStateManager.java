@@ -8,38 +8,38 @@ public class GameStateManager {
 
     private Stack<State> states;
 
-    public GameStateManager(){
+    public GameStateManager() {
         states = new Stack<State>();
     }
 
-    public void push(State state){
+    public void push(State state) {
         states.push(state);
     }
 
-    public void pop(){
+    public void pop() {
         states.pop();
     }
 
-    public void set(State state){
+    public void set(State state) {
         states.pop();
         states.push(state);
     }
 
-    public void update(float dt){
+    public void update(float dt) {
         states.peek().update(dt);
     }
 
-    public void render(SpriteBatch batch){
+    public void render(SpriteBatch batch) {
         states.peek().render(batch);
     }
 
     public void dispose() {
-        while(!states.isEmpty()) {
+        while (!states.isEmpty()) {
             states.pop().dispose();
         }
     }
 
-    public State peek(){
+    public State peek() {
         return states.peek();
     }
 }

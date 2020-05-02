@@ -110,8 +110,7 @@ public class Troll extends Enemy {
             if (elapsed <= duration) {
 
                 elapsed += dt;
-            }
-            else{
+            } else {
                 elapsed = 0;
                 attack(PlayState.player.hitbox.getX(), PlayState.player.hitbox.getY());
             }

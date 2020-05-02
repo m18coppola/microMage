@@ -11,7 +11,6 @@ public class EnemyProjectiles extends Entity {
     }
 
 
-
     @Override
     public Sprite getSprite() {
         return null;

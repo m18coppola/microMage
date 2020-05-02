@@ -17,31 +17,31 @@ import java.util.ArrayList;
 import java.util.Timer;
 
 public class Game extends ApplicationAdapter {
-	SpriteBatch batch;
-	GameStateManager gsm;
+    SpriteBatch batch;
+    GameStateManager gsm;
 
 
-	@Override
-	public void create () {
+    @Override
+    public void create () {
 
-		batch = new SpriteBatch();
-		gsm = new GameStateManager();
-		gsm.push(new MenuState(gsm));
-	}
+        batch = new SpriteBatch();
+        gsm = new GameStateManager();
+        gsm.push(new MenuState(gsm));
+    }
 
-	@Override
-	public void render () {
-		if(!(gsm.peek() instanceof PlayState) || !PlayState.isPaused) {
-			gsm.update(Gdx.graphics.getDeltaTime());
-			gsm.render(batch);
-		}
+    @Override
+    public void render () {
+        if(!(gsm.peek() instanceof PlayState) || !PlayState.isPaused) {
+            gsm.update(Gdx.graphics.getDeltaTime());
+            gsm.render(batch);
+        }
 
-	}
-	
-	@Override
-	public void dispose () {
-		gsm.dispose();
-	}
+    }
+
+    @Override
+    public void dispose () {
+        gsm.dispose();
+    }
 
 
 }

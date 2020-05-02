@@ -109,10 +109,9 @@ public class Barbarian extends Enemy {
             attacking = true;
             if (elapsed < duration) {
                 elapsed += dt;
-            }
-            else {
-               elapsed = 0;
-               attack(PlayState.player.hitbox.getX(), PlayState.player.hitbox.getY());
+            } else {
+                elapsed = 0;
+                attack(PlayState.player.hitbox.getX(), PlayState.player.hitbox.getY());
             }
         } else {
             attacking = false;

@@ -1,11 +1,12 @@
 package com.project.game;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.project.game.entities.Player;
 
-public class ManaBar extends Thread{
+public class ManaBar extends Thread {
 
     private Sprite filledManaHeart;
     private Sprite emptyManaHeart;
@@ -16,8 +17,7 @@ public class ManaBar extends Thread{
     public final int MANA_HEART_WIDTH = 180;
     public final int MANA_HEART_HEIGHT = 156;
 
-    public ManaBar(Player p)
-    {
+    public ManaBar(Player p) {
         manaArray = new boolean[]{true, true, true, true, true, true, true, true};
         player = p;
         filledManaHeart = ResourceLoader.loadFilledManaHeart();
@@ -131,8 +131,7 @@ public class ManaBar extends Thread{
 
     }
 
-    public void dispose()
-    {
+    public void dispose() {
         filledManaHeart.getTexture().dispose();
         emptyManaHeart.getTexture().dispose();
     }

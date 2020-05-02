@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.project.game.ResourceLoader;
 
-public class LightningBolt extends Spells{
+public class LightningBolt extends Spells {
 
     public static final int WIDTH = 8;
     public static final int HEIGHT = 11;
@@ -14,12 +14,14 @@ public class LightningBolt extends Spells{
     public static final int DAMAGE = 15;
     public static final int MANA = 2;
 
-    public LightningBolt(double angle, Vector2 position){
-        super(angle,position,SPEED,WIDTH,HEIGHT,DAMAGE,MANA,ResourceLoader.loadLightningBolt());
+    public LightningBolt(double angle, Vector2 position) {
+        super(angle, position, SPEED, WIDTH, HEIGHT, DAMAGE, MANA, ResourceLoader.loadLightningBolt());
 
     }
 
 
-    public int getManaUsage() { return MANA; }
+    public int getManaUsage() {
+        return MANA;
+    }
 
 }

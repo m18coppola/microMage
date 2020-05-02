@@ -15,8 +15,7 @@ public class RegenMana extends Thread {
     public static final int DELAY_TIME = 500;
     private Player player;
 
-    public RegenMana(Player p)
-    {
+    public RegenMana(Player p) {
         player = p;
     }
 
@@ -25,8 +24,7 @@ public class RegenMana extends Thread {
             try {
                 System.out.println("hello");
                 sleep(DELAY_TIME);
-            }
-            catch (InterruptedException e) {
+            } catch (InterruptedException e) {
             }
             player.setMana(player.getMana() + 1);
         }
