@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.project.game.Controller;
+
 import com.project.game.HealthBar;
 import com.project.game.ManaBar;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -19,13 +20,16 @@ import com.project.game.entities.tiles.Tile;
 import com.project.game.entities.tiles.TileMap;
 import com.project.game.entities.tiles.Wall;
 
+import com.project.game.entities.*;
+
 import java.util.ArrayList;
 
 public class PlayState extends State {
 
     public static OrthographicCamera cam;
+
     public static OrthographicCamera UIcam;
-    Player player;
+    public static Player player;
 
     Controller controller;
     Texture pause;
@@ -39,14 +43,14 @@ public class PlayState extends State {
 
     public static TileMap tileMap;
 
-
+    static ArrayList<EnemyProjectiles> enemyProjectiles;
 
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
         tileMap = new TileMap();
         projectiles = new ArrayList<Spells>();
-        player = new Player(tileMap.playerSpawn.x,tileMap.playerSpawn.y);
+        player = new Player(tileMap.playerSpawn.x, tileMap.playerSpawn.y);
         healthBar = new HealthBar(player);
         healthBar.start();
         manaBar = new ManaBar(player);
@@ -54,18 +58,21 @@ public class PlayState extends State {
         regenMana = new RegenMana(player);
         regenMana.start();
         cam = new OrthographicCamera();
-        cam.setToOrtho(false,125 , 125);
+        cam.setToOrtho(false, 125, 125);
         UIcam = new OrthographicCamera();
-        UIcam.setToOrtho(false,125,125);
-        Gdx.gl.glClearColor(41f/255f, 30f/255f, 49f/255f, 1);
+        UIcam.setToOrtho(false, 125, 125);
+        Gdx.gl.glClearColor(41f / 255f, 30f / 255f, 49f / 255f, 1);
         Gdx.input.setInputProcessor(new Controller(player));
         pause = new Texture("UI/pause.png");
         isPaused = false;
+        enemyProjectiles = new ArrayList<EnemyProjectiles>();
+
 
     }
 
     @Override
     public void update(float dt) {
+
         if (isPaused) {
             dt = 0;
         } else {
@@ -75,10 +82,14 @@ public class PlayState extends State {
                 p.update(dt);
             }
         }
-        cam.position.set(player.getCenter(),0);
+        cam.position.set(player.getCenter(), 0);
         cam.update();
 
+        for (EnemyProjectiles ep : enemyProjectiles) {
+            ep.update(dt);
+        }
     }
+
 
     @Override
     public void render(SpriteBatch batch) {
@@ -90,14 +101,14 @@ public class PlayState extends State {
         batch.setProjectionMatrix(cam.combined);
 
 
-        for(Tile t: tileMap.tiles){
-            if(t != null)
-            batch.draw(t.getSprite(),t.getPosition().x,t.getPosition().y,16,16);
+        for (Tile t : tileMap.tiles) {
+            if (t != null)
+                batch.draw(t.getSprite(), t.getPosition().x, t.getPosition().y, 16, 16);
         }
 
-        batch.draw(pause, 115,115, 10, 10);
-        for(Spells p: projectiles){
-            batch.draw(p.getSprite(),p.getPosition().x, p.getPosition().y);
+        batch.draw(pause, 115, 115, 10, 10);
+        for (Spells p : projectiles) {
+            batch.draw(p.getSprite(), p.getPosition().x, p.getPosition().y);
         }
         batch.draw(player.getSprite(), player.getPosition().x - 5, player.getPosition().y);
         batch.setProjectionMatrix(UIcam.combined);
@@ -105,7 +116,10 @@ public class PlayState extends State {
         manaBar.render(batch);
 
 
-
+        for (EnemyProjectiles ep : enemyProjectiles) {
+            ep.getSprite().setPosition(ep.getPosition().x, ep.getPosition().y);
+            ep.getSprite().draw(batch);
+        }
 
 
         batch.end();
@@ -113,17 +127,32 @@ public class PlayState extends State {
 
     }
 
-    public static void addProjectile(Spells p){ projectiles.add(p);
+
+    public static void addProjectile(Spells p) {
+        projectiles.add(p);
     }
+
+    public static void addEnemyProjectile(EnemyProjectiles f) {
+        enemyProjectiles.add(f);
+    }
+
 
     @Override
     public void dispose() {
         player.dispose();
-        for(Spells p: projectiles){
+
+        for (Spells p : projectiles) {
             p.dispose();
         }
         healthBar.dispose();
         pause.dispose();
         manaBar.dispose();
+
+        for (EnemyProjectiles ep : enemyProjectiles) {
+            ep.dispose();
+        }
     }
 }
+
+
+

@@ -3,9 +3,6 @@ package com.project.game.entities;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
-
-import javax.swing.text.Position;
 
 public abstract class Entity {
     Vector2 position;
@@ -18,7 +15,7 @@ public abstract class Entity {
     public Entity(float x, float y, int width, int height){
         position = new Vector2();
         hitbox = new Rectangle(x, y, width, height);
-        position = hitbox.getPosition(position);
+        hitbox.getPosition(position);
     }
 
     public Vector2 getPosition(){ return hitbox.getPosition(position);
