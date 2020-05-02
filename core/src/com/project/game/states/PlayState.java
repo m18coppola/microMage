@@ -97,11 +97,7 @@ public class PlayState extends State {
 
         batch.end();
 
-        //debug
-        Game.sr.begin(ShapeRenderer.ShapeType.Line);
-        Game.sr.setProjectionMatrix(cam.combined);
-        Game.sr.rect(player.hitbox.x,player.hitbox.y,player.hitbox.getWidth(),player.hitbox.getHeight());
-        Game.sr.end();
+
     }
 
     public static void addProjectile(Spells p){ projectiles.add(p);
