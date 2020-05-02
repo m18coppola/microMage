@@ -18,6 +18,7 @@ import java.util.Timer;
 public class Game extends ApplicationAdapter {
 	SpriteBatch batch;
 	GameStateManager gsm;
+	public static ShapeRenderer sr;
 
 
 	@Override
@@ -26,6 +27,7 @@ public class Game extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		gsm = new GameStateManager();
 		gsm.push(new PlayState(gsm));
+		sr = new ShapeRenderer();
 	}
 
 	@Override

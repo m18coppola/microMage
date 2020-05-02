@@ -48,7 +48,7 @@ public class PlayState extends State {
         cam.setToOrtho(false,125 , 125);
         UIcam = new OrthographicCamera();
         UIcam.setToOrtho(false,125,125);
-        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClearColor(41f/255f, 30f/255f, 49f/255f, 1);
         Gdx.input.setInputProcessor(new Controller(player));
 
 
@@ -86,7 +86,7 @@ public class PlayState extends State {
         for(Spells p: projectiles){
             batch.draw(p.getSprite(),p.getPosition().x, p.getPosition().y);
         }
-        batch.draw(player.getSprite(), player.getPosition().x, player.getPosition().y);
+        batch.draw(player.getSprite(), player.getPosition().x - 5, player.getPosition().y);
         batch.setProjectionMatrix(UIcam.combined);
         healthBar.render(batch);
         manaBar.render(batch);
@@ -96,6 +96,12 @@ public class PlayState extends State {
 
 
         batch.end();
+
+        //debug
+        Game.sr.begin(ShapeRenderer.ShapeType.Line);
+        Game.sr.setProjectionMatrix(cam.combined);
+        Game.sr.rect(player.hitbox.x,player.hitbox.y,player.hitbox.getWidth(),player.hitbox.getHeight());
+        Game.sr.end();
     }
 
     public static void addProjectile(Spells p){ projectiles.add(p);

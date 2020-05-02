@@ -11,8 +11,8 @@ import com.project.game.entities.tiles.Wall;
 import com.project.game.states.PlayState;
 
 public class Player extends Entity{
-    public static final int WIDTH = 5;
-    public static final int HEIGHT = 5;
+    public static final int WIDTH = 10;
+    public static final int HEIGHT = 10;
     static final int MAX_MANA = 8;
     private static final float MANA_REGEN_SPEED = 1.5f;
     Vector2 velocity;
@@ -95,16 +95,27 @@ public class Player extends Entity{
         if(attack.getCurrentFrame() == 6 && attacking)
         attacking = false;
         hitbox.getPosition(oldPos);
-        hitbox.setPosition(hitbox.getX() + velocity.x*dt,
-                           hitbox.getY() + velocity.y*dt);
+
+        //check x collision
+        hitbox.setX(hitbox.getX() + velocity.x * dt);
         for(Tile t: PlayState.tileMap.tiles){
             if(t instanceof Wall){
                 if(this.collidesWith(t)){
-                    hitbox.setPosition(oldPos);
-                    System.out.println("colliding with dt at " + dt);
+                    hitbox.setX(oldPos.x);
                 }
             }
         }
+        //check y collision
+        hitbox.setY(hitbox.getY() + velocity.y * dt);
+        for(Tile t: PlayState.tileMap.tiles){
+            if(t instanceof Wall){
+                if(this.collidesWith(t)){
+                    hitbox.setY(oldPos.y);
+                }
+            }
+        }
+
+
         walk.update(dt);
         idle.update(dt);
         attack.update(dt);
