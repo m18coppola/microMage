@@ -23,7 +23,7 @@ public class Troll extends Enemy {
     public float elapsed = 0.0f;
 
 
-    public Troll() {
+    public Troll(int x, int y) {
 
         super(100, 5, WIDTH, HEIGHT);
         center = new Vector2();
@@ -85,8 +85,8 @@ public class Troll extends Enemy {
         if (attacking) {
             center = hitbox.getCenter(center);
             double angle = Math.atan2((y - center.y), (x - center.x));
-            Axe axe = new Axe(angle, new Vector2(center.x, center.y));
-            PlayState.addAxe(axe);
+            Arrow arrow = new Arrow(angle, new Vector2(center.x, center.y));
+            PlayState.addArrow(arrow);
 
         }
     }

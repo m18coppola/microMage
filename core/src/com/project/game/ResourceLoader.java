@@ -71,6 +71,40 @@ public class ResourceLoader {
 
         };
     }
+    public static Sprite[] loadTrollAttack() {
+        return new Sprite[]{
+                new Sprite(new Texture("characters/troll/troll_attack_01.png")),
+                new Sprite(new Texture("characters/troll/troll_attack_02.png")),
+                new Sprite(new Texture("characters/troll/troll_attack_03.png")),
+                new Sprite(new Texture("characters/troll/troll_attack_04.png")),
+                new Sprite(new Texture("characters/troll/troll_attack_05.png")),
+                new Sprite(new Texture("characters/troll/troll_attack_04.png")),
+                new Sprite(new Texture("characters/troll/troll_attack_05.png")),
+                new Sprite(new Texture("characters/troll/troll_attack_06.png")),
+                new Sprite(new Texture("characters/troll/troll_attack_07.png")),
+                new Sprite(new Texture("characters/troll/troll_attack_08.png")),
+        };
+    }
+    public static Sprite[] loadTrollIdle() {
+        return new Sprite[]{
+                new Sprite(new Texture("characters/troll/troll_idle_01.png")),
+                new Sprite(new Texture("characters/troll/troll_idle_02.png")),
+                new Sprite(new Texture("characters/troll/troll_idle_03.png")),
+                new Sprite(new Texture("characters/troll/troll_idle_04.png")),
+
+        };
+    }
+
+    public static Sprite[] loadTrollWalk() {
+        return new Sprite[]{
+                new Sprite(new Texture("characters/troll/troll_run_01.png")),
+                new Sprite(new Texture("characters/troll/troll_run_02.png")),
+                new Sprite(new Texture("characters/troll/troll_run_03.png")),
+                new Sprite(new Texture("characters/troll/troll_run_04.png")),
+
+        };
+    }
+
 
 
 
@@ -80,6 +114,10 @@ public class ResourceLoader {
 
     public static Sprite loadAxe() {
         return new Sprite(new Texture("items/axe.png"));
+    }
+
+    public static Sprite loadArrow() {
+        return new Sprite(new Texture("items/arrow.png"));
     }
 
 

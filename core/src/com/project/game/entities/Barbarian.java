@@ -19,13 +19,13 @@ public class Barbarian extends Enemy {
     Vector2 center;
     Vector2 target;
     boolean movement = false;
-    public float duration = 0.3f;
+    public float duration = 0.5f;
     public float elapsed = 0.0f;
 
 
-    public Barbarian() {
+    public Barbarian(int x, int y) {
 
-        super(100, 100, WIDTH, HEIGHT);
+        super(x, y, WIDTH, HEIGHT);
         center = new Vector2();
         attacking = false;
         idle = new Animation(ResourceLoader.loadBarbarianIdle(), .1f);
@@ -107,8 +107,7 @@ public class Barbarian extends Enemy {
             }
 
             attacking = true;
-            if (elapsed <= duration) {
-
+            if (elapsed < duration) {
                 elapsed += dt;
             }
             else {

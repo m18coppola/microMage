@@ -15,21 +15,13 @@ public abstract class Enemy extends Entity {
 
     public abstract Sprite getSprite();
 
-    public abstract void moveRight();
 
-    public abstract void moveLeft();
-
-    public abstract void moveUp();
-
-    public abstract void moveDown();
 
     public abstract void attack(float x, float y);
 
 
     @Override
-    public void update(float dt) {
-
-    }
+    public abstract void update(float dt);
 
 
 
