@@ -29,7 +29,7 @@ public class PlayState extends State {
     public static OrthographicCamera cam;
     public static OrthographicCamera UIcam;
     public static Player player;
-    public static int score = 1;
+    public static int score = 0;
     Controller controller;
     Texture pause;
 
