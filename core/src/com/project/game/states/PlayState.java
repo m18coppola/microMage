@@ -41,6 +41,7 @@ public class PlayState extends State {
     static ManaBar manaBar;
     static RegenMana regenMana;
     public static int currSpell;
+    public static SoundEffect currSpellSound;
     public static TileMap tileMap;
     public static ArrayList<EnemyProjectiles> enemyProjectiles;
     public static ArrayList<EnemyProjectiles> removedProjectiles;

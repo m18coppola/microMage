@@ -1,5 +1,7 @@
 package com.project.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -168,6 +170,14 @@ public class ResourceLoader {
     public static Sprite loadArrow() {
         return new Sprite(new Texture("items/arrow.png"));
     }
+
+    public static Sound loadEmptyManaSound() {return  Gdx.audio.newSound(Gdx.files.internal("sfx/EmptyClip.mp3"));}
+
+    public static Sound loadFireballSound() {return Gdx.audio.newSound(Gdx.files.internal("sfx/Fireball.mp3"));}
+
+    public static Sound loadSnowballSound() {return Gdx.audio.newSound(Gdx.files.internal("sfx/Snowball.mp3"));}
+
+    public static Sound loadLightningBoltSound() {return Gdx.audio.newSound(Gdx.files.internal("sfx/Lightning.mp3"));}
 
 
 }
