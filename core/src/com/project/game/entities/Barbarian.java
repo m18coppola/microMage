@@ -21,7 +21,7 @@ public class Barbarian extends Enemy {
     boolean movement = false;
     public float duration = 0.5f;
     public float elapsed = 0.0f;
-    public static int health = 100;
+    public int health = 90;
 
 
     public Barbarian(int x, int y) {
@@ -128,11 +128,26 @@ public class Barbarian extends Enemy {
         for (Spells s : PlayState.projectiles) {
 
             if (this.collidesWith(s)) {
+                if (s instanceof LightningBolt) {
+                    this.damage(90);
+                }
+                if (s instanceof FireBall) {
+                    this.damage(45);
+                }
+                if (s instanceof SnowBall) {
+                    this.damage(30);
+                }
+
+
+            }
+            if (this.health <= 0) {
                 PlayState.killedEnemies.add(this);
             }
         }
-
     }
+
+
+
 
     @Override
     public void dispose() {
