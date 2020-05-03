@@ -25,7 +25,7 @@ public class Troll extends Enemy {
 
     public Troll(int x, int y) {
 
-        super(100, 5, WIDTH, HEIGHT);
+        super(x, y, WIDTH, HEIGHT);
         center = new Vector2();
         attacking = false;
         idle = new Animation(ResourceLoader.loadTrollIdle(), .1f);
