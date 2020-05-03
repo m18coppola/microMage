@@ -29,6 +29,7 @@ public class PlayState extends State {
     public static OrthographicCamera cam;
     public static OrthographicCamera UIcam;
     public static Player player;
+    private static int score = 0;
     Controller controller;
     Texture pause;
 
@@ -47,10 +48,14 @@ public class PlayState extends State {
     public static ArrayList<EnemyProjectiles> removedProjectiles;
     public static ArrayList<Enemy> killedEnemies;
     public static ArrayList<Spells> usedProjectiles;
+    private static GameStateManager gsm;
+    private static boolean alt = true;
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
-        tileMap = new TileMap(false);
+        this.gsm = gsm;
+        tileMap = new TileMap(alt);
+        alt = !alt;
         projectiles = new ArrayList<Spells>();
         player = new Player(tileMap.playerSpawn.x, tileMap.playerSpawn.y);
         healthBar = new HealthBar(player);
@@ -74,6 +79,11 @@ public class PlayState extends State {
         usedProjectiles = new ArrayList<Spells>();
 
 
+    }
+
+    public static void nextLevel() {
+        score++;
+        gsm.set(new PlayState(gsm));
     }
 
     @Override
@@ -109,7 +119,6 @@ public class PlayState extends State {
             projectiles.remove(usedProjectiles.get(i));
         }
         usedProjectiles =  new ArrayList<Spells>();
-
     }
 
 

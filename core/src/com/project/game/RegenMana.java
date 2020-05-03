@@ -22,7 +22,6 @@ public class RegenMana extends Thread {
     public void run() {
         while (player.getMana() < 8) {
             try {
-                System.out.println("hello");
                 sleep(DELAY_TIME);
             } catch (InterruptedException e) {
             }

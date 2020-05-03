@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class TileMap {
+
     public enum GridSpace {empty, wall, floor}
 
     public GridSpace[][] grid;
@@ -24,6 +25,7 @@ public class TileMap {
     public Vector2 playerSpawn = new Vector2();
     public static ArrayList<Enemy> enemies;
     private boolean alt;
+    public Vector2 goalPos;
 
     final int MAX_WALKERS = 10;
     final float PERCENT_TO_FILL = 0.25f;
@@ -44,6 +46,22 @@ public class TileMap {
         CreateFloors();
         CreateWalls();
         GenerateTiles();
+        PlaceGoal();
+    }
+
+    private void PlaceGoal() {
+        int i = 0;
+        while(!(tiles[i] instanceof Floor)){
+            i++;
+        }
+        tiles[i].hitbox.getPosition(playerSpawn);
+        playerSpawn.add(0,2); //prevent collision locks
+        i = tiles.length - 1;
+        while(!(tiles[i] instanceof Floor)){
+            i--;
+        }
+        Tile t = tiles[i];
+        tiles[i] = new Goal(t.getPosition().x,t.getPosition().y,alt);
     }
 
     private void GenerateTiles() {
@@ -58,7 +76,6 @@ public class TileMap {
                         break;
                     case floor:
                         newTile = new Floor(x * 16, y * 16, alt);
-                        newTile.hitbox.getPosition(playerSpawn);
                         if(rand.nextFloat() < ENEMY_SPAWN_CHANCE){
                             enemies.add((rand.nextFloat() >= 0.5)?new Barbarian(x * 16, y * 16):new Troll(x * 16, y * 16));
                         }

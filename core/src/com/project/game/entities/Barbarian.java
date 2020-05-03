@@ -87,8 +87,6 @@ public class Barbarian extends Enemy {
             hitbox.getCenter(center);
             double angle = Math.atan2((y - center.y), (x - center.x));
             Axe axe = new Axe(angle, new Vector2(center.x, center.y));
-            System.out.println(axe.getPosition());
-            System.out.println(this.position);
             PlayState.addEnemyProjectile(axe);
 
         }

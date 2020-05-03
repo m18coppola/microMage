@@ -164,6 +164,10 @@ public class ResourceLoader {
         return sprites;
     }
 
+    public static Sprite loadGoal(boolean alt) {
+        return new Sprite(new TextureRegion((alt) ? tiles : altTiles), 48, 0, Tile.DIM, Tile.DIM);
+    }
+
     public static Sprite loadAxe() {
         return new Sprite(new Texture("items/axe.png"));
     }
@@ -172,13 +176,21 @@ public class ResourceLoader {
         return new Sprite(new Texture("items/arrow.png"));
     }
 
-    public static Sound loadEmptyManaSound() {return  Gdx.audio.newSound(Gdx.files.internal("sfx/EmptyClip.mp3"));}
+    public static Sound loadEmptyManaSound() {
+        return Gdx.audio.newSound(Gdx.files.internal("sfx/EmptyClip.mp3"));
+    }
 
-    public static Sound loadFireballSound() {return Gdx.audio.newSound(Gdx.files.internal("sfx/Fireball.mp3"));}
+    public static Sound loadFireballSound() {
+        return Gdx.audio.newSound(Gdx.files.internal("sfx/Fireball.mp3"));
+    }
 
-    public static Sound loadSnowballSound() {return Gdx.audio.newSound(Gdx.files.internal("sfx/Snowball.mp3"));}
+    public static Sound loadSnowballSound() {
+        return Gdx.audio.newSound(Gdx.files.internal("sfx/Snowball.mp3"));
+    }
 
-    public static Sound loadLightningBoltSound() {return Gdx.audio.newSound(Gdx.files.internal("sfx/Lightning.mp3"));}
+    public static Sound loadLightningBoltSound() {
+        return Gdx.audio.newSound(Gdx.files.internal("sfx/Lightning.mp3"));
+    }
 
 
 }

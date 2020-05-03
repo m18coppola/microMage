@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.project.game.Animation;
 import com.project.game.ResourceLoader;
 import com.project.game.SoundEffect;
+import com.project.game.entities.tiles.Goal;
 import com.project.game.entities.tiles.Tile;
 import com.project.game.entities.tiles.Wall;
 import com.project.game.states.PlayState;
@@ -13,6 +14,9 @@ import com.project.game.states.PlayState;
 import static com.project.game.states.PlayState.currSpell;
 
 public class Player extends Entity {
+    public enum Direction{N,S,E,W}
+    boolean left,right,up,down = false;
+
     public static final int WIDTH = 10;
     public static final int HEIGHT = 10;
     static final int MAX_MANA = 8;
@@ -64,39 +68,15 @@ public class Player extends Entity {
             return walk.getSprite();
     }
 
-    public void moveLeft(boolean moving) {
-        if (moving) {
-            velocity.x -= SPEED;
-            walk.setLeft();
-            idle.setLeft();
-            attack.setLeft();
-        } else
-            velocity.x += SPEED;
+    public void move(Direction d, boolean moving) {
+        switch (d){
+            case N: up = moving; break;
+            case S: down = moving; break;
+            case E: right = moving; break;
+            case W: left = moving;break;
+        }
     }
 
-    public void moveRight(boolean moving) {
-        if (moving) {
-            velocity.x += SPEED;
-            walk.setRight();
-            idle.setRight();
-            attack.setRight();
-        } else
-            velocity.x -= SPEED;
-    }
-
-    public void moveUp(boolean moving) {
-        if (moving)
-            velocity.y += SPEED;
-        else
-            velocity.y -= SPEED;
-    }
-
-    public void moveDown(boolean moving) {
-        if (moving)
-            velocity.y -= SPEED;
-        else
-            velocity.y += SPEED;
-    }
 
 
     @Override
@@ -112,7 +92,27 @@ public class Player extends Entity {
             attacking = false;
         hitbox.getPosition(oldPos);
 
-        //check x collision
+        //calc velocity
+        if(up){
+            velocity.y = SPEED;
+        }
+        if(down){
+            velocity.y = -SPEED;
+        }
+        if(up == down){
+            velocity.y = 0;
+        }
+        if(left){
+            velocity.x = -SPEED;
+        }
+        if(right){
+            velocity.x = SPEED;
+        }
+        if(left == right) {
+            velocity.x = 0;
+        }
+
+            //check x collision
         hitbox.setX(hitbox.getX() + velocity.x * dt);
         for (Tile t : PlayState.tileMap.tiles) {
             if (t instanceof Wall) {
@@ -130,6 +130,14 @@ public class Player extends Entity {
                 }
             }
         }
+        //check goal collision
+        for(Tile t : PlayState.tileMap.tiles){
+            if(t instanceof Goal) {
+                if (this.collidesWith(t)) {
+                    PlayState.nextLevel();
+                }
+            }
+        }
 
         //check for projectile collision
         for(int i = 0; i < PlayState.enemyProjectiles.size(); i++){
@@ -140,6 +148,9 @@ public class Player extends Entity {
                 i--;
             }
         }
+
+
+        System.out.println(velocity);
 
 
         walk.update(dt);
@@ -165,7 +176,6 @@ public class Player extends Entity {
             PlayState.addProjectile(spellType);
             setMana(mana - spellType.getManaUsage());
             attacking = true;
-            System.out.println(mana);
             attack.resetFrames();
         } else {
             attacking = false;

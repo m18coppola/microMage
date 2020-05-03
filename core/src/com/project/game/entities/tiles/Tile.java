@@ -18,7 +18,6 @@ public abstract class Tile extends Entity {
         super(x, y, DIM * 2, DIM * 2);
         this.sprite = sprite;
         this.altSprite = altSprite;
-        System.out.println(hitbox);
         alt = altPallette;
     }
 
