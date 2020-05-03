@@ -150,7 +150,6 @@ public class PlayState extends State {
         for (EnemyProjectiles ep : enemyProjectiles) {
             ep.getSprite().setPosition(ep.getPosition().x, ep.getPosition().y);
             ep.getSprite().draw(batch);
-
         }
         batch.draw(player.getSprite(), player.getPosition().x - 5, player.getPosition().y);
         batch.setProjectionMatrix(UIcam.combined);
