@@ -22,10 +22,14 @@ public abstract class Enemy extends Entity {
     @Override
     public abstract void update(float dt);
 
+    public abstract void damage(int damage);
+
 
     @Override
     public void dispose() {
 
     }
+
+
 
 }
