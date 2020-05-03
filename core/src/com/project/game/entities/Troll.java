@@ -4,6 +4,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.project.game.Animation;
 import com.project.game.ResourceLoader;
+import com.project.game.entities.tiles.Tile;
+import com.project.game.entities.tiles.TileMap;
+import com.project.game.entities.tiles.Wall;
 import com.project.game.states.PlayState;
 
 public class Troll extends Enemy {
@@ -117,8 +120,16 @@ public class Troll extends Enemy {
         } else {
             attacking = false;
         }
+        for (Spells s : PlayState.projectiles) {
+
+            if (this.collidesWith(s)) {
+                PlayState.killedEnemies.add(this);
+            }
+        }
 
     }
+
+
 
     @Override
     public void dispose() {

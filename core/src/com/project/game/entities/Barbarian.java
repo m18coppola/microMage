@@ -119,6 +119,13 @@ public class Barbarian extends Enemy {
         } else {
             attacking = false;
         }
+        for (Spells s : PlayState.projectiles) {
+
+            if (this.collidesWith(s)) {
+                PlayState.killedEnemies.add(this);
+            }
+        }
+
 
     }
 

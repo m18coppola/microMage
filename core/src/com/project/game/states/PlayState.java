@@ -34,7 +34,7 @@ public class PlayState extends State {
     Controller controller;
     Texture pause;
 
-    static ArrayList<Spells> projectiles;
+    public static ArrayList<Spells> projectiles;
     static HealthBar healthBar;
     public static boolean isPaused;
     static ManaBar manaBar;
@@ -45,6 +45,7 @@ public class PlayState extends State {
 
     public static ArrayList<EnemyProjectiles> enemyProjectiles;
     public static ArrayList<EnemyProjectiles> removedProjectiles;
+    public static ArrayList<Enemy> killedEnemies;
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
@@ -67,7 +68,7 @@ public class PlayState extends State {
         isPaused = false;
         enemyProjectiles = new ArrayList<EnemyProjectiles>();
         removedProjectiles = new ArrayList<EnemyProjectiles>();
-
+        killedEnemies = new ArrayList<Enemy>();
 
 
     }
@@ -97,6 +98,11 @@ public class PlayState extends State {
         for (Enemy enemy : tileMap.enemies) {
             enemy.update(dt);
         }
+        for (int i = 0; i < killedEnemies.size(); i++) {
+            tileMap.enemies.remove(killedEnemies.get(i));
+        }
+        killedEnemies = new ArrayList<Enemy>();
+
     }
 
 

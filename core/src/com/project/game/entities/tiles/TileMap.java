@@ -22,7 +22,7 @@ public class TileMap {
     final float ENEMY_SPAWN_CHANCE = 0.05f;
     private static Random rand = new Random();
     public Vector2 playerSpawn = new Vector2();
-    public ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+    public static ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 
     final int MAX_WALKERS = 10;
     final float PERCENT_TO_FILL = 0.25f;

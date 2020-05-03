@@ -37,6 +37,7 @@ public class Arrow extends EnemyProjectiles {
                     PlayState.removedProjectiles.add(this);
                 }
             }
+
         }
 
     }
