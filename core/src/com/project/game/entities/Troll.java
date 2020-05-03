@@ -12,7 +12,7 @@ import com.project.game.states.PlayState;
 public class Troll extends Enemy {
     public static final int WIDTH = 18;
     public static final int HEIGHT = 18;
-    public static final float attackRange = 50;
+    public static final float attackRange = 60;
     Vector2 velocity;
     Animation walk;
     Animation idle;
