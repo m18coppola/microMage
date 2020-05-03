@@ -36,6 +36,7 @@ public class EndGameState extends State {
     @Override
     public void update(float dt) {
         if(Gdx.input.justTouched()) {
+            PlayState.score = 1;
             gsm.set(new MenuState(gsm));
         }
     }
