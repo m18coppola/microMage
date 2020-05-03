@@ -27,6 +27,7 @@ public class TileMap {
     public static ArrayList<Enemy> enemies;
     private boolean alt;
     public Vector2 goalPos;
+    private boolean playerPlaced;
 
     final int MAX_WALKERS = 10;
     final float PERCENT_TO_FILL = 0.25f;
@@ -51,13 +52,9 @@ public class TileMap {
     }
 
     private void PlaceGoal() {
-        int i = 0;
-        while(!(tiles[i] instanceof Floor)){
-            i++;
-        }
-        tiles[i].hitbox.getPosition(playerSpawn);
-        playerSpawn.add(0,2); //prevent collision locks
-        i = tiles.length - 1;
+
+         //prevent collision locks
+        int i = tiles.length - 1;
         while(!(tiles[i] instanceof Floor)){
             i--;
         }
@@ -77,7 +74,13 @@ public class TileMap {
                         break;
                     case floor:
                         newTile = new Floor(x * 16, y * 16, alt);
-                        if(rand.nextFloat() < ENEMY_SPAWN_CHANCE){
+                        if(!playerPlaced){
+                            tiles[i] = newTile;
+                            tiles[i].hitbox.getPosition(playerSpawn);
+                            playerSpawn.add(0,2);
+                            playerPlaced = true;
+                        }
+                        if(rand.nextFloat() < ENEMY_SPAWN_CHANCE && playerSpawn.dst(x * 16, y * 16) > 60){
                             enemies.add((alt)?new Barbarian(x * 16, y * 16):new Troll(x * 16, y * 16));
                         }
                         break;
@@ -92,6 +95,7 @@ public class TileMap {
 
         grid = new GridSpace[WIDTH][HEIGHT];
         enemies  = new ArrayList<Enemy>();
+        playerPlaced = false;
 
         //initialize grid
         for (int x = 0; x < WIDTH; x++) {
