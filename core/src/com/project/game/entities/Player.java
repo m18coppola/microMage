@@ -70,10 +70,24 @@ public class Player extends Entity {
 
     public void move(Direction d, boolean moving) {
         switch (d){
-            case N: up = moving; break;
-            case S: down = moving; break;
-            case E: right = moving; break;
-            case W: left = moving;break;
+            case N:
+                up = moving;
+                break;
+            case S:
+                down = moving;
+                break;
+            case E:
+                right = moving;
+                walk.setRight();
+                idle.setRight();
+                attack.setRight();
+                break;
+            case W:
+                left = moving;
+                walk.setLeft();
+                idle.setLeft();
+                attack.setLeft();
+                break;
         }
     }
 

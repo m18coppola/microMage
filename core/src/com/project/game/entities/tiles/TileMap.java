@@ -77,7 +77,7 @@ public class TileMap {
                     case floor:
                         newTile = new Floor(x * 16, y * 16, alt);
                         if(rand.nextFloat() < ENEMY_SPAWN_CHANCE){
-                            enemies.add((rand.nextFloat() >= 0.5)?new Barbarian(x * 16, y * 16):new Troll(x * 16, y * 16));
+                            enemies.add((alt)?new Barbarian(x * 16, y * 16):new Troll(x * 16, y * 16));
                         }
                         break;
                 }
