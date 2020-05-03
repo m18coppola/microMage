@@ -25,7 +25,6 @@ public class Troll extends Enemy {
     public float duration = 0.4f;
     public float elapsed = 0.0f;
 
-
     public Troll(int x, int y) {
 
         super(x, y, WIDTH, HEIGHT);
@@ -78,6 +77,10 @@ public class Troll extends Enemy {
         if (movement) {
             velocity.y -= SPEED;
         }
+    }
+
+    public void damage(int damage) {
+        health -= damage;
     }
 
     public void attack(float x, float y) {
