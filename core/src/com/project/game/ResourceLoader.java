@@ -197,7 +197,7 @@ public class ResourceLoader {
 
     public static Sound loadGameOver() {return Gdx.audio.newSound(Gdx.files.internal("sfx/GameOver.mp3"));}
 
-    //public static Sound loadStartSound() {return Gdx.audio.newSound(Gdx.files.internal("sfx/StartGame.mp3"));}
+    public static Sound loadNewLevelSound() {return Gdx.audio.newSound(Gdx.files.internal("sfx/LevelUpDigital.mp3"));}
 
 }
 
