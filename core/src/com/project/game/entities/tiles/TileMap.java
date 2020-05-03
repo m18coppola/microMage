@@ -22,7 +22,7 @@ public class TileMap {
     final float ENEMY_SPAWN_CHANCE = 0.05f;
     private static Random rand = new Random();
     public Vector2 playerSpawn = new Vector2();
-    public static ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+    public static ArrayList<Enemy> enemies;
 
     final int MAX_WALKERS = 10;
     final float PERCENT_TO_FILL = 0.25f;
@@ -70,6 +70,7 @@ public class TileMap {
 
     private void setup() {
         grid = new GridSpace[WIDTH][HEIGHT];
+        enemies  = new ArrayList<Enemy>();
 
         //initialize grid
         for (int x = 0; x < WIDTH; x++) {
