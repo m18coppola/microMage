@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.project.game.Animation;
 import com.project.game.ResourceLoader;
+import com.project.game.SoundEffect;
 import com.project.game.states.PlayState;
 
 public class Barbarian extends Enemy {
@@ -128,6 +129,8 @@ public class Barbarian extends Enemy {
         for (Spells s : PlayState.projectiles) {
 
             if (this.collidesWith(s)) {
+                SoundEffect enemyHit = new SoundEffect(ResourceLoader.loadEnemyHitSound());
+                enemyHit.playSound();
                 if (s instanceof LightningBolt) {
                     this.damage(90);
                 }

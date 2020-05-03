@@ -161,6 +161,8 @@ public class Player extends Entity {
         for(int i = 0; i < PlayState.enemyProjectiles.size(); i++){
             EnemyProjectiles ep = PlayState.enemyProjectiles.get(i);
             if(ep.collidesWith(this)){
+                SoundEffect playerHit = new SoundEffect(ResourceLoader.loadPlayerHitSound());
+                playerHit.playSound();
                 this.setHealth(getHealth()-1);
                 PlayState.enemyProjectiles.remove(ep);
                 i--;

@@ -199,6 +199,10 @@ public class ResourceLoader {
 
     public static Sound loadNewLevelSound() {return Gdx.audio.newSound(Gdx.files.internal("sfx/LevelUpDigital.mp3"));}
 
+    public static Sound loadEnemyHitSound() { return Gdx.audio.newSound(Gdx.files.internal("sfx/enemyhit.wav"));}
+
+    public static Sound loadPlayerHitSound() { return Gdx.audio.newSound(Gdx.files.internal("sfx/playerhit.mp3"));}
+
 }
 
 
