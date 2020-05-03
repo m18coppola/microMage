@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.project.game.entities.Barbarian;
 import com.project.game.entities.Enemy;
 import com.project.game.entities.Troll;
+import com.project.game.states.PlayState;
 
 import java.util.ArrayList;
 import java.util.Random;

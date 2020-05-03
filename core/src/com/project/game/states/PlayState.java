@@ -1,10 +1,13 @@
 package com.project.game.states;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.project.game.Controller;
 
 import com.project.game.HealthBar;
@@ -26,9 +29,11 @@ public class PlayState extends State {
     public static OrthographicCamera cam;
     public static OrthographicCamera UIcam;
     public static Player player;
-    private static int score = 0;
+    public static int score = 1;
     Controller controller;
     Texture pause;
+
+
 
 
     public static ArrayList<Spells> projectiles;
