@@ -21,6 +21,7 @@ public class Barbarian extends Enemy {
     boolean movement = false;
     public float duration = 0.5f;
     public float elapsed = 0.0f;
+    public static int health = 100;
 
 
     public Barbarian(int x, int y) {
@@ -78,6 +79,11 @@ public class Barbarian extends Enemy {
         }
     }
 
+    public void damage(int damage) {
+        health -= damage;
+    }
+
+
     public void attack(float x, float y) {
         if (attack.getCurrentFrame() == 7 && attacking) {
             attacking = false;
@@ -91,6 +97,8 @@ public class Barbarian extends Enemy {
 
         }
     }
+
+
 
 
     @Override
