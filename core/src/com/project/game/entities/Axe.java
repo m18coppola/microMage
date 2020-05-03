@@ -18,7 +18,6 @@ public class Axe extends EnemyProjectiles {
     public Axe(double angle, Vector2 position) {
         super(position.x - WIDTH / 2, position.y - HEIGHT / 2, WIDTH, HEIGHT);
         sprite = ResourceLoader.loadAxe();
-        sprite.setRotation(189);
         velocity = new Vector2((float) (Math.cos(angle) * SPEED), (float) (Math.sin(angle) * SPEED));
     }
 
