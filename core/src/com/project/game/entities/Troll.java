@@ -24,6 +24,7 @@ public class Troll extends Enemy {
     boolean movement = false;
     public float duration = 0.4f;
     public float elapsed = 0.0f;
+    public int health = 100;
 
     public Troll(int x, int y) {
 
@@ -126,6 +127,19 @@ public class Troll extends Enemy {
         for (Spells s : PlayState.projectiles) {
 
             if (this.collidesWith(s)) {
+                if (s instanceof LightningBolt) {
+                    this.damage(90);
+                }
+                if (s instanceof FireBall) {
+                    this.damage(45);
+                }
+              if (s instanceof SnowBall) {
+                    this.damage(30);
+                }
+
+
+            }
+            if (this.health <= 0) {
                 PlayState.killedEnemies.add(this);
             }
         }
