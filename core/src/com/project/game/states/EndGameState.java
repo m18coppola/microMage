@@ -36,7 +36,7 @@ public class EndGameState extends State {
     @Override
     public void update(float dt) {
         if(Gdx.input.justTouched()) {
-            PlayState.score = 1;
+            PlayState.score = 0;
             gsm.set(new MenuState(gsm));
         }
     }
@@ -47,7 +47,7 @@ public class EndGameState extends State {
         batch.setProjectionMatrix(UIcam.combined);
         batch.begin();
         batch.draw(endGame, 250 - endGame.getWidth()/2,250);
-        gl.setText(font30, "FINAL LEVEL : " + PlayState.score);
+        gl.setText(font30, "Levels Cleared : " + PlayState.score);
         font30.draw(batch,gl, -1 * gl.width/2 + endGame.getWidth()/2, 200);
         batch.end();
     }
