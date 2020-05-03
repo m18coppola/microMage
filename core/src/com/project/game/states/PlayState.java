@@ -27,22 +27,17 @@ import java.util.ArrayList;
 public class PlayState extends State {
 
     public static OrthographicCamera cam;
-
     public static OrthographicCamera UIcam;
     public static Player player;
-
     Controller controller;
     Texture pause;
-
     static ArrayList<Spells> projectiles;
     static HealthBar healthBar;
     public static boolean isPaused;
     static ManaBar manaBar;
     static RegenMana regenMana;
     public static int currSpell;
-
     public static TileMap tileMap;
-
     public static ArrayList<EnemyProjectiles> enemyProjectiles;
 
 
@@ -66,27 +61,23 @@ public class PlayState extends State {
         pause = new Texture("UI/pause.png");
         isPaused = false;
         enemyProjectiles = new ArrayList<EnemyProjectiles>();
-
-
     }
 
     @Override
     public void update(float dt) {
-
-
+        if(Player.getHealth() == 0){
+            gsm.set(new EndGameState(gsm));
+        }
         dt = Gdx.graphics.getDeltaTime();
         player.update(dt);
         for (Spells p : projectiles) {
             p.update(dt);
         }
-
         cam.position.set(player.getCenter(), 0);
         cam.update();
-
         for (EnemyProjectiles ep : enemyProjectiles) {
             ep.update(dt);
         }
-
         for (Enemy enemy : tileMap.enemies) {
             enemy.update(dt);
         }
@@ -95,14 +86,9 @@ public class PlayState extends State {
 
     @Override
     public void render(SpriteBatch batch) {
-
-
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         batch.begin();
         batch.setProjectionMatrix(cam.combined);
-
-
         for (Tile t : tileMap.tiles) {
             if (t != null)
                 batch.draw(t.getSprite(), t.getPosition().x, t.getPosition().y, 16, 16);
@@ -111,7 +97,6 @@ public class PlayState extends State {
         for (Enemy enemy : tileMap.enemies) {
             batch.draw(enemy.getSprite(), enemy.hitbox.getX(), enemy.hitbox.y);
         }
-
 
         for (Spells p : projectiles) {
             batch.draw(p.getSprite(), p.getPosition().x, p.getPosition().y);
@@ -126,14 +111,7 @@ public class PlayState extends State {
         batch.draw(pause, 115, 115, 10, 10);
         healthBar.render(batch);
         manaBar.render(batch);
-
-
-
-
-
         batch.end();
-
-
     }
 
 

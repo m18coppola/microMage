@@ -5,6 +5,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.project.game.entities.Player;
+import com.project.game.states.EndGameState;
+import com.project.game.states.GameStateManager;
+
 
 public class HealthBar extends Thread {
     private Sprite filledHeart;
