@@ -1,9 +1,11 @@
 package com.project.game.entities;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.project.game.Animation;
 import com.project.game.ResourceLoader;
+import com.project.game.SoundEffect;
 import com.project.game.entities.tiles.Tile;
 import com.project.game.entities.tiles.Wall;
 import com.project.game.states.PlayState;
@@ -22,10 +24,11 @@ public class Player extends Entity {
     Animation idle;
     Animation attack;
     static final int SPEED = 100;
-    boolean attacking;
+    static boolean attacking;
     Vector2 center;
     float manaRegen;
-    Spells spellType;
+    static Spells spellType;
+    static SoundEffect spellSound;
 
 
     Vector2 oldPos;
@@ -36,6 +39,7 @@ public class Player extends Entity {
         attacking = false;
         health = 3;
         mana = MAX_MANA;
+        spellSound = new SoundEffect(ResourceLoader.loadEmptyManaSound());
 
 
         walk = new Animation(ResourceLoader.loadWizardWalk(), 0.06f);
@@ -148,10 +152,14 @@ public class Player extends Entity {
         double angle = Math.atan2((y - center.y), (x - center.x));
         if (currSpell == 1) {
             spellType = new SnowBall(angle, new Vector2(center.x, center.y));
+            spellSound.setSound(ResourceLoader.loadSnowballSound());
+
         } else if (currSpell == 2) {
             spellType = new FireBall(angle, new Vector2(center.x, center.y));
+            spellSound.setSound(ResourceLoader.loadFireballSound());
         } else if (currSpell == 3) {
             spellType = new LightningBolt(angle, new Vector2(center.x, center.y));
+            spellSound.setSound(ResourceLoader.loadLightningBoltSound());
         }
         if (mana > 0 && mana >= spellType.getManaUsage()) {
             PlayState.addProjectile(spellType);
@@ -161,7 +169,9 @@ public class Player extends Entity {
             attack.resetFrames();
         } else {
             attacking = false;
+            spellSound.setSound(ResourceLoader.loadEmptyManaSound());
         }
+        spellSound.playSound();
     }
 
     public static int getHealth() {
@@ -184,6 +194,10 @@ public class Player extends Entity {
         }
     }
 
+    public static Spells getSpellType(){ return spellType;}
+
+    public static Boolean isAttacking(){return attacking;}
+
     public Vector2 getCenter() {
         return hitbox.getCenter(center);
     }
@@ -193,6 +207,7 @@ public class Player extends Entity {
         walk.dispose();
         attack.dispose();
         idle.dispose();
+        spellSound.dispose();
     }
 
 
