@@ -151,6 +151,8 @@ public class Player extends Entity {
             if(t instanceof Goal) {
                 if (this.collidesWith(t) && TileMap.enemies.isEmpty()) {
                     PlayState.nextLevel();
+                    SoundEffect newLevelSound = new SoundEffect(ResourceLoader.loadNewLevelSound());
+                    newLevelSound.playSound();
                 }
             }
         }
@@ -197,7 +199,9 @@ public class Player extends Entity {
             attacking = false;
             spellSound.setSound(ResourceLoader.loadEmptyManaSound());
         }
-        spellSound.playSound();
+        if(PlayState.gsm.peek() instanceof PlayState) {
+            spellSound.playSound();
+        }
     }
 
     public static int getHealth() {

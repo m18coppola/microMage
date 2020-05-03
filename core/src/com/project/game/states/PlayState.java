@@ -50,7 +50,7 @@ public class PlayState extends State {
     public static ArrayList<EnemyProjectiles> removedProjectiles;
     public static ArrayList<Enemy> killedEnemies;
     public static ArrayList<Spells> usedProjectiles;
-    private static GameStateManager gsm;
+    public static GameStateManager gsm;
     private static boolean alt = true;
 
     public PlayState(GameStateManager gsm) {
