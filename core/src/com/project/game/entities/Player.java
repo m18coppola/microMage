@@ -168,7 +168,6 @@ public class Player extends Entity {
         }
 
 
-        System.out.println(velocity);
 
 
         walk.update(dt);
