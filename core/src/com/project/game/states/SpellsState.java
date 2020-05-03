@@ -6,12 +6,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.project.game.ResourceLoader;
 import com.project.game.SoundEffect;
 
-public class InstructionState extends State {
-    Texture instructions;
+public class SpellsState extends State {
+    Texture spells;
 
-    public InstructionState(GameStateManager gsm) {
+    public SpellsState(GameStateManager gsm) {
         super(gsm);
-        instructions = new Texture("UI/instructions.png");
+        spells = new Texture("UI/spells.png");
     }
 
     @Override
@@ -19,20 +19,20 @@ public class InstructionState extends State {
         if (Gdx.input.justTouched()) {
             SoundEffect startGameSound = new SoundEffect(ResourceLoader.loadPauseSound());
             startGameSound.playSound();
-            gsm.set(new SpellsState(gsm));
+            gsm.set(new PlayState(gsm));
         }
     }
 
     @Override
     public void render(SpriteBatch batch) {
         batch.begin();
-        batch.draw(instructions, 250 - instructions.getWidth() / 2, 0);
+        batch.draw(spells, 255 - spells.getWidth() / 2, 0);
         batch.end();
 
     }
 
     @Override
     public void dispose() {
-        instructions.dispose();
+        spells.dispose();
     }
 }
