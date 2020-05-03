@@ -180,6 +180,12 @@ public class ResourceLoader {
     public static Sound loadLightningBoltSound() {return Gdx.audio.newSound(Gdx.files.internal("sfx/Lightning.mp3"));}
 
 
+    public static Sound loadPauseSound() {return Gdx.audio.newSound(Gdx.files.internal("sfx/PauseSound.mp3"));}
+
+    public static Sound loadGameOver() {return Gdx.audio.newSound(Gdx.files.internal("sfx/GameOver.mp3"));}
+
+    //public static Sound loadStartSound() {return Gdx.audio.newSound(Gdx.files.internal("sfx/StartGame.mp3"));}
+
 }
 
 

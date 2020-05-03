@@ -3,6 +3,8 @@ package com.project.game.states;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.project.game.ResourceLoader;
+import com.project.game.SoundEffect;
 
 public class MenuState extends State {
     Texture playBtn;
@@ -20,6 +22,8 @@ public class MenuState extends State {
     @Override
     public void update(float dt) {
         if (Gdx.input.justTouched()) {
+            SoundEffect startGameSound = new SoundEffect(ResourceLoader.loadPauseSound());
+            startGameSound.playSound();
             gsm.set(new PlayState(gsm));
         }
     }

@@ -80,6 +80,8 @@ public class PlayState extends State {
     public void update(float dt) {
         if (Player.getHealth() == 0) {
             gsm.set(new EndGameState(gsm));
+            SoundEffect gameOver = new SoundEffect(ResourceLoader.loadGameOver());
+            gameOver.playSound();
         }
         dt = Gdx.graphics.getDeltaTime();
         player.update(dt);

@@ -84,6 +84,8 @@ public class Controller extends InputAdapter {
             Vector3 mousePos = PlayState.cam.unproject(new Vector3(x, y, 0));
             if (x >= 468 && x <= 493 && y >= 7 && y <= 34) {
                 PlayState.isPaused = !PlayState.isPaused;
+                SoundEffect pauseSound = new SoundEffect(ResourceLoader.loadPauseSound());
+                pauseSound.playSound();
             } else if(!PlayState.isPaused){
                 player.shoot((int) mousePos.x, (int) mousePos.y);
             }
