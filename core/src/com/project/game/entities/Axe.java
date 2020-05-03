@@ -13,6 +13,7 @@ public class Axe extends EnemyProjectiles {
     public static final int WIDTH = 8;
     public static final int HEIGHT = 9;
     public static final int SPEED = 100;
+    public static final float ROTATION_SPEED = 20;
 
 
     public Axe(double angle, Vector2 position) {
@@ -26,7 +27,7 @@ public class Axe extends EnemyProjectiles {
     }
 
     public void update(float dt) {
-
+        sprite.rotate(ROTATION_SPEED);
         hitbox.setPosition(hitbox.getX() + velocity.x * dt,
                 hitbox.getY() + velocity.y * dt);
         for (Tile t : PlayState.tileMap.tiles) {
