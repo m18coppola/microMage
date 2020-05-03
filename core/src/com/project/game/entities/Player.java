@@ -150,9 +150,11 @@ public class Player extends Entity {
         for(Tile t : PlayState.tileMap.tiles){
             if(t instanceof Goal) {
                 if (this.collidesWith(t) && TileMap.enemies.isEmpty()) {
+                    PlayState.getDungeonMusic().dispose();
                     PlayState.nextLevel();
                     SoundEffect newLevelSound = new SoundEffect(ResourceLoader.loadNewLevelSound());
                     newLevelSound.playSound();
+                    PlayState.getDungeonMusic().playSound();
                 }
             }
         }

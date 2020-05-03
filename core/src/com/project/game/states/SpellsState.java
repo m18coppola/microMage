@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.project.game.ResourceLoader;
 import com.project.game.SoundEffect;
+import com.project.game.states.MenuState;
+
 
 public class SpellsState extends State {
     Texture spells;
@@ -19,6 +21,7 @@ public class SpellsState extends State {
         if (Gdx.input.justTouched()) {
             SoundEffect startGameSound = new SoundEffect(ResourceLoader.loadPauseSound());
             startGameSound.playSound();
+            MenuState.getMenuMusic().dispose();
             gsm.set(new PlayState(gsm));
         }
     }

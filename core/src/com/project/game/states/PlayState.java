@@ -52,7 +52,7 @@ public class PlayState extends State {
     public static ArrayList<Spells> usedProjectiles;
     public static GameStateManager gsm;
     private static boolean alt = true;
-    SoundEffect dungeonMusic = new SoundEffect(ResourceLoader.loadDungeonMusic());
+    public static SoundEffect dungeonMusic = new SoundEffect(ResourceLoader.loadDungeonMusic());
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
@@ -83,7 +83,6 @@ public class PlayState extends State {
         removedProjectiles = new ArrayList<EnemyProjectiles>();
         killedEnemies = new ArrayList<Enemy>();
         usedProjectiles = new ArrayList<Spells>();
-
 
         dungeonMusic.playSound();
 
@@ -173,6 +172,8 @@ public class PlayState extends State {
     public static void addEnemyProjectile(EnemyProjectiles f) {
         enemyProjectiles.add(f);
     }
+
+    public static SoundEffect getDungeonMusic() { return dungeonMusic; }
 
 
     @Override
