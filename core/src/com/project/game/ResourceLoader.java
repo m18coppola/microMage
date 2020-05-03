@@ -142,13 +142,14 @@ public class ResourceLoader {
     }
 
     static Texture tiles = new Texture("tilesets/topdown.png");
+    static Texture altTiles = new Texture("tilesets/topdown_jungle.png");
 
-    public static Sprite loadWall() {
-        return new Sprite(new TextureRegion(tiles, 20, 8, Tile.DIM, Tile.DIM));
+    public static Sprite loadWall(boolean alt) {
+        return new Sprite(new TextureRegion((alt) ? tiles : altTiles, 20, 8, Tile.DIM, Tile.DIM));
     }
 
 
-    public static Sprite[] loadFloorTiles() {
+    public static Sprite[] loadFloorTiles(boolean alt) {
         int y = 24;
         int x = 0;
         int i = 0;
@@ -156,7 +157,7 @@ public class ResourceLoader {
         Sprite[] sprites = new Sprite[20];
         for (int xCount = 0; xCount < 5; xCount++) {
             for (int yCount = 0; yCount < 4; yCount++) {
-                sprites[i] = new Sprite(new TextureRegion(tiles, xCount * Tile.DIM + x, yCount * Tile.DIM + y, Tile.DIM, Tile.DIM));
+                sprites[i] = new Sprite(new TextureRegion((alt) ? tiles : altTiles, xCount * Tile.DIM + x, yCount * Tile.DIM + y, Tile.DIM, Tile.DIM));
                 i++;
             }
         }

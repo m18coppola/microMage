@@ -50,7 +50,7 @@ public class PlayState extends State {
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
-        tileMap = new TileMap();
+        tileMap = new TileMap(false);
         projectiles = new ArrayList<Spells>();
         player = new Player(tileMap.playerSpawn.x, tileMap.playerSpawn.y);
         healthBar = new HealthBar(player);

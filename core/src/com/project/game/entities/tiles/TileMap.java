@@ -23,6 +23,7 @@ public class TileMap {
     private static Random rand = new Random();
     public Vector2 playerSpawn = new Vector2();
     public static ArrayList<Enemy> enemies;
+    private boolean alt;
 
     final int MAX_WALKERS = 10;
     final float PERCENT_TO_FILL = 0.25f;
@@ -37,7 +38,8 @@ public class TileMap {
         }
     }
 
-    public TileMap() {
+    public TileMap(boolean alt) {
+        this.alt = alt;
         setup();
         CreateFloors();
         CreateWalls();
@@ -52,10 +54,10 @@ public class TileMap {
                 Tile newTile = null;
                 switch (grid[x][y]) {
                     case wall:
-                        newTile = new Wall(x * 16, y * 16);
+                        newTile = new Wall(x * 16, y * 16, alt);
                         break;
                     case floor:
-                        newTile = new Floor(x * 16, y * 16);
+                        newTile = new Floor(x * 16, y * 16, alt);
                         newTile.hitbox.getPosition(playerSpawn);
                         if(rand.nextFloat() < ENEMY_SPAWN_CHANCE){
                             enemies.add((rand.nextFloat() >= 0.5)?new Barbarian(x * 16, y * 16):new Troll(x * 16, y * 16));
@@ -69,6 +71,7 @@ public class TileMap {
     }
 
     private void setup() {
+
         grid = new GridSpace[WIDTH][HEIGHT];
         enemies  = new ArrayList<Enemy>();
 
