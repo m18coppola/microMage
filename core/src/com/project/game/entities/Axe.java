@@ -3,6 +3,8 @@ package com.project.game.entities;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.project.game.ResourceLoader;
+import com.project.game.entities.tiles.Tile;
+import com.project.game.entities.tiles.Wall;
 import com.project.game.states.PlayState;
 
 public class Axe extends EnemyProjectiles {
@@ -28,7 +30,13 @@ public class Axe extends EnemyProjectiles {
 
         hitbox.setPosition(hitbox.getX() + velocity.x * dt,
                 hitbox.getY() + velocity.y * dt);
-
+        for (Tile t : PlayState.tileMap.tiles) {
+            if (t instanceof Wall) {
+                if (this.collidesWith(t)) {
+                    PlayState.removedProjectiles.add(this);
+                }
+            }
+        }
 
     }
 

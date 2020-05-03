@@ -44,7 +44,7 @@ public class PlayState extends State {
     public static TileMap tileMap;
 
     public static ArrayList<EnemyProjectiles> enemyProjectiles;
-
+    public static ArrayList<EnemyProjectiles> removedProjectiles;
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
@@ -66,6 +66,8 @@ public class PlayState extends State {
         pause = new Texture("UI/pause.png");
         isPaused = false;
         enemyProjectiles = new ArrayList<EnemyProjectiles>();
+        removedProjectiles = new ArrayList<EnemyProjectiles>();
+
 
 
     }
