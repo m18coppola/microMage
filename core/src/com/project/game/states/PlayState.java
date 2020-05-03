@@ -87,7 +87,12 @@ public class PlayState extends State {
 
         for (EnemyProjectiles ep : enemyProjectiles) {
             ep.update(dt);
+
         }
+        for (int i = 0; i < removedProjectiles.size(); i++) {
+            enemyProjectiles.remove(removedProjectiles.get(i));
+        }
+        removedProjectiles = new ArrayList<EnemyProjectiles>();
 
         for (Enemy enemy : tileMap.enemies) {
             enemy.update(dt);
