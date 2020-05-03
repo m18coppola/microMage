@@ -24,7 +24,7 @@ public class Troll extends Enemy {
     boolean movement = false;
     public float duration = 0.4f;
     public float elapsed = 0.0f;
-    public int health = 100;
+    public int health = 90;
 
     public Troll(int x, int y) {
 
