@@ -145,6 +145,7 @@ public class ResourceLoader {
         return new Sprite(new TextureRegion(tiles, 20, 8, Tile.DIM, Tile.DIM));
     }
 
+
     public static Sprite[] loadFloorTiles() {
         int y = 24;
         int x = 0;

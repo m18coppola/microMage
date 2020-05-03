@@ -86,6 +86,10 @@ public class PlayState extends State {
         for (EnemyProjectiles ep : enemyProjectiles) {
             ep.update(dt);
         }
+
+        for (Enemy enemy : tileMap.enemies) {
+            enemy.update(dt);
+        }
     }
 
 
@@ -102,6 +106,10 @@ public class PlayState extends State {
         for (Tile t : tileMap.tiles) {
             if (t != null)
                 batch.draw(t.getSprite(), t.getPosition().x, t.getPosition().y, 16, 16);
+        }
+
+        for (Enemy enemy : tileMap.enemies) {
+            batch.draw(enemy.getSprite(), enemy.hitbox.getX(), enemy.hitbox.y);
         }
 
 

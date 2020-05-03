@@ -1,6 +1,9 @@
 package com.project.game.entities.tiles;
 
 import com.badlogic.gdx.math.Vector2;
+import com.project.game.entities.Barbarian;
+import com.project.game.entities.Enemy;
+import com.project.game.entities.Troll;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -16,8 +19,10 @@ public class TileMap {
     final float CHANCE_WALKER_CHANGE_DIR = 0.5f;
     final float CHANCE_WALKER_SPAWN = 0.05f;
     final float CHANCE_WALKER_DESTROY = 0.05f;
+    final float ENEMY_SPAWN_CHANCE = 0.05f;
     private static Random rand = new Random();
     public Vector2 playerSpawn = new Vector2();
+    public ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 
     final int MAX_WALKERS = 10;
     final float PERCENT_TO_FILL = 0.25f;
@@ -52,6 +57,9 @@ public class TileMap {
                     case floor:
                         newTile = new Floor(x * 16, y * 16);
                         newTile.hitbox.getPosition(playerSpawn);
+                        if(rand.nextFloat() < ENEMY_SPAWN_CHANCE){
+                            enemies.add((rand.nextFloat() > 0.5)?new Barbarian(x * 16, y * 16):new Troll(x * 16, y * 16));
+                        }
                         break;
                 }
                 tiles[i] = newTile;
