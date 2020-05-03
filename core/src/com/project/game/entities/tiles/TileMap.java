@@ -58,7 +58,7 @@ public class TileMap {
                         newTile = new Floor(x * 16, y * 16);
                         newTile.hitbox.getPosition(playerSpawn);
                         if(rand.nextFloat() < ENEMY_SPAWN_CHANCE){
-                            enemies.add((rand.nextFloat() > 0.5)?new Barbarian(x * 16, y * 16):new Troll(x * 16, y * 16));
+                            enemies.add((rand.nextFloat() >= 0.5)?new Barbarian(x * 16, y * 16):new Troll(x * 16, y * 16));
                         }
                         break;
                 }

@@ -116,6 +116,11 @@ public class PlayState extends State {
         for (Spells p : projectiles) {
             batch.draw(p.getSprite(), p.getPosition().x, p.getPosition().y);
         }
+        for (EnemyProjectiles ep : enemyProjectiles) {
+            ep.getSprite().setPosition(ep.getPosition().x, ep.getPosition().y);
+            ep.getSprite().draw(batch);
+
+        }
         batch.draw(player.getSprite(), player.getPosition().x - 5, player.getPosition().y);
         batch.setProjectionMatrix(UIcam.combined);
         batch.draw(pause, 115, 115, 10, 10);
@@ -123,10 +128,7 @@ public class PlayState extends State {
         manaBar.render(batch);
 
 
-        for (EnemyProjectiles ep : enemyProjectiles) {
-            ep.getSprite().setPosition(ep.getPosition().x, ep.getPosition().y);
-            ep.getSprite().draw(batch);
-        }
+
 
 
         batch.end();

@@ -32,6 +32,7 @@ public class Barbarian extends Enemy {
         walk = new Animation(ResourceLoader.loadBarbarianWalk(), 0.06f);
         attack = new Animation(ResourceLoader.loadBarbarianAttack(), 0.1f);
         velocity = new Vector2(0, 0);
+        target = new Vector2();
     }
 
 
@@ -83,9 +84,11 @@ public class Barbarian extends Enemy {
         }
 
         if (attacking) {
-            center = hitbox.getCenter(center);
+            hitbox.getCenter(center);
             double angle = Math.atan2((y - center.y), (x - center.x));
             Axe axe = new Axe(angle, new Vector2(center.x, center.y));
+            System.out.println(axe.getPosition());
+            System.out.println(this.position);
             PlayState.addEnemyProjectile(axe);
 
         }
@@ -95,8 +98,8 @@ public class Barbarian extends Enemy {
     @Override
     public void update(float dt) {
 
-        center = hitbox.getCenter(center);
-        target = PlayState.player.hitbox.getCenter(PlayState.player.center);
+        hitbox.getCenter(center);
+        PlayState.player.hitbox.getCenter(target);
         this.idle.update(dt);
         this.attack.update(dt);
         if (center.dst(target) < attackRange) {
