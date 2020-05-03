@@ -11,11 +11,10 @@ public class SnowBall extends Spells {
     public static final int WIDTH = 8;
     public static final int HEIGHT = 8;
     public static final int SPEED = 150;
-    public static final int DAMAGE = 10;
     public static final int MANA = 1;
 
     public SnowBall(double angle, Vector2 position) {
-        super(angle, position, SPEED, WIDTH, HEIGHT, DAMAGE, MANA, ResourceLoader.loadSnowBall());
+        super(angle, position, SPEED, WIDTH, HEIGHT,MANA, ResourceLoader.loadSnowBall());
     }
 
 
