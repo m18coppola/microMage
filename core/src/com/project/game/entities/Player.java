@@ -8,10 +8,12 @@ import com.project.game.ResourceLoader;
 import com.project.game.SoundEffect;
 import com.project.game.entities.tiles.Goal;
 import com.project.game.entities.tiles.Tile;
+import com.project.game.entities.tiles.TileMap;
 import com.project.game.entities.tiles.Wall;
 import com.project.game.states.PlayState;
 
 import static com.project.game.states.PlayState.currSpell;
+import static com.project.game.states.PlayState.tileMap;
 
 public class Player extends Entity {
     public enum Direction{N,S,E,W}
@@ -147,7 +149,7 @@ public class Player extends Entity {
         //check goal collision
         for(Tile t : PlayState.tileMap.tiles){
             if(t instanceof Goal) {
-                if (this.collidesWith(t)) {
+                if (this.collidesWith(t) && TileMap.enemies.isEmpty()) {
                     PlayState.nextLevel();
                 }
             }

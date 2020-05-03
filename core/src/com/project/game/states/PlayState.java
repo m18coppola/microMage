@@ -15,10 +15,7 @@ import com.project.game.*;
 import com.project.game.entities.FireBall;
 import com.project.game.entities.Player;
 import com.project.game.entities.Spells;
-import com.project.game.entities.tiles.Floor;
-import com.project.game.entities.tiles.Tile;
-import com.project.game.entities.tiles.TileMap;
-import com.project.game.entities.tiles.Wall;
+import com.project.game.entities.tiles.*;
 
 import com.project.game.entities.*;
 
@@ -129,6 +126,7 @@ public class PlayState extends State {
         batch.setProjectionMatrix(cam.combined);
         for (Tile t : tileMap.tiles) {
             if (t != null)
+                if(!(t instanceof Goal) || TileMap.enemies.isEmpty())
                 batch.draw(t.getSprite(), t.getPosition().x, t.getPosition().y, 16, 16);
         }
 
