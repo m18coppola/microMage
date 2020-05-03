@@ -18,7 +18,7 @@ import java.util.Timer;
 
 public class Game extends ApplicationAdapter {
     SpriteBatch batch;
-    GameStateManager gsm;
+    static GameStateManager gsm;
 
 
     @Override

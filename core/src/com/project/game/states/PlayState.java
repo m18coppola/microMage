@@ -27,25 +27,25 @@ import java.util.ArrayList;
 public class PlayState extends State {
 
     public static OrthographicCamera cam;
-
     public static OrthographicCamera UIcam;
     public static Player player;
-
     Controller controller;
     Texture pause;
 
+
     public static ArrayList<Spells> projectiles;
+
+
     static HealthBar healthBar;
     public static boolean isPaused;
     static ManaBar manaBar;
     static RegenMana regenMana;
     public static int currSpell;
-
     public static TileMap tileMap;
-
     public static ArrayList<EnemyProjectiles> enemyProjectiles;
     public static ArrayList<EnemyProjectiles> removedProjectiles;
     public static ArrayList<Enemy> killedEnemies;
+    public static ArrayList<Spells> usedProjectiles;
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
@@ -67,16 +67,19 @@ public class PlayState extends State {
         pause = new Texture("UI/pause.png");
         isPaused = false;
         enemyProjectiles = new ArrayList<EnemyProjectiles>();
+
         removedProjectiles = new ArrayList<EnemyProjectiles>();
         killedEnemies = new ArrayList<Enemy>();
+        usedProjectiles = new ArrayList<Spells>();
 
 
     }
 
     @Override
     public void update(float dt) {
-
-
+        if (Player.getHealth() == 0) {
+            gsm.set(new EndGameState(gsm));
+        }
         dt = Gdx.graphics.getDeltaTime();
         player.update(dt);
         for (Spells p : projectiles) {
@@ -85,15 +88,14 @@ public class PlayState extends State {
 
         cam.position.set(player.getCenter(), 0);
         cam.update();
-
         for (EnemyProjectiles ep : enemyProjectiles) {
-            ep.update(dt);
-
-        }
+            ep.update(dt);        }
         for (int i = 0; i < removedProjectiles.size(); i++) {
             enemyProjectiles.remove(removedProjectiles.get(i));
         }
+
         removedProjectiles = new ArrayList<EnemyProjectiles>();
+
 
         for (Enemy enemy : tileMap.enemies) {
             enemy.update(dt);
@@ -102,20 +104,19 @@ public class PlayState extends State {
             tileMap.enemies.remove(killedEnemies.get(i));
         }
         killedEnemies = new ArrayList<Enemy>();
+        for (int i = 0; i < usedProjectiles.size(); i++) {
+            projectiles.remove(usedProjectiles.get(i));
+        }
+        usedProjectiles =  new ArrayList<Spells>();
 
     }
 
 
     @Override
     public void render(SpriteBatch batch) {
-
-
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         batch.begin();
         batch.setProjectionMatrix(cam.combined);
-
-
         for (Tile t : tileMap.tiles) {
             if (t != null)
                 batch.draw(t.getSprite(), t.getPosition().x, t.getPosition().y, 16, 16);
@@ -124,7 +125,6 @@ public class PlayState extends State {
         for (Enemy enemy : tileMap.enemies) {
             batch.draw(enemy.getSprite(), enemy.hitbox.getX(), enemy.hitbox.y);
         }
-
 
         for (Spells p : projectiles) {
             batch.draw(p.getSprite(), p.getPosition().x, p.getPosition().y);
@@ -139,14 +139,7 @@ public class PlayState extends State {
         batch.draw(pause, 115, 115, 10, 10);
         healthBar.render(batch);
         manaBar.render(batch);
-
-
-
-
-
         batch.end();
-
-
     }
 
 

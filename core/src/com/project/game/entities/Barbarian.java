@@ -126,7 +126,6 @@ public class Barbarian extends Enemy {
             }
         }
 
-
     }
 
     @Override
