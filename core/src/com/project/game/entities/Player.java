@@ -127,6 +127,16 @@ public class Player extends Entity {
             }
         }
 
+        //check for projectile collision
+        for(int i = 0; i < PlayState.enemyProjectiles.size(); i++){
+            EnemyProjectiles ep = PlayState.enemyProjectiles.get(i);
+            if(ep.collidesWith(this)){
+                this.setHealth(getHealth()-1);
+                PlayState.enemyProjectiles.remove(ep);
+                i--;
+            }
+        }
+
 
         walk.update(dt);
         idle.update(dt);

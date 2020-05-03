@@ -43,7 +43,7 @@ public class PlayState extends State {
 
     public static TileMap tileMap;
 
-    static ArrayList<EnemyProjectiles> enemyProjectiles;
+    public static ArrayList<EnemyProjectiles> enemyProjectiles;
 
 
     public PlayState(GameStateManager gsm) {
