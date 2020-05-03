@@ -23,7 +23,6 @@ public class Game extends ApplicationAdapter {
 
     @Override
     public void create () {
-
         batch = new SpriteBatch();
         gsm = new GameStateManager();
         gsm.push(new MenuState(gsm));

@@ -141,6 +141,8 @@ public class PlayState extends State {
         healthBar.render(batch);
         manaBar.render(batch);
         batch.end();
+
+
     }
 
 

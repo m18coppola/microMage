@@ -8,8 +8,8 @@ import com.project.game.ResourceLoader;
 
 public class SnowBall extends Spells {
 
-    public static final int WIDTH = 12;
-    public static final int HEIGHT = 12;
+    public static final int WIDTH = 8;
+    public static final int HEIGHT = 8;
     public static final int SPEED = 150;
     public static final int DAMAGE = 10;
     public static final int MANA = 1;
