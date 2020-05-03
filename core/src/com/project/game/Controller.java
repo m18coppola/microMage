@@ -37,25 +37,23 @@ public class Controller extends InputAdapter {
                 player.move(Player.Direction.E, true);
                 break;
             case Input.Keys.NUM_1:
-                if (currSpell != 1) {
                     //SnowBall spell
                     currSpell = 1;
                     break;
-                }
+
             case Input.Keys.NUM_2:
-                if (currSpell != 2) {
                     //FireBall spell
                     currSpell = 2;
                     break;
-                }
+
             case Input.Keys.NUM_3:
-                if (currSpell != 3) {
                     //Lightning Spell
                     currSpell = 3;
                     break;
-                }
+
             case Input.Keys.ESCAPE:
                 Gdx.app.exit();
+                break;
         }
         return true;
     }
