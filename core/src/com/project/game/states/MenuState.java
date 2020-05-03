@@ -24,7 +24,7 @@ public class MenuState extends State {
         if (Gdx.input.justTouched()) {
             SoundEffect startGameSound = new SoundEffect(ResourceLoader.loadPauseSound());
             startGameSound.playSound();
-            gsm.set(new PlayState(gsm));
+            gsm.set(new InstructionState(gsm));
         }
     }
 
