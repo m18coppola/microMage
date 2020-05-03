@@ -141,6 +141,7 @@ public class Troll extends Enemy {
             }
             if (this.health <= 0) {
                 PlayState.killedEnemies.add(this);
+                Player.setMana(Player.mana + 1);
             }
         }
 
