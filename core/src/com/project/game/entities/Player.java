@@ -197,7 +197,9 @@ public class Player extends Entity {
             attacking = false;
             spellSound.setSound(ResourceLoader.loadEmptyManaSound());
         }
-        spellSound.playSound();
+        if(PlayState.gsm.peek() instanceof PlayState) {
+            spellSound.playSound();
+        }
     }
 
     public static int getHealth() {
