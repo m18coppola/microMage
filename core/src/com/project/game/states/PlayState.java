@@ -86,10 +86,8 @@ public class PlayState extends State {
         cam.setToOrtho(false, 125, 125);
         UIcam = new OrthographicCamera();
         UIcam.setToOrtho(false, 125, 125);
-        Gdx.gl.glClearColor(41f / 255f, 30f / 255f, 49f / 255f, 1);
-        if(alt){
-            Gdx.gl.glClearColor(49f / 255f, 30f / 255f, 30f / 255f, 1);
-        }
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+
         Gdx.input.setInputProcessor(new Controller(player));
         pause = new Texture("UI/pause.png");
         isPaused = false;
