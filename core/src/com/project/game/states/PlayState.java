@@ -65,10 +65,12 @@ public class PlayState extends State {
     FreeTypeFontGenerator.FreeTypeFontParameter parameter;
     BitmapFont font30;
     GlyphLayout gl;
+    boolean gameReady;
 
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
+        gameReady = false;
         this.gsm = gsm;
         tileMap = new TileMap(alt);
         alt = !alt;
@@ -120,6 +122,7 @@ public class PlayState extends State {
             dungeonMusic2.playSound();
             dungeonMusic2.loop();
         }
+        gameReady = true;
     }
 
     public static void nextLevel() {
@@ -141,7 +144,9 @@ public class PlayState extends State {
             gameOver.playSound();
         }
         dt = Gdx.graphics.getDeltaTime();
-        player.update(dt);
+        if(gameReady) {
+            player.update(dt);
+        }
         for (Spells p : projectiles) {
             p.update(dt);
         }
