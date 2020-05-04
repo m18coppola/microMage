@@ -56,7 +56,6 @@ public class PlayState extends State {
     public static ArrayList<Spells> usedProjectiles;
     public static GameStateManager gsm;
     private static boolean alt = true;
-    RayCaster rc;
 
 
     public static SoundEffect dungeonMusic1 = new SoundEffect(ResourceLoader.loadDungeonMusic1());
@@ -104,7 +103,6 @@ public class PlayState extends State {
             }
         }
 
-        rc = new RayCaster(walls);
 
 
         generator = new FreeTypeFontGenerator(Gdx.files.internal("UI/Boxy-Bold.ttf"));
@@ -197,8 +195,6 @@ public class PlayState extends State {
         }
         batch.draw(player.getSprite(), player.getPosition().x - 5, player.getPosition().y);
 
-        rc.update(player.getCenter());
-        batch.draw(rc.getShadow(player.getCenter()),0,0,500,500);
 
         batch.setProjectionMatrix(UIcam.combined);
 
