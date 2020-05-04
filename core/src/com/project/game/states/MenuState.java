@@ -10,12 +10,15 @@ public class MenuState extends State {
     Texture playBtn;
     Texture background;
     Texture title;
+    public static SoundEffect menuMusic = new SoundEffect(ResourceLoader.loadMenuMusic());
+
 
     public MenuState(GameStateManager gsm) {
         super(gsm);
         background = new Texture("UI/background.bmp");
         playBtn = new Texture("UI/playbtn.png");
         title = new Texture("UI/microMage.png");
+        menuMusic.playSound();
     }
 
     @Override
@@ -42,4 +45,7 @@ public class MenuState extends State {
         title.dispose();
         playBtn.dispose();
     }
-}
+
+    public static SoundEffect getMenuMusic() { return menuMusic; }
+
+    }

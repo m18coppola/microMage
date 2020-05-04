@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Vector2;
@@ -57,7 +58,14 @@ public class PlayState extends State {
     private static boolean alt = true;
     RayCaster rc;
 
-    SoundEffect dungeonMusic = new SoundEffect(ResourceLoader.loadDungeonMusic());
+
+    public static SoundEffect dungeonMusic1 = new SoundEffect(ResourceLoader.loadDungeonMusic1());
+    public static SoundEffect dungeonMusic2 = new SoundEffect(ResourceLoader.loadDungeonMusic2());
+    FreeTypeFontGenerator generator;
+    FreeTypeFontGenerator.FreeTypeFontParameter parameter;
+    BitmapFont font30;
+    GlyphLayout gl;
+
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
@@ -97,10 +105,22 @@ public class PlayState extends State {
         }
 
         rc = new RayCaster(walls);
-        sr = new ShapeRenderer();
 
 
-        dungeonMusic.playSound();
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("UI/Boxy-Bold.ttf"));
+        parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 8;
+        font30 = generator.generateFont(parameter);
+        gl = new GlyphLayout();
+        gl.setText(font30, "");
+        if(alt == true) {
+            dungeonMusic1.playSound();
+            dungeonMusic1.loop();
+        }
+        else if(alt == false) {
+            dungeonMusic2.playSound();
+            dungeonMusic2.loop();
+        }
 
     }
 
@@ -112,7 +132,12 @@ public class PlayState extends State {
     @Override
     public void update(float dt) {
         if (Player.getHealth() == 0) {
-            dungeonMusic.dispose();
+            if(alt == true) {
+                dungeonMusic1.stopSound();
+            }
+            else if(alt == false) {
+                dungeonMusic2.stopSound();
+            }
             gsm.set(new EndGameState(gsm));
             SoundEffect gameOver = new SoundEffect(ResourceLoader.loadGameOver());
             gameOver.playSound();
@@ -133,7 +158,6 @@ public class PlayState extends State {
 
         removedProjectiles = new ArrayList<EnemyProjectiles>();
 
-
         for (Enemy enemy : tileMap.enemies) {
             enemy.update(dt);
         }
@@ -148,7 +172,6 @@ public class PlayState extends State {
 
 
     }
-
 
     @Override
     public void render(SpriteBatch batch) {
@@ -183,15 +206,9 @@ public class PlayState extends State {
         batch.draw(pause, 115, 115, 10, 10);
         healthBar.render(batch);
         manaBar.render(batch);
+        gl.setText(font30, "Enemies Left: " + TileMap.enemiesLeft);
+        font30.draw(batch,gl, 0, 125);
         batch.end();
-
-
-
-
-
-
-
-
 
     }
 
@@ -203,6 +220,17 @@ public class PlayState extends State {
     public static void addEnemyProjectile(EnemyProjectiles f) {
         enemyProjectiles.add(f);
     }
+
+    public static SoundEffect getDungeonMusic() {
+        if(alt == true) {
+            return dungeonMusic1;
+        }
+        else  {
+            return dungeonMusic2;
+        }
+    }
+
+
 
 
     @Override

@@ -35,6 +35,7 @@ public class Player extends Entity {
     float manaRegen;
     static Spells spellType;
     static SoundEffect spellSound;
+    public static int enemiesKilled = 0;
 
 
     Vector2 oldPos;
@@ -150,6 +151,7 @@ public class Player extends Entity {
         for(Tile t : PlayState.tileMap.tiles){
             if(t instanceof Goal) {
                 if (this.collidesWith(t) && TileMap.enemies.isEmpty()) {
+                    PlayState.getDungeonMusic().stopSound();
                     PlayState.nextLevel();
                     SoundEffect newLevelSound = new SoundEffect(ResourceLoader.loadNewLevelSound());
                     newLevelSound.playSound();
@@ -240,6 +242,4 @@ public class Player extends Entity {
         idle.dispose();
         spellSound.dispose();
     }
-
-
 }

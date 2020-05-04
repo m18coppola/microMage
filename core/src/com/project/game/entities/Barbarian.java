@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.project.game.Animation;
 import com.project.game.ResourceLoader;
 import com.project.game.SoundEffect;
+import com.project.game.entities.tiles.TileMap;
 import com.project.game.states.PlayState;
 
 public class Barbarian extends Enemy {
@@ -146,6 +147,8 @@ public class Barbarian extends Enemy {
             if (this.health <= 0) {
                 PlayState.killedEnemies.add(this);
                 Player.setMana(Player.mana + 1);
+                Player.enemiesKilled += 1;
+                TileMap.enemiesLeft--;
             }
         }
     }

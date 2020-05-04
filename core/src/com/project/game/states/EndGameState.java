@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.project.game.entities.Player;
 
 
 public class EndGameState extends State {
@@ -48,7 +49,9 @@ public class EndGameState extends State {
         batch.begin();
         batch.draw(endGame, 250 - endGame.getWidth()/2,250);
         gl.setText(font30, "Levels Cleared : " + PlayState.score);
-        font30.draw(batch,gl, -1 * gl.width/2 + endGame.getWidth()/2, 200);
+        font30.draw(batch,gl, -1 * gl.width/2 + endGame.getWidth()/2, 240);
+        gl.setText(font30, "Enemies Killed: " + Player.enemiesKilled);
+        font30.draw(batch,gl, -1 * gl.width/2 + endGame.getWidth()/2, 180);
         batch.end();
     }
 
