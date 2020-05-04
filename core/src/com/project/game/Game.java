@@ -34,7 +34,6 @@ public class Game extends ApplicationAdapter {
             gsm.update(Gdx.graphics.getDeltaTime());
             gsm.render(batch);
         }
-
     }
 
     @Override

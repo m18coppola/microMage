@@ -18,7 +18,6 @@ public class MenuState extends State {
         title = new Texture("UI/microMage.png");
     }
 
-
     @Override
     public void update(float dt) {
         if (Gdx.input.justTouched()) {
@@ -35,7 +34,6 @@ public class MenuState extends State {
         batch.draw(playBtn, 250 - playBtn.getWidth() / 2, 275);
         batch.draw(title, 250 - title.getWidth() / 2, 350);
         batch.end();
-
     }
 
     @Override
