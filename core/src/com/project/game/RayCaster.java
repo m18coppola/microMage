@@ -17,13 +17,13 @@ public class RayCaster {
 
     public RayCaster(ArrayList<Wall> walls) {
         this.walls = walls;
-        rays = new Ray[1080];
+        rays = new Ray[720];
 
     }
 
     public void update(Vector2 pos) {
         for (int i = 0; i < rays.length; i++) {
-            rays[i] = new Ray((float)i/3f, walls);
+            rays[i] = new Ray((float)i/2f, walls);
             rays[i].setPosition(new Vector2(pos));
             rays[i].calc();
         }
@@ -61,7 +61,7 @@ public class RayCaster {
     }
 
     class Ray extends Thread {
-        static final float MARCH_SIZE = 1f;
+        static final float MARCH_SIZE = 1.25f;
         private float angle;
         ArrayList<Wall> walls;
         Vector2 position;
@@ -83,7 +83,7 @@ public class RayCaster {
 
         public void calc() {
             int i = 0;
-            while (!found && i < 50) {
+            while (!found && i < 45) {
                 //check if we collided
                 for (Wall w : walls) {
                     if (w.hitbox.contains(position)) {
