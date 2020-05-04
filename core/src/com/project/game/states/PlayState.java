@@ -52,7 +52,8 @@ public class PlayState extends State {
     public static ArrayList<Spells> usedProjectiles;
     public static GameStateManager gsm;
     private static boolean alt = true;
-    public static SoundEffect dungeonMusic = new SoundEffect(ResourceLoader.loadDungeonMusic());
+    public static SoundEffect dungeonMusic1 = new SoundEffect(ResourceLoader.loadDungeonMusic1());
+    public static SoundEffect dungeonMusic2 = new SoundEffect(ResourceLoader.loadDungeonMusic2());
 
 
     public PlayState(GameStateManager gsm) {
@@ -84,8 +85,14 @@ public class PlayState extends State {
         removedProjectiles = new ArrayList<EnemyProjectiles>();
         killedEnemies = new ArrayList<Enemy>();
         usedProjectiles = new ArrayList<Spells>();
-
-        dungeonMusic.playSound();
+        if(alt == true) {
+            dungeonMusic1.playSound();
+            dungeonMusic1.loop();
+        }
+        else if(alt == false) {
+            dungeonMusic2.playSound();
+            dungeonMusic2.loop();
+        }
 
     }
 
@@ -97,7 +104,12 @@ public class PlayState extends State {
     @Override
     public void update(float dt) {
         if (Player.getHealth() == 0) {
-            dungeonMusic.stopSound();
+            if(alt == true) {
+                dungeonMusic1.stopSound();
+            }
+            else if(alt == false) {
+                dungeonMusic2.stopSound();
+            }
             gsm.set(new EndGameState(gsm));
             SoundEffect gameOver = new SoundEffect(ResourceLoader.loadGameOver());
             gameOver.playSound();
@@ -174,15 +186,16 @@ public class PlayState extends State {
         enemyProjectiles.add(f);
     }
 
-    public static SoundEffect getDungeonMusic() { return dungeonMusic; }
-
-    public static void changeMusic() {
-        if(alt == true)
-        {
-
+    public static SoundEffect getDungeonMusic() {
+        if(alt == true) {
+            return dungeonMusic1;
         }
-
+        else  {
+            return dungeonMusic2;
+        }
     }
+
+
 
 
     @Override

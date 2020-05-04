@@ -205,7 +205,9 @@ public class ResourceLoader {
 
     public static Sound loadMenuMusic() { return Gdx.audio.newSound(Gdx.files.internal("sfx/menumusic.wav"));}
 
-    public static Sound loadDungeonMusic() { return Gdx.audio.newSound(Gdx.files.internal("sfx/dungeonmusic.wav"));}
+    public static Sound loadDungeonMusic1() { return Gdx.audio.newSound(Gdx.files.internal("sfx/dungeonmusic1.wav"));}
+
+    public static Sound loadDungeonMusic2() { return Gdx.audio.newSound(Gdx.files.internal("sfx/dungeonmusic2.wav"));}
 
 }
 

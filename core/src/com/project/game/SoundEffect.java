@@ -27,4 +27,6 @@ public class SoundEffect {
     }
 
     public void stopSound() { soundEffect.stop(); }
+
+    public void loop() { soundEffect.loop(); }
 }
