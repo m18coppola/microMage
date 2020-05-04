@@ -28,6 +28,7 @@ public class TileMap {
     private boolean alt;
     public Vector2 goalPos;
     private boolean playerPlaced;
+    public static int enemiesLeft = 0;
 
     final int MAX_WALKERS = 10;
     final float PERCENT_TO_FILL = 0.25f;
@@ -44,6 +45,7 @@ public class TileMap {
 
     public TileMap(boolean alt) {
         this.alt = alt;
+        enemiesLeft = 0;
         setup();
         CreateFloors();
         CreateWalls();
@@ -82,6 +84,7 @@ public class TileMap {
                         }
                         if(rand.nextFloat() < ENEMY_SPAWN_CHANCE && playerSpawn.dst(x * 16, y * 16) > 60){
                             enemies.add((alt)?new Barbarian(x * 16, y * 16):new Troll(x * 16, y * 16));
+                            enemiesLeft++;
                         }
                         break;
                 }

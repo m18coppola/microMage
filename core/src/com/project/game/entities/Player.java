@@ -35,6 +35,7 @@ public class Player extends Entity {
     float manaRegen;
     static Spells spellType;
     static SoundEffect spellSound;
+    public static int enemiesKilled = 0;
 
 
     Vector2 oldPos;
@@ -241,6 +242,4 @@ public class Player extends Entity {
         idle.dispose();
         spellSound.dispose();
     }
-
-
 }

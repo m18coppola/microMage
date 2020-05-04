@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.project.game.Controller;
@@ -54,6 +55,10 @@ public class PlayState extends State {
     private static boolean alt = true;
     public static SoundEffect dungeonMusic1 = new SoundEffect(ResourceLoader.loadDungeonMusic1());
     public static SoundEffect dungeonMusic2 = new SoundEffect(ResourceLoader.loadDungeonMusic2());
+    FreeTypeFontGenerator generator;
+    FreeTypeFontGenerator.FreeTypeFontParameter parameter;
+    BitmapFont font30;
+    GlyphLayout gl;
 
 
     public PlayState(GameStateManager gsm) {
@@ -85,6 +90,12 @@ public class PlayState extends State {
         removedProjectiles = new ArrayList<EnemyProjectiles>();
         killedEnemies = new ArrayList<Enemy>();
         usedProjectiles = new ArrayList<Spells>();
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("UI/Boxy-Bold.ttf"));
+        parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 8;
+        font30 = generator.generateFont(parameter);
+        gl = new GlyphLayout();
+        gl.setText(font30, "");
         if(alt == true) {
             dungeonMusic1.playSound();
             dungeonMusic1.loop();
@@ -130,7 +141,6 @@ public class PlayState extends State {
 
         removedProjectiles = new ArrayList<EnemyProjectiles>();
 
-
         for (Enemy enemy : tileMap.enemies) {
             enemy.update(dt);
         }
@@ -143,7 +153,6 @@ public class PlayState extends State {
         }
         usedProjectiles =  new ArrayList<Spells>();
     }
-
 
     @Override
     public void render(SpriteBatch batch) {
@@ -172,9 +181,9 @@ public class PlayState extends State {
         batch.draw(pause, 115, 115, 10, 10);
         healthBar.render(batch);
         manaBar.render(batch);
+        gl.setText(font30, "Enemies Left: " + TileMap.enemiesLeft);
+        font30.draw(batch,gl, 0, 125);
         batch.end();
-
-
     }
 
 
