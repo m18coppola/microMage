@@ -66,9 +66,12 @@ public class PlayState extends State {
     BitmapFont font30;
     GlyphLayout gl;
 
+    float gameStartTimer = 0;
+
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
+
         this.gsm = gsm;
         tileMap = new TileMap(alt);
         alt = !alt;
@@ -131,6 +134,10 @@ public class PlayState extends State {
 
     @Override
     public void update(float dt) {
+        if(gameStartTimer < 1.5f) {
+            gameStartTimer += dt;
+        }
+
         if (Player.getHealth() == 0) {
             if(alt == true) {
                 dungeonMusic1.stopSound();
@@ -143,7 +150,9 @@ public class PlayState extends State {
             gameOver.playSound();
         }
         dt = Gdx.graphics.getDeltaTime();
-        player.update(dt);
+        if(gameStartTimer > 1.0f){
+            player.update(dt);
+        }
         for (Spells p : projectiles) {
             p.update(dt);
         }
