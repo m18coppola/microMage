@@ -214,7 +214,7 @@ public class PlayState extends State {
         batch.draw(pause, 115, 115, 10, 10);
         healthBar.render(batch);
         manaBar.render(batch);
-        gl.setText(font30, "Enemies Left: " + TileMap.enemiesLeft);
+        gl.setText(font30, "Enemies Left: " + TileMap.enemies.size());
         font30.draw(batch,gl, 0, 125);
         batch.end();
 
