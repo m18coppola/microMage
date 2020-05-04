@@ -25,16 +25,17 @@ import com.project.game.entities.tiles.*;
 import com.project.game.entities.*;
 
 import java.util.ArrayList;
-
+/*
+the main game state
+ */
 public class PlayState extends State {
 
-    ShapeRenderer sr;
+
 
     public static OrthographicCamera cam;
     public static OrthographicCamera UIcam;
     public static Player player;
     public static int score = 0;
-    Controller controller;
     Texture pause;
 
 
@@ -48,7 +49,6 @@ public class PlayState extends State {
     static ManaBar manaBar;
     static RegenMana regenMana;
     public static int currSpell;
-    public static SoundEffect currSpellSound;
     public static TileMap tileMap;
     public static ArrayList<EnemyProjectiles> enemyProjectiles;
     public static ArrayList<EnemyProjectiles> removedProjectiles;
@@ -69,7 +69,11 @@ public class PlayState extends State {
 
     float gameStartTimer = 0;
 
+    /*
+    constructs state
 
+    @param gsm the game state manager
+     */
     public PlayState(GameStateManager gsm) {
         super(gsm);
 
@@ -124,12 +128,18 @@ public class PlayState extends State {
         }
         gameReady = true;
     }
-
+    /*
+        creates new level and moves it to the stack
+     */
     public static void nextLevel() {
         score++;
         gsm.set(new PlayState(gsm));
     }
+    /*
+    updates the state
 
+    @param dt the time passed between frames
+     */
     @Override
     public void update(float dt) {
         if(gameStartTimer < 1.5f) {
@@ -180,7 +190,11 @@ public class PlayState extends State {
 
 
     }
+    /*
+    renders the current state
 
+    @param batch the batch to be used for drawing
+     */
     @Override
     public void render(SpriteBatch batch) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -226,15 +240,27 @@ public class PlayState extends State {
 
     }
 
+    /*
+    adds player projectile to state
 
+    @param p the projectile
+     */
     public static void addProjectile(Spells p) {
         projectiles.add(p);
     }
+    /*
+    adds enemy projectile to state
 
+    @param f the projectile
+     */
     public static void addEnemyProjectile(EnemyProjectiles f) {
         enemyProjectiles.add(f);
     }
+    /*
+    returns the dungeon's music
 
+    @return the music
+     */
     public static SoundEffect getDungeonMusic() {
         if(alt == true) {
             return dungeonMusic1;
@@ -246,7 +272,9 @@ public class PlayState extends State {
 
 
 
-
+    /*
+    frees the memory allocated by the object
+     */
     @Override
     public void dispose() {
         player.dispose();

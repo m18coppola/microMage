@@ -10,7 +10,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.project.game.entities.Player;
 
-
+/*
+game over screen state
+ */
 public class EndGameState extends State {
 
     Texture endGame;
@@ -19,7 +21,11 @@ public class EndGameState extends State {
     FreeTypeFontGenerator.FreeTypeFontParameter parameter;
     BitmapFont font30;
     GlyphLayout gl;
+    /*
+    constructs a game over state
 
+    @param the game state manager
+     */
     public EndGameState(GameStateManager gsm){
         super(gsm);
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -34,6 +40,11 @@ public class EndGameState extends State {
         gl.setText(font30, "");
     }
 
+    /*
+    updates the object
+
+    @param dt time that has passed between frames
+     */
     @Override
     public void update(float dt) {
         if(Gdx.input.justTouched()) {
@@ -41,7 +52,11 @@ public class EndGameState extends State {
             gsm.set(new MenuState(gsm));
         }
     }
+    /*
+    renders the screen
 
+    @param batch the sprite batch to draw in
+     */
     @Override
     public void render(SpriteBatch batch) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -55,6 +70,9 @@ public class EndGameState extends State {
         batch.end();
     }
 
+    /*
+    frees memory allocated by the object
+     */
     @Override
     public void dispose() {
         endGame.dispose();

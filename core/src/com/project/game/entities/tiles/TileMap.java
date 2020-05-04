@@ -8,7 +8,9 @@ import com.project.game.states.PlayState;
 
 import java.util.ArrayList;
 import java.util.Random;
-
+/*
+generates and stores tile map information
+ */
 public class TileMap {
 
     public enum GridSpace {empty, wall, floor}
@@ -33,16 +35,25 @@ public class TileMap {
     final int MAX_WALKERS = 10;
     final float PERCENT_TO_FILL = 0.25f;
 
+    /*
+    a struct to hold walker information
+     */
     class Walker {
         Vector2 direction;
         Vector2 position;
-
+        /*
+        constructs a walker
+         */
         public Walker() {
             direction = new Vector2();
             position = new Vector2();
         }
     }
 
+    /*
+    tilemap constructor
+    @param alt what enemy palette to use
+     */
     public TileMap(boolean alt) {
         this.alt = alt;
         enemiesLeft = 0;
@@ -52,7 +63,9 @@ public class TileMap {
         GenerateTiles();
         PlaceGoal();
     }
-
+    /*
+    places goal in tile map
+     */
     private void PlaceGoal() {
 
          //prevent collision locks
@@ -63,6 +76,9 @@ public class TileMap {
         Tile t = tiles[i];
         tiles[i] = new Goal(t.getPosition().x,t.getPosition().y,alt);
     }
+    /*
+    generates the tilemap in the form of enums in a 2d array
+     */
 
     private void GenerateTiles() {
         tiles = new Tile[WIDTH * HEIGHT];
@@ -94,6 +110,9 @@ public class TileMap {
         }
     }
 
+    /*
+    initialises variables
+     */
     private void setup() {
 
         grid = new GridSpace[WIDTH][HEIGHT];
@@ -114,6 +133,10 @@ public class TileMap {
         walkers.add(newWalker);
     }
 
+    /*
+    returns a random direction
+    @return a vector that denotes direction
+     */
     private Vector2 randomDirection() {
         int dir = rand.nextInt(4);
         Vector2 newDir;
@@ -133,7 +156,9 @@ public class TileMap {
         }
         return newDir;
     }
-
+    /*
+    generates the tile objects
+     */
     private void CreateFloors() {
         int iterations = 0;
         do {
@@ -186,6 +211,9 @@ public class TileMap {
         } while (iterations < 100000);
     }
 
+    /*
+    counts the number of floors in the tilemap
+     */
     private int numberOfFloors() {
         int count = 0;
         for (int x = 0; x < WIDTH; x++) {
@@ -197,7 +225,9 @@ public class TileMap {
         }
         return count;
     }
-
+    /*
+    surrounds the floors with walls
+     */
     private void CreateWalls() {
         for (int x = 0; x < WIDTH; x++) {
             for (int y = 0; y < HEIGHT; y++) {
