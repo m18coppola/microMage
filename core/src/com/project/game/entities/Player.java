@@ -14,7 +14,9 @@ import com.project.game.states.PlayState;
 
 import static com.project.game.states.PlayState.currSpell;
 import static com.project.game.states.PlayState.tileMap;
-
+/*
+Represents the player being played by the user
+ */
 public class Player extends Entity {
     public enum Direction{N,S,E,W}
     boolean left,right,up,down = false;
@@ -37,9 +39,10 @@ public class Player extends Entity {
     static SoundEffect spellSound;
     public static int enemiesKilled = 0;
 
-
+    // to halt movement and go back to oldPos once collided with walls
     Vector2 oldPos;
 
+    //constructor for the player
     public Player(float x, float y) {
         super(x, y, WIDTH, HEIGHT);
         center = new Vector2();
@@ -61,6 +64,7 @@ public class Player extends Entity {
 
     }
 
+    //returns the sprite of the player; a wizard, depending upon the state of the player
     @Override
     public Sprite getSprite() {
         if (attacking)
@@ -71,6 +75,7 @@ public class Player extends Entity {
             return walk.getSprite();
     }
 
+    //changes the boolean of all 4 movement based on the key being pressed.
     public void move(Direction d, boolean moving) {
         switch (d){
             case N:
@@ -91,7 +96,7 @@ public class Player extends Entity {
     }
 
 
-
+    //updates the player every delta time.
     @Override
     public void update(float dt) {
         manaRegen += dt;
@@ -179,26 +184,32 @@ public class Player extends Entity {
 
 
 
-
+        //updates the animation of all the states
         walk.update(dt);
         idle.update(dt);
         attack.update(dt);
     }
 
+    //triggers the attack state of the player
     public void shoot(int x, int y) {
         center = hitbox.getCenter(center);
         double angle = Math.atan2((y - center.y), (x - center.x));
+        //choosing snowball
         if (currSpell == 1) {
             spellType = new SnowBall(angle, new Vector2(center.x, center.y));
             spellSound.setSound(ResourceLoader.loadSnowballSound());
-
-        } else if (currSpell == 2) {
+        }
+        //choosing fireball
+        else if (currSpell == 2) {
             spellType = new FireBall(angle, new Vector2(center.x, center.y));
             spellSound.setSound(ResourceLoader.loadFireballSound());
-        } else if (currSpell == 3) {
+        }
+        //choosing lightning bolt
+        else if (currSpell == 3) {
             spellType = new LightningBolt(angle, new Vector2(center.x, center.y));
             spellSound.setSound(ResourceLoader.loadLightningBoltSound());
         }
+        //checking if enough mana for a specific spell
         if (mana > 0 && mana >= spellType.getManaUsage()) {
             PlayState.addProjectile(spellType);
             setMana(mana - spellType.getManaUsage());
@@ -213,34 +224,42 @@ public class Player extends Entity {
         }
     }
 
+    //returns player health
     public static int getHealth() {
         return health;
     }
 
+    //sets players health to given value
     public void setHealth(int newHealth) {
         if (newHealth >= 0 && newHealth <= 3) {
             health = newHealth;
         }
     }
 
+    // returns players mana
     public static int getMana() {
         return mana;
     }
 
+    //sets player mana to given value
     public static void setMana(int newMana) {
         if (newMana >= 0 && newMana <= 8) {
             mana = newMana;
         }
     }
 
+    //returns the type of spell active for player
     public static Spells getSpellType(){ return spellType;}
 
+    //checking if player is currently attacking
     public static Boolean isAttacking(){return attacking;}
 
+    //return the center of the hitbox of the wizards
     public Vector2 getCenter() {
         return hitbox.getCenter(center);
     }
 
+    //discards outdated objects that are taking up memory
     @Override
     public void dispose() {
         walk.dispose();

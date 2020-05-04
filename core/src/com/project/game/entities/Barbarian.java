@@ -7,7 +7,9 @@ import com.project.game.ResourceLoader;
 import com.project.game.SoundEffect;
 import com.project.game.entities.tiles.TileMap;
 import com.project.game.states.PlayState;
-
+/*
+Represents the enemy class barbarian
+*/
 public class Barbarian extends Enemy {
     public static final int WIDTH = 18;
     public static final int HEIGHT = 18;
@@ -38,7 +40,7 @@ public class Barbarian extends Enemy {
         target = new Vector2();
     }
 
-
+    //returns the sprite of the barbarian, depending upon the state of barbarian.
     public Sprite getSprite() {
         if (attacking)
             return attack.getSprite();
@@ -48,6 +50,7 @@ public class Barbarian extends Enemy {
             return walk.getSprite();
     }
 
+    //Barbarian update, activating movement towards the left.
     public void moveLeft() {
         if (movement) {
             velocity.x -= SPEED;
@@ -58,6 +61,7 @@ public class Barbarian extends Enemy {
     }
 
 
+    //Barbarian update, activating movement towards the right.
     public void moveRight() {
         if (movement) {
             velocity.x += SPEED;
@@ -67,7 +71,7 @@ public class Barbarian extends Enemy {
         }
     }
 
-
+    //Barbarian update, activating movement upwards.
     public void moveUp() {
         if (movement) {
             velocity.y += SPEED;
@@ -75,17 +79,19 @@ public class Barbarian extends Enemy {
 
     }
 
+    //Barbarian update, activating movement downwards.
     public void moveDown() {
         if (movement) {
             velocity.y -= SPEED;
         }
     }
 
+    //Updates the health of barbarian when attacked and inflicted.
     public void damage(int damage) {
         health -= damage;
     }
 
-
+    //Triggers the attack state of barbarian where it hurls axes towards the player.
     public void attack(float x, float y) {
         if (attack.getCurrentFrame() == 7 && attacking) {
             attacking = false;
@@ -102,7 +108,7 @@ public class Barbarian extends Enemy {
 
 
 
-
+    // Updates a single barbarian object every delta time
     @Override
     public void update(float dt) {
 
@@ -155,7 +161,7 @@ public class Barbarian extends Enemy {
 
 
 
-
+    //discards outdated objects that are taking up memory
     @Override
     public void dispose() {
         walk.dispose();

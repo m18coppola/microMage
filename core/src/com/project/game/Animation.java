@@ -18,7 +18,7 @@ public class Animation {
         frameTimeDelta = 0;
         frameTimeLength = speed;
     }
-
+    //returns the current frame number of the animation
     public int getCurrentFrame() {
         return currentFrame;
     }
@@ -34,6 +34,7 @@ public class Animation {
 
     }
 
+    //flips the sprite in accordance to movement to left
     public void setLeft() {
         if (!isLeft) {
             isLeft = true;
@@ -43,6 +44,7 @@ public class Animation {
         }
     }
 
+    //flips the sprite in accordance to movement to right
     public void setRight() {
         if (isLeft) {
             isLeft = false;
@@ -52,14 +54,17 @@ public class Animation {
         }
     }
 
+    //return the sprite of the current frame
     public Sprite getSprite() {
         return frames[currentFrame];
     }
 
+    //resets the frames, to restart the animation
     public void resetFrames() {
         currentFrame = 0;
     }
 
+    //discards outdated objects that are taking up memory
     public void dispose() {
         for (Sprite s : frames) {
             s.getTexture().dispose();

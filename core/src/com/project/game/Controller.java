@@ -11,7 +11,9 @@ import com.project.game.states.PlayState;
 import com.badlogic.gdx.ScreenAdapter;
 
 import static com.project.game.states.PlayState.currSpell;
-
+/*
+Represent the controller class that is dependant upon the input of the user
+ */
 
 public class Controller extends InputAdapter {
     Player player;
@@ -21,18 +23,23 @@ public class Controller extends InputAdapter {
         this.player = player;
     }
 
+    //detects the input of the user from keyboard and triggers activity accordingly.
     @Override
     public boolean keyDown(int keycode) {
         switch (keycode) {
+            //move up
             case Input.Keys.W:
                 player.move(Player.Direction.N, true);
                 break;
+            //move left
             case Input.Keys.A:
                 player.move(Player.Direction.W, true);
                 break;
+            //move right
             case Input.Keys.S:
                 player.move(Player.Direction.S, true);
                 break;
+            //move down
             case Input.Keys.D:
                 player.move(Player.Direction.E, true);
                 break;
@@ -58,6 +65,7 @@ public class Controller extends InputAdapter {
         return true;
     }
 
+    //checks for the release of the key, to halt movement
     @Override
     public boolean keyUp(int keycode) {
         switch (keycode) {
@@ -77,10 +85,11 @@ public class Controller extends InputAdapter {
         return true;
     }
 
+    //checks the mouse input
     @Override
     public boolean touchDown(int x, int y, int pointer, int button) {
         if (button == 0) { // 0 is left click
-
+            //checks the click position of the mouse to attack at that position if valid click
             Vector3 mousePos = PlayState.cam.unproject(new Vector3(x, y, 0));
             if (x >= 468 && x <= 493 && y >= 7 && y <= 34) {
                 PlayState.isPaused = !PlayState.isPaused;

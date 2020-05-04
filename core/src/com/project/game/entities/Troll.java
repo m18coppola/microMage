@@ -10,6 +10,9 @@ import com.project.game.entities.tiles.TileMap;
 import com.project.game.entities.tiles.Wall;
 import com.project.game.states.PlayState;
 
+/*
+Represents the enemy class troll
+*/
 public class Troll extends Enemy {
     public static final int WIDTH = 18;
     public static final int HEIGHT = 18;
@@ -38,7 +41,7 @@ public class Troll extends Enemy {
         velocity = new Vector2(0, 0);
     }
 
-
+    //returns the sprite of the troll, depending upon the state of troll.
     public Sprite getSprite() {
         if (attacking)
             return attack.getSprite();
@@ -47,7 +50,7 @@ public class Troll extends Enemy {
         else
             return walk.getSprite();
     }
-
+    //Troll update, activating movement towards the left.
     public void moveLeft() {
         if (movement) {
             velocity.x -= SPEED;
@@ -57,6 +60,7 @@ public class Troll extends Enemy {
         }
     }
 
+    //Troll update, activating movement towards the right.
 
     public void moveRight() {
         if (movement) {
@@ -67,24 +71,26 @@ public class Troll extends Enemy {
         }
     }
 
-
+    //Troll update, activating movement upwards.
     public void moveUp() {
         if (movement) {
             velocity.y += SPEED;
         }
 
     }
-
+    //Troll update, activating movement downwards
     public void moveDown() {
         if (movement) {
             velocity.y -= SPEED;
         }
     }
 
+    //Updates the health of troll when attacked and inflicted.
     public void damage(int damage) {
         health -= damage;
     }
 
+    //Triggers the attack state of troll where it shoots arrows towards the player.
     public void attack(float x, float y) {
         if (attack.getCurrentFrame() == 8 && attacking) {
             attacking = false;
@@ -99,7 +105,7 @@ public class Troll extends Enemy {
         }
     }
 
-
+    // Updates a single troll object every delta time
     @Override
     public void update(float dt) {
 
@@ -153,7 +159,7 @@ public class Troll extends Enemy {
     }
 
 
-
+    //discards outdated objects that are taking up memory
     @Override
     public void dispose() {
         walk.dispose();

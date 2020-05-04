@@ -7,8 +7,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.project.game.entities.Player;
 import com.project.game.states.EndGameState;
 import com.project.game.states.GameStateManager;
-
-
+/*
+Represents the health bar, constant inside the game
+*/
 public class HealthBar extends Thread {
     private Sprite filledHeart;
     private Sprite emptyHeart;
@@ -26,11 +27,13 @@ public class HealthBar extends Thread {
         emptyHeart = ResourceLoader.loadEmptyHeart();
     }
 
+    //updates the health bar, by running a thread
     @Override
     public void run() {
         while (true) {
 
             int lives = Player.getHealth();
+            //synchronizes the health thread
             synchronized (livesArray) {
                 if (lives == 3) {
                     livesArray[0] = true;
@@ -55,6 +58,7 @@ public class HealthBar extends Thread {
     }
 
 
+    //renders the health bar, either filled heart or empty heart
     public void render(SpriteBatch batch) {
         xPos = 5;
         yPos = 5;
@@ -69,7 +73,7 @@ public class HealthBar extends Thread {
 
 
     }
-
+    //discards outdated texture that takes up memory
     public void dispose() {
         filledHeart.getTexture().dispose();
         emptyHeart.getTexture().dispose();

@@ -4,7 +4,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.project.game.ResourceLoader;
-
+/*
+Represent the second-spell of wizard; a fireball
+ */
 public class FireBall extends Spells {
 
     public static final int WIDTH = 8;

@@ -3,7 +3,9 @@ package com.project.game.entities;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-
+/*
+The super class that is extended by all the existing objects in the game world.
+ */
 public abstract class Entity {
     Vector2 position;
 

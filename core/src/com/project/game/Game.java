@@ -15,12 +15,16 @@ import com.project.game.states.PlayState;
 
 import java.util.ArrayList;
 import java.util.Timer;
-
+/*
+Class that represent the game being played
+ */
 public class Game extends ApplicationAdapter {
     SpriteBatch batch;
     static GameStateManager gsm;
 
-
+    //created a new Sprite batch for all the entities
+    //creates a manager to scroll through states
+    // starts the game with the menu state
     @Override
     public void create () {
         batch = new SpriteBatch();
@@ -28,6 +32,7 @@ public class Game extends ApplicationAdapter {
         gsm.push(new MenuState(gsm));
     }
 
+    // renders every state and all coming under the stare
     @Override
     public void render () {
         if(!(gsm.peek() instanceof PlayState) || !PlayState.isPaused) {
@@ -36,6 +41,7 @@ public class Game extends ApplicationAdapter {
         }
     }
 
+    //discards outdated state that takes up memory
     @Override
     public void dispose () {
         gsm.dispose();

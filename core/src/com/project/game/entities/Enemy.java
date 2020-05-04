@@ -4,6 +4,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+/*
+The general abstract enemy class to be extended by every enemy
+ */
 public abstract class Enemy extends Entity {
 
 

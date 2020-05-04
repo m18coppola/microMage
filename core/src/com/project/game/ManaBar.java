@@ -5,7 +5,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.project.game.entities.Player;
-
+/*
+Represents the mana bar for the mana available to the player
+ */
 public class ManaBar extends Thread {
 
     private Sprite filledManaHeart;
@@ -24,10 +26,12 @@ public class ManaBar extends Thread {
         emptyManaHeart = ResourceLoader.loadEmptyManaHeart();
     }
 
+    //updates the mana bar, by running a thread
     @Override
     public void run() {
         while (true) {
             int mana = Player.getMana();
+            //synchronizes the mana threads
             synchronized (manaArray) {
                 if (mana == 8) {
                     manaArray[0] = true;
@@ -116,6 +120,7 @@ public class ManaBar extends Thread {
         }
     }
 
+    //renders the mana bar, either filled heart or empty heart
     public void render(SpriteBatch batch) {
         xPos = 118;
         yPos = 110;
@@ -131,6 +136,7 @@ public class ManaBar extends Thread {
 
     }
 
+    //discards outdated texture that takes up memory
     public void dispose() {
         filledManaHeart.getTexture().dispose();
         emptyManaHeart.getTexture().dispose();
