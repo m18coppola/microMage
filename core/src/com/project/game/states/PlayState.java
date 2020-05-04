@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.math.Vector2;
 import com.project.game.Controller;
 
 import com.project.game.HealthBar;
@@ -25,6 +26,8 @@ import com.project.game.entities.*;
 import java.util.ArrayList;
 
 public class PlayState extends State {
+
+    ShapeRenderer sr;
 
     public static OrthographicCamera cam;
     public static OrthographicCamera UIcam;
@@ -52,6 +55,7 @@ public class PlayState extends State {
     public static ArrayList<Spells> usedProjectiles;
     public static GameStateManager gsm;
     private static boolean alt = true;
+    RayCaster rc;
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
@@ -82,6 +86,16 @@ public class PlayState extends State {
         removedProjectiles = new ArrayList<EnemyProjectiles>();
         killedEnemies = new ArrayList<Enemy>();
         usedProjectiles = new ArrayList<Spells>();
+
+        ArrayList<Wall> walls = new ArrayList<Wall>();
+        for(Tile t: tileMap.tiles){
+            if(t instanceof Wall){
+                walls.add((Wall)t);
+            }
+        }
+
+        rc = new RayCaster(walls);
+        sr = new ShapeRenderer();
 
 
     }
@@ -126,6 +140,8 @@ public class PlayState extends State {
             projectiles.remove(usedProjectiles.get(i));
         }
         usedProjectiles =  new ArrayList<Spells>();
+
+
     }
 
 
@@ -152,11 +168,24 @@ public class PlayState extends State {
             ep.getSprite().draw(batch);
         }
         batch.draw(player.getSprite(), player.getPosition().x - 5, player.getPosition().y);
+
+        rc.update(player.getCenter());
+        batch.draw(rc.getShadow(player.getCenter()),0,0,500,500);
+
         batch.setProjectionMatrix(UIcam.combined);
+
+
         batch.draw(pause, 115, 115, 10, 10);
         healthBar.render(batch);
         manaBar.render(batch);
         batch.end();
+
+
+
+
+
+
+
 
 
     }
@@ -185,6 +214,7 @@ public class PlayState extends State {
         for (EnemyProjectiles ep : enemyProjectiles) {
             ep.dispose();
         }
+
     }
 }
 

@@ -211,6 +211,18 @@ public class TileMap {
                     if (grid[x - 1][y] == GridSpace.empty) {
                         grid[x - 1][y] = GridSpace.wall;
                     }
+                    if (grid[x - 1][y - 1] == GridSpace.empty) {
+                        grid[x - 1][y - 1] = GridSpace.wall;
+                    }
+                    if (grid[x - 1][y + 1] == GridSpace.empty) {
+                        grid[x - 1][y + 1] = GridSpace.wall;
+                    }
+                    if (grid[x + 1][y - 1] == GridSpace.empty) {
+                        grid[x + 1][y - 1] = GridSpace.wall;
+                    }
+                    if (grid[x + 1][y + 1] == GridSpace.empty) {
+                        grid[x + 1][y + 1] = GridSpace.wall;
+                    }
                 }
             }
         }
