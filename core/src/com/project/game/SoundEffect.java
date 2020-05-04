@@ -25,4 +25,6 @@ public class SoundEffect {
     {
         soundEffect.dispose();
     }
+
+    public void stopSound() { soundEffect.stop(); }
 }

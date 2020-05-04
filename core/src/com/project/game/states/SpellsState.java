@@ -21,7 +21,7 @@ public class SpellsState extends State {
         if (Gdx.input.justTouched()) {
             SoundEffect startGameSound = new SoundEffect(ResourceLoader.loadPauseSound());
             startGameSound.playSound();
-            MenuState.getMenuMusic().dispose();
+            MenuState.getMenuMusic().stopSound();
             gsm.set(new PlayState(gsm));
         }
     }

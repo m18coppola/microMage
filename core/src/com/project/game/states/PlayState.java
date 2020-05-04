@@ -54,6 +54,7 @@ public class PlayState extends State {
     private static boolean alt = true;
     public static SoundEffect dungeonMusic = new SoundEffect(ResourceLoader.loadDungeonMusic());
 
+
     public PlayState(GameStateManager gsm) {
         super(gsm);
         this.gsm = gsm;
@@ -96,7 +97,7 @@ public class PlayState extends State {
     @Override
     public void update(float dt) {
         if (Player.getHealth() == 0) {
-            dungeonMusic.dispose();
+            dungeonMusic.stopSound();
             gsm.set(new EndGameState(gsm));
             SoundEffect gameOver = new SoundEffect(ResourceLoader.loadGameOver());
             gameOver.playSound();
@@ -174,6 +175,14 @@ public class PlayState extends State {
     }
 
     public static SoundEffect getDungeonMusic() { return dungeonMusic; }
+
+    public static void changeMusic() {
+        if(alt == true)
+        {
+
+        }
+
+    }
 
 
     @Override
