@@ -81,15 +81,11 @@ public class Player extends Entity {
                 break;
             case E:
                 right = moving;
-                walk.setRight();
-                idle.setRight();
-                attack.setRight();
+
                 break;
             case W:
                 left = moving;
-                walk.setLeft();
-                idle.setLeft();
-                attack.setLeft();
+
                 break;
         }
     }
@@ -127,6 +123,16 @@ public class Player extends Entity {
         }
         if(left == right) {
             velocity.x = 0;
+        }
+
+        if(velocity.x > 0){
+            walk.setRight();
+            idle.setRight();
+            attack.setRight();
+        } else if (velocity.x < 0){
+            walk.setLeft();
+            idle.setLeft();
+            attack.setLeft();
         }
 
             //check x collision

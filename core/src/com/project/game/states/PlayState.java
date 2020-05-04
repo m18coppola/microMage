@@ -65,6 +65,7 @@ public class PlayState extends State {
     FreeTypeFontGenerator.FreeTypeFontParameter parameter;
     BitmapFont font30;
     GlyphLayout gl;
+    boolean gameReady;
 
     float gameStartTimer = 0;
 
@@ -87,10 +88,8 @@ public class PlayState extends State {
         cam.setToOrtho(false, 125, 125);
         UIcam = new OrthographicCamera();
         UIcam.setToOrtho(false, 125, 125);
-        Gdx.gl.glClearColor(41f / 255f, 30f / 255f, 49f / 255f, 1);
-        if(alt){
-            Gdx.gl.glClearColor(49f / 255f, 30f / 255f, 30f / 255f, 1);
-        }
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+
         Gdx.input.setInputProcessor(new Controller(player));
         pause = new Texture("UI/pause.png");
         isPaused = false;
@@ -109,7 +108,6 @@ public class PlayState extends State {
 
         rc = new RayCaster(walls);
 
-
         generator = new FreeTypeFontGenerator(Gdx.files.internal("UI/Boxy-Bold.ttf"));
         parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 8;
@@ -124,7 +122,7 @@ public class PlayState extends State {
             dungeonMusic2.playSound();
             dungeonMusic2.loop();
         }
-
+        gameReady = true;
     }
 
     public static void nextLevel() {
@@ -151,6 +149,7 @@ public class PlayState extends State {
         }
         dt = Gdx.graphics.getDeltaTime();
         if(gameStartTimer > 1.0f){
+
             player.update(dt);
         }
         for (Spells p : projectiles) {
