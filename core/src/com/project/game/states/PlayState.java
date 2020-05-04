@@ -106,7 +106,6 @@ public class PlayState extends State {
 
         rc = new RayCaster(walls);
 
-
         generator = new FreeTypeFontGenerator(Gdx.files.internal("UI/Boxy-Bold.ttf"));
         parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 8;
@@ -121,7 +120,6 @@ public class PlayState extends State {
             dungeonMusic2.playSound();
             dungeonMusic2.loop();
         }
-
     }
 
     public static void nextLevel() {

@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.project.game.ResourceLoader;
 import com.project.game.SoundEffect;
+import com.project.game.entities.Player;
 
 public class MenuState extends State {
     Texture playBtn;
@@ -19,6 +20,7 @@ public class MenuState extends State {
         playBtn = new Texture("UI/playbtn.png");
         title = new Texture("UI/microMage.png");
         menuMusic.playSound();
+        Player.enemiesKilled = 0;
     }
 
     @Override
