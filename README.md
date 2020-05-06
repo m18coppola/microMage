@@ -2,7 +2,7 @@
 
 MicroMage is  a top-down, procedurally-generated, horror themed dungeon crawler using the LibGDX game development library. The goal is to use raycasting to create a limited field of view for the player, as they battle creatures during their descent into the dungeon. We plan to use multithreading to manage particle systems, menus and enemy entities.
 
-Project Video: https://www.youtube.com/watch?v=eN8MK7yN744&feature=youtu.be
+Project Video: https://www.youtube.com/watch?v=DDC1e4fZRIU&feature=youtu.be
 
 # Running with IntelliJ
 to run the game, create an application in intellij using the `DesktopLauncher.java`
